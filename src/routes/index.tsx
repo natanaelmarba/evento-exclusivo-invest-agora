@@ -124,7 +124,7 @@ function LandingPage() {
     <div ref={rootRef} className="min-h-screen bg-background text-foreground">
       {/* ================ HEADER ================ */}
       <header className="fixed top-0 z-50 w-full border-b border-black/5 bg-white/85 backdrop-blur-md">
-        <div className="container-app flex h-16 items-center justify-between gap-4">
+        <div className="container-app flex h-20 items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             {/* Logos brancas invertidas para uso em fundo claro */}
             <img
@@ -406,8 +406,8 @@ function LandingPage() {
           <div className="grid gap-10 md:grid-cols-3">
             <div>
               <div className="flex items-center gap-4">
-                <img src={logoEspecialista.url} alt="Especialista" className="h-9 w-auto" />
-                <img src={logoAgora.url} alt="Agora" className="h-9 w-auto" />
+                <img src={logoEspecialista.url} alt="Especialista" className="h-16 w-auto" />
+                <img src={logoAgora.url} alt="Agora" className="h-16 w-auto" />
               </div>
               <p className="mt-5 text-sm leading-relaxed text-white/60">
                 Encontro presencial exclusivo para empresários. Conteúdo direto sobre patrimônio, investimento e leilão.
