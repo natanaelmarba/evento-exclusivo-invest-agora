@@ -124,20 +124,20 @@ function LandingPage() {
     <div ref={rootRef} className="min-h-screen bg-background text-foreground">
       {/* ================ HEADER ================ */}
       <header className="fixed top-0 z-50 w-full border-b border-black/5 bg-white/85 backdrop-blur-md">
-        <div className="container-app flex h-16 items-center justify-between gap-4">
+        <div className="container-app flex h-20 items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             {/* Logos brancas invertidas para uso em fundo claro */}
             <img
               src={logoEspecialista.url}
               alt="Especialista em Investimento e Alavancagem Patrimonial"
-              className="h-8 w-auto"
+              className="h-14 w-auto sm:h-16"
               style={{ filter: "invert(1) brightness(0)" }}
             />
-            <div className="hidden h-6 w-px bg-border sm:block" />
+            <div className="hidden h-8 w-px bg-border sm:block" />
             <img
               src={logoAgora.url}
               alt="Agora"
-              className="hidden h-8 w-auto sm:block"
+              className="hidden h-14 w-auto sm:block sm:h-16"
               style={{ filter: "invert(1) brightness(0)" }}
             />
           </div>
@@ -406,8 +406,8 @@ function LandingPage() {
           <div className="grid gap-10 md:grid-cols-3">
             <div>
               <div className="flex items-center gap-4">
-                <img src={logoEspecialista.url} alt="Especialista" className="h-9 w-auto" />
-                <img src={logoAgora.url} alt="Agora" className="h-9 w-auto" />
+                <img src={logoEspecialista.url} alt="Especialista" className="h-16 w-auto" />
+                <img src={logoAgora.url} alt="Agora" className="h-16 w-auto" />
               </div>
               <p className="mt-5 text-sm leading-relaxed text-white/60">
                 Encontro presencial exclusivo para empresários. Conteúdo direto sobre patrimônio, investimento e leilão.
