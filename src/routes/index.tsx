@@ -55,11 +55,11 @@ export const Route = createFileRoute("/")({
         content:
           "Evento presencial exclusivo para empresários. Alavancagem patrimonial, investimento, aplicação e oportunidades com leilão. Vagas limitadas.",
       },
-      { property: "og:title", content: "Encontro Exclusivo para Empresários" },
+      { property: "og:title", content: "Encontro Exclusivo para Empresários | Alavancagem & Investimento" },
       {
         property: "og:description",
         content:
-          "Um encontro presencial para empresários que projetam o futuro de seus negócios e de sua família. Vagas limitadas.",
+          "Evento presencial exclusivo para empresários. Alavancagem patrimonial, investimento, aplicação e oportunidades com leilão. Vagas limitadas.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

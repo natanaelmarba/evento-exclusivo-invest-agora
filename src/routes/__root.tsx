@@ -77,14 +77,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "Encontro Exclusivo para Empresários | Alavancagem & Investimento" },
+      { name: "description", content: "Evento presencial exclusivo para empresários. Alavancagem patrimonial, investimento, aplicação e oportunidades com leilão. Vagas limitadas." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "Encontro Exclusivo para Empresários | Alavancagem & Investimento" },
+      { property: "og:description", content: "Evento presencial exclusivo para empresários. Alavancagem patrimonial, investimento, aplicação e oportunidades com leilão. Vagas limitadas." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Encontro Exclusivo para Empresários | Alavancagem & Investimento" },
+      { name: "twitter:description", content: "Evento presencial exclusivo para empresários. Alavancagem patrimonial, investimento, aplicação e oportunidades com leilão. Vagas limitadas." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/lyNJi0aZBBa9xUIOByzJpLkDg6r1/social-images/social-1784853468369-ESPECIALISTA_EM_INVESTIMENTO_E_ALAVANCAHEM_PATRIMONIAL_(2).webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/lyNJi0aZBBa9xUIOByzJpLkDg6r1/social-images/social-1784853468369-ESPECIALISTA_EM_INVESTIMENTO_E_ALAVANCAHEM_PATRIMONIAL_(2).webp" },
     ],
     links: [
       {
