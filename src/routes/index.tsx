@@ -130,14 +130,14 @@ function LandingPage() {
             <img
               src={logoEspecialista.url}
               alt="Especialista em Investimento e Alavancagem Patrimonial"
-              className="h-8 w-auto"
+              className="h-14 w-auto sm:h-16"
               style={{ filter: "invert(1) brightness(0)" }}
             />
-            <div className="hidden h-6 w-px bg-border sm:block" />
+            <div className="hidden h-8 w-px bg-border sm:block" />
             <img
               src={logoAgora.url}
               alt="Agora"
-              className="hidden h-8 w-auto sm:block"
+              className="hidden h-14 w-auto sm:block sm:h-16"
               style={{ filter: "invert(1) brightness(0)" }}
             />
           </div>
