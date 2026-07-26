@@ -343,16 +343,22 @@ function LandingPage() {
         </Section>
 
         {/* ============= FORMULÁRIO INLINE ============= */}
-        <section id="inscricao" className="py-14 md:py-20">
+        <section id="inscricao" className="relative py-14 md:py-20">
           <div
-            className="grid gap-8 rounded-3xl border p-6 md:grid-cols-[1fr_1.1fr] md:p-10"
+            className="relative grid gap-8 overflow-hidden rounded-3xl border p-6 md:grid-cols-[1fr_1.1fr] md:p-10"
             style={{
               background: `linear-gradient(160deg, ${C.bgCard2}, ${C.bgCard} 55%, ${C.bgSoft})`,
               borderColor: C.line,
               boxShadow: "0 30px 80px rgba(0,0,0,.4)",
             }}
           >
-            <div className="flex flex-col justify-center">
+            {/* subtle inner glow */}
+            <span
+              aria-hidden
+              className="pointer-events-none absolute -left-20 -top-20 h-96 w-96 rounded-full opacity-15 blur-3xl"
+              style={{ background: `radial-gradient(circle, ${C.accentSoft} 0%, transparent 70%)` }}
+            />
+            <div className="relative flex flex-col justify-center">
               <p
                 className="mb-3 text-[12px] font-semibold uppercase tracking-[0.18em]"
                 style={{ color: C.accent }}
@@ -366,7 +372,9 @@ function LandingPage() {
                 Preencha seus dados para receber a confirmação e os detalhes de participação.
               </p>
             </div>
-            <RegistrationForm />
+            <div className="relative">
+              <RegistrationForm />
+            </div>
           </div>
         </section>
 
