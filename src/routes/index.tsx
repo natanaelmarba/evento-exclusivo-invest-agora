@@ -582,26 +582,38 @@ function Section({
   id,
   eyebrow,
   title,
+  align = "left",
   children,
 }: {
   id?: string;
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
+  align?: "left" | "center";
   children: React.ReactNode;
 }) {
+  const isCenter = align === "center";
   return (
     <section id={id} className="py-14 md:py-20">
-      <p
-        className="mb-3 text-[12px] font-semibold uppercase tracking-[0.18em]"
-        style={{ color: C.accent }}
+      {eyebrow && (
+        <p
+          className={`mb-3 text-[12px] font-semibold uppercase tracking-[0.18em] ${isCenter ? "text-center" : ""}`}
+          style={{ color: C.accent }}
+        >
+          {eyebrow}
+        </p>
+      )}
+      <h2
+        className={`mb-8 text-3xl font-semibold tracking-tight md:text-4xl ${
+          isCenter ? "mx-auto max-w-3xl text-center" : "max-w-3xl"
+        }`}
       >
-        {eyebrow}
-      </p>
-      <h2 className="mb-8 max-w-3xl text-3xl font-semibold tracking-tight md:text-4xl">{title}</h2>
+        {title}
+      </h2>
       {children}
     </section>
   );
 }
+
 
 function Card({ children }: { children: React.ReactNode }) {
   return (
