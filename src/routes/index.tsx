@@ -542,48 +542,70 @@ function Section({
   const isCenter = align === "center";
 
   const variantBg: Record<typeof variant, React.CSSProperties> = {
-    default: {},
+    default: {
+      backgroundImage: `radial-gradient(600px 300px at 110% 20%, ${C.accentSoft}0d 0%, transparent 60%)`,
+    },
     soft: {
-      background: `linear-gradient(180deg, ${C.bgSoft}80, transparent)`,
+      background: `${C.bgSoft}80`,
+      backgroundImage: `linear-gradient(180deg, transparent, ${C.bg}60), radial-gradient(900px 400px at -5% 50%, ${C.bgCard2}40 0%, transparent 55%)`,
       borderTop: `1px solid ${C.lineSoft}`,
       borderBottom: `1px solid ${C.lineSoft}`,
+      boxShadow: "inset 0 40px 80px -40px rgba(0,0,0,.35)",
     },
     dark: {
-      background: `linear-gradient(180deg, ${C.bg}ee, ${C.bgSoft}ee)`,
+      background: `${C.bg}ee`,
+      backgroundImage: `linear-gradient(180deg, ${C.bgSoft}30, transparent 40%, ${C.bgSoft}30), radial-gradient(700px 350px at 105% 0%, ${C.accentDeep}18 0%, transparent 60%)`,
       borderTop: `1px solid ${C.lineSoft}`,
       borderBottom: `1px solid ${C.lineSoft}`,
-      boxShadow: "inset 0 30px 60px rgba(0,0,0,.25)",
+      boxShadow: "inset 0 30px 70px rgba(0,0,0,.28)",
     },
     accent: {
-      background: `linear-gradient(135deg, ${C.accentDeep}90, ${C.bgCard}90)`,
+      background: `${C.accentDeep}90`,
+      backgroundImage: `linear-gradient(135deg, ${C.accentDeep}80 0%, ${C.bgCard}80 60%, ${C.bgSoft}90 100%), radial-gradient(700px 350px at 20% 0%, ${C.accentSoft}25 0%, transparent 60%)`,
       borderTop: `1px solid ${C.accent}33`,
       borderBottom: `1px solid ${C.accent}33`,
+      boxShadow: "inset 0 -30px 60px rgba(0,0,0,.25)",
     },
     highlight: {
-      background: `radial-gradient(800px 400px at 20% 0%, ${C.accentSoft}22 0%, transparent 60%), linear-gradient(180deg, ${C.bgCard}, ${C.bgSoft})`,
+      background: C.bgCard,
+      backgroundImage: `radial-gradient(800px 400px at 20% 0%, ${C.accentSoft}16 0%, transparent 60%), linear-gradient(180deg, ${C.bgCard2}40, ${C.bgSoft}60), radial-gradient(600px 300px at 110% 100%, ${C.bgCard2}50 0%, transparent 55%)`,
       borderTop: `1px solid ${C.lineSoft}`,
       borderBottom: `1px solid ${C.lineSoft}`,
+      boxShadow: "inset 0 30px 60px rgba(0,0,0,.18)",
     },
   };
 
   return (
-    <section id={id} className="py-14 md:py-20" style={variantBg[variant]}>
-      {eyebrow && (
-        <p
-          className={`mb-3 text-[12px] font-semibold uppercase tracking-[0.18em] ${isCenter ? "text-center" : ""}`}
-          style={{ color: C.accent }}
+    <section id={id} className="relative py-14 md:py-20" style={variantBg[variant]}>
+      {/* subtle top/bottom fade to break flat edges */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-16"
+        style={{ background: "linear-gradient(180deg, rgba(0,0,0,.12), transparent)" }}
+      />
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-16"
+        style={{ background: "linear-gradient(0deg, rgba(0,0,0,.12), transparent)" }}
+      />
+      <div className="relative">
+        {eyebrow && (
+          <p
+            className={`mb-3 text-[12px] font-semibold uppercase tracking-[0.18em] ${isCenter ? "text-center" : ""}`}
+            style={{ color: C.accent }}
+          >
+            {eyebrow}
+          </p>
+        )}
+        <h2
+          className={`mb-8 text-3xl font-semibold tracking-tight md:text-4xl ${
+            isCenter ? "mx-auto max-w-3xl text-center" : "max-w-3xl"
+          }`}
         >
-          {eyebrow}
-        </p>
-      )}
-      <h2
-        className={`mb-8 text-3xl font-semibold tracking-tight md:text-4xl ${
-          isCenter ? "mx-auto max-w-3xl text-center" : "max-w-3xl"
-        }`}
-      >
-        {title}
-      </h2>
-      {children}
+          {title}
+        </h2>
+        {children}
+      </div>
     </section>
   );
 }
