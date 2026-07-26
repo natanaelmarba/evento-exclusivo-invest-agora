@@ -90,6 +90,15 @@ function LandingPage() {
         background: `radial-gradient(1100px 550px at 85% -10%, ${C.accentDeep}55 0%, transparent 60%), radial-gradient(900px 500px at -10% 15%, ${C.bgCard2}aa 0%, transparent 55%), linear-gradient(180deg, ${C.bg}, ${C.bgSoft})`,
       }}
     >
+      {/* subtle grain texture overlay */}
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-0 z-0 opacity-[0.035]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+          backgroundSize: "200px 200px",
+        }}
+      />
       {/* ============= HEADER ============= */}
       <header
         className="sticky top-0 z-40 backdrop-blur-md"
@@ -113,9 +122,15 @@ function LandingPage() {
 
       <div id="top" className="mx-auto max-w-[1200px] px-5 pb-24">
         {/* ============= HERO ============= */}
-        <section className="flex flex-col items-center pt-14 pb-10 text-center md:pt-20 md:pb-14">
+        <section className="relative flex flex-col items-center pt-14 pb-10 text-center md:pt-20 md:pb-14">
+          {/* soft radial glow behind headline */}
+          <span
+            aria-hidden
+            className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full opacity-20 blur-3xl"
+            style={{ background: `radial-gradient(circle, ${C.accentSoft}30 0%, transparent 70%)` }}
+          />
 
-          <h1 className="mb-6 max-w-4xl text-[clamp(32px,4.6vw,56px)] font-semibold leading-[1.08] tracking-tight">
+          <h1 className="relative mb-6 max-w-4xl text-[clamp(32px,4.6vw,56px)] font-semibold leading-[1.08] tracking-tight">
             Seu negócio construiu patrimônio.
             <br />
             <span style={{ color: C.text }}>Agora, </span>
@@ -131,14 +146,14 @@ function LandingPage() {
             </span>
           </h1>
 
-          <p className="mb-8 max-w-2xl text-base leading-relaxed md:text-lg" style={{ color: C.muted }}>
+          <p className="relative mb-8 max-w-2xl text-base leading-relaxed md:text-lg" style={{ color: C.muted }}>
             Participe de um encontro estratégico para empresários que desejam tomar decisões mais conscientes sobre
             investimentos, aplicação de capital, alavancagem patrimonial e oportunidades em operações de leilão —
             com visão de longo prazo para a empresa, a família e o futuro.
           </p>
 
           <div
-            className="mb-8 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-sm"
+            className="relative mb-8 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-sm"
             style={{ color: C.mutedSoft }}
           >
             <Info>{EVENT_DATE}</Info>
@@ -160,7 +175,13 @@ function LandingPage() {
               boxShadow: "0 30px 80px rgba(0,0,0,.55)",
             }}
           >
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-6">
+            {/* subtle sheen */}
+            <span
+              aria-hidden
+              className="pointer-events-none absolute inset-0 opacity-30"
+              style={{ background: `linear-gradient(135deg, ${C.accentSoft}10 0%, transparent 50%, ${C.bgCard2}40 100%)` }}
+            />
+            <div className="relative flex flex-col items-center justify-center gap-4 p-6">
               <div
                 className="grid h-16 w-16 place-items-center rounded-full text-2xl"
                 style={{ background: `${C.accentDark}66`, color: C.text, border: `1px solid ${C.line}` }}
@@ -173,12 +194,12 @@ function LandingPage() {
             </div>
           </div>
 
-          <div className="mt-10">
+          <div className="relative mt-10">
             <CtaButton onClick={openModal}>Quero garantir minha inscrição</CtaButton>
           </div>
 
           <div
-            className="mt-12 w-full max-w-3xl rounded-2xl border px-6 py-6 text-center text-base italic md:text-lg"
+            className="relative mt-12 w-full max-w-3xl rounded-2xl border px-6 py-6 text-center text-base italic md:text-lg"
             style={{
               borderColor: C.lineSoft,
               background: `linear-gradient(180deg, ${C.bgCard}cc, ${C.bgSoft}cc)`,
@@ -268,7 +289,7 @@ function LandingPage() {
           id="publico"
           eyebrow="Para quem é"
           title="Este encontro foi pensado para empresários que…"
-          variant="soft"
+          variant="highlight"
         >
           <div className="grid gap-4 md:grid-cols-2">
             {[
@@ -322,16 +343,22 @@ function LandingPage() {
         </Section>
 
         {/* ============= FORMULÁRIO INLINE ============= */}
-        <section id="inscricao" className="py-14 md:py-20">
+        <section id="inscricao" className="relative py-14 md:py-20">
           <div
-            className="grid gap-8 rounded-3xl border p-6 md:grid-cols-[1fr_1.1fr] md:p-10"
+            className="relative grid gap-8 overflow-hidden rounded-3xl border p-6 md:grid-cols-[1fr_1.1fr] md:p-10"
             style={{
               background: `linear-gradient(160deg, ${C.bgCard2}, ${C.bgCard} 55%, ${C.bgSoft})`,
               borderColor: C.line,
               boxShadow: "0 30px 80px rgba(0,0,0,.4)",
             }}
           >
-            <div className="flex flex-col justify-center">
+            {/* subtle inner glow */}
+            <span
+              aria-hidden
+              className="pointer-events-none absolute -left-20 -top-20 h-96 w-96 rounded-full opacity-15 blur-3xl"
+              style={{ background: `radial-gradient(circle, ${C.accentSoft} 0%, transparent 70%)` }}
+            />
+            <div className="relative flex flex-col justify-center">
               <p
                 className="mb-3 text-[12px] font-semibold uppercase tracking-[0.18em]"
                 style={{ color: C.accent }}
@@ -345,7 +372,9 @@ function LandingPage() {
                 Preencha seus dados para receber a confirmação e os detalhes de participação.
               </p>
             </div>
-            <RegistrationForm />
+            <div className="relative">
+              <RegistrationForm />
+            </div>
           </div>
         </section>
 
@@ -401,15 +430,21 @@ function LandingPage() {
         </Section>
 
         {/* ============= FINAL ============= */}
-        <section className="pt-8 md:pt-14">
+        <section className="relative pt-8 md:pt-14">
           <div
-            className="grid grid-cols-1 items-center gap-6 rounded-3xl border p-8 md:grid-cols-[1.2fr_.8fr] md:p-12"
+            className="relative grid grid-cols-1 items-center gap-6 overflow-hidden rounded-3xl border p-8 md:grid-cols-[1.2fr_.8fr] md:p-12"
             style={{
               background: `linear-gradient(135deg, ${C.accentDeep}77, ${C.bgCard})`,
               borderColor: `${C.accent}44`,
             }}
           >
-            <div>
+            {/* subtle radial texture */}
+            <span
+              aria-hidden
+              className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full opacity-20 blur-3xl"
+              style={{ background: `radial-gradient(circle, ${C.accentSoft} 0%, transparent 70%)` }}
+            />
+            <div className="relative">
               <h2 className="mb-3 text-3xl font-semibold tracking-tight md:text-4xl">
                 O patrimônio que você construiu merece uma estratégia à altura.
               </h2>
@@ -418,7 +453,7 @@ function LandingPage() {
                 visão, critério e preparo diante das oportunidades e incertezas do mercado.
               </p>
             </div>
-            <div className="md:text-right">
+            <div className="relative md:text-right">
               <CtaButton onClick={openModal}>Quero participar do encontro</CtaButton>
             </div>
           </div>
@@ -533,48 +568,70 @@ function Section({
   const isCenter = align === "center";
 
   const variantBg: Record<typeof variant, React.CSSProperties> = {
-    default: {},
+    default: {
+      backgroundImage: `radial-gradient(600px 300px at 110% 20%, ${C.accentSoft}0d 0%, transparent 60%)`,
+    },
     soft: {
-      background: `linear-gradient(180deg, ${C.bgSoft}80, transparent)`,
+      background: `${C.bgSoft}80`,
+      backgroundImage: `linear-gradient(180deg, transparent, ${C.bg}60), radial-gradient(900px 400px at -5% 50%, ${C.bgCard2}40 0%, transparent 55%)`,
       borderTop: `1px solid ${C.lineSoft}`,
       borderBottom: `1px solid ${C.lineSoft}`,
+      boxShadow: "inset 0 40px 80px -40px rgba(0,0,0,.35)",
     },
     dark: {
-      background: `linear-gradient(180deg, ${C.bg}ee, ${C.bgSoft}ee)`,
+      background: `${C.bg}ee`,
+      backgroundImage: `linear-gradient(180deg, ${C.bgSoft}30, transparent 40%, ${C.bgSoft}30), radial-gradient(700px 350px at 105% 0%, ${C.accentDeep}18 0%, transparent 60%)`,
       borderTop: `1px solid ${C.lineSoft}`,
       borderBottom: `1px solid ${C.lineSoft}`,
-      boxShadow: "inset 0 30px 60px rgba(0,0,0,.25)",
+      boxShadow: "inset 0 30px 70px rgba(0,0,0,.28)",
     },
     accent: {
-      background: `linear-gradient(135deg, ${C.accentDeep}90, ${C.bgCard}90)`,
+      background: `${C.accentDeep}90`,
+      backgroundImage: `linear-gradient(135deg, ${C.accentDeep}80 0%, ${C.bgCard}80 60%, ${C.bgSoft}90 100%), radial-gradient(700px 350px at 20% 0%, ${C.accentSoft}25 0%, transparent 60%)`,
       borderTop: `1px solid ${C.accent}33`,
       borderBottom: `1px solid ${C.accent}33`,
+      boxShadow: "inset 0 -30px 60px rgba(0,0,0,.25)",
     },
     highlight: {
-      background: `radial-gradient(800px 400px at 20% 0%, ${C.accentSoft}22 0%, transparent 60%), linear-gradient(180deg, ${C.bgCard}, ${C.bgSoft})`,
+      background: C.bgCard,
+      backgroundImage: `radial-gradient(800px 400px at 20% 0%, ${C.accentSoft}16 0%, transparent 60%), linear-gradient(180deg, ${C.bgCard2}40, ${C.bgSoft}60), radial-gradient(600px 300px at 110% 100%, ${C.bgCard2}50 0%, transparent 55%)`,
       borderTop: `1px solid ${C.lineSoft}`,
       borderBottom: `1px solid ${C.lineSoft}`,
+      boxShadow: "inset 0 30px 60px rgba(0,0,0,.18)",
     },
   };
 
   return (
-    <section id={id} className="py-14 md:py-20" style={variantBg[variant]}>
-      {eyebrow && (
-        <p
-          className={`mb-3 text-[12px] font-semibold uppercase tracking-[0.18em] ${isCenter ? "text-center" : ""}`}
-          style={{ color: C.accent }}
+    <section id={id} className="relative py-14 md:py-20" style={variantBg[variant]}>
+      {/* subtle top/bottom fade to break flat edges */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-16"
+        style={{ background: "linear-gradient(180deg, rgba(0,0,0,.12), transparent)" }}
+      />
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-16"
+        style={{ background: "linear-gradient(0deg, rgba(0,0,0,.12), transparent)" }}
+      />
+      <div className="relative">
+        {eyebrow && (
+          <p
+            className={`mb-3 text-[12px] font-semibold uppercase tracking-[0.18em] ${isCenter ? "text-center" : ""}`}
+            style={{ color: C.accent }}
+          >
+            {eyebrow}
+          </p>
+        )}
+        <h2
+          className={`mb-8 text-3xl font-semibold tracking-tight md:text-4xl ${
+            isCenter ? "mx-auto max-w-3xl text-center" : "max-w-3xl"
+          }`}
         >
-          {eyebrow}
-        </p>
-      )}
-      <h2
-        className={`mb-8 text-3xl font-semibold tracking-tight md:text-4xl ${
-          isCenter ? "mx-auto max-w-3xl text-center" : "max-w-3xl"
-        }`}
-      >
-        {title}
-      </h2>
-      {children}
+          {title}
+        </h2>
+        {children}
+      </div>
     </section>
   );
 }
@@ -583,13 +640,19 @@ function Section({
 function Card({ children }: { children: React.ReactNode }) {
   return (
     <div
-      className="rounded-2xl border p-6 transition hover:-translate-y-0.5"
+      className="relative overflow-hidden rounded-2xl border p-6 transition hover:-translate-y-0.5"
       style={{
         background: `linear-gradient(180deg, ${C.bgCard2}, ${C.bgCard})`,
         borderColor: C.lineSoft,
         boxShadow: "0 10px 30px rgba(0,0,0,.35)",
       }}
     >
+      {/* subtle top sheen */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-px opacity-40"
+        style={{ background: `linear-gradient(90deg, transparent, ${C.accentSoft}40, transparent)` }}
+      />
       {children}
     </div>
   );
