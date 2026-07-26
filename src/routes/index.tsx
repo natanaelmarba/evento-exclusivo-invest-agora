@@ -240,7 +240,7 @@ function LandingPage() {
               </Field>
 
               <label className="flex items-start gap-2 pt-1 text-[13px]" style={{ color: C.muted }}>
-                <input type="checkbox" checked={lgpd} onChange={(e) => setLgpd(e.target.checked)} className="mt-1 accent-[#7cc3ff]" />
+                <input type="checkbox" checked={lgpd} onChange={(e) => setLgpd(e.target.checked)} className="mt-1 accent-[#e11f1d]" />
                 <span>Autorizo o contato da equipe organizadora, conforme a LGPD, para tratar da minha inscrição.</span>
               </label>
 
