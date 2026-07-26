@@ -328,15 +328,15 @@ function LandingPage() {
 
 
         {/* ============= ESCASSEZ ============= */}
-        <Section eyebrow="Vagas limitadas" title="Inscrições limitadas para esta edição." variant="soft">
-          <p className="max-w-3xl text-[15.5px] leading-relaxed md:text-lg" style={{ color: "#3a3b40" }}>
+        <Section eyebrow="Vagas limitadas" title="Inscrições limitadas para esta edição." variant="highlight">
+          <p className="max-w-3xl text-[15.5px] leading-relaxed md:text-lg" style={{ color: C.muted }}>
             Para preservar a qualidade da experiência e da interação, as inscrições para este encontro são
             limitadas. Se você entende que este é o momento de olhar com mais estratégia para o patrimônio
             que construiu e para o futuro que deseja projetar, faça sua inscrição agora.
           </p>
           <div className="mt-8">
             <CtaButton onClick={openModal}>Garantir minha inscrição</CtaButton>
-            <p className="mt-3 text-[13px]" style={{ color: "#6a6c72" }}>
+            <p className="mt-3 text-[13px]" style={{ color: "rgba(255,255,255,.72)" }}>
               Participação sujeita à disponibilidade de vagas.
             </p>
           </div>
