@@ -11,27 +11,27 @@ const WEBHOOK_URL = "{{WEBHOOK_URL}}";
 const eventSchema = {
   "@context": "https://schema.org",
   "@type": "Event",
-  name: "Evento Online Estratégico para Empresários — Invest Agora",
+  name: "Encontro Online para Empresários — Invest Agora × Verticale",
   eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
   eventStatus: "https://schema.org/EventScheduled",
   description:
-    "Evento online estratégico para empresários sobre alavancagem patrimonial, investimento inteligente, aplicação de capital e oportunidades em leilão.",
+    "Encontro online, exclusivo e gratuito, com estratégias práticas para empresários que querem investir melhor, proteger patrimônio e tomar decisões mais seguras.",
 };
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Evento Online para Empresários | Invest Agora × Verticale" },
+      { title: "Encontro Online para Empresários | Invest Agora × Verticale" },
       {
         name: "description",
         content:
-          "Empresários que decidem hoje colhem vantagem amanhã. Participe do evento online estratégico sobre alavancagem patrimonial, investimento e oportunidades em leilão.",
+          "Encontro online, exclusivo e gratuito para empresários. Estratégias práticas para investir melhor, proteger patrimônio e decidir com segurança em cenário de incerteza.",
       },
-      { property: "og:title", content: "Evento Online Estratégico para Empresários | Invest Agora" },
+      { property: "og:title", content: "Encontro Online para Empresários | Invest Agora" },
       {
         property: "og:description",
         content:
-          "Acelere resultados com inteligência patrimonial, investimento estratégico e oportunidades em leilão. Vagas limitadas.",
+          "Investimento inteligente, alavancagem patrimonial e oportunidades em leilão. Vagas limitadas.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
