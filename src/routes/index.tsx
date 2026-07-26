@@ -114,13 +114,6 @@ function LandingPage() {
       <div id="top" className="mx-auto max-w-[1200px] px-5 pb-24">
         {/* ============= HERO ============= */}
         <section className="flex flex-col items-center pt-14 pb-10 text-center md:pt-20 md:pb-14">
-          <span
-            className="mb-6 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em]"
-            style={{ borderColor: `${C.accent}55`, color: C.text, background: `${C.accentDeep}55` }}
-          >
-            <span className="h-1.5 w-1.5 rounded-full" style={{ background: C.accent }} />
-            Encontro Online Exclusivo para Empresários
-          </span>
 
           <h1 className="mb-6 max-w-4xl text-[clamp(32px,4.6vw,56px)] font-semibold leading-[1.08] tracking-tight">
             Seu negócio construiu patrimônio.
