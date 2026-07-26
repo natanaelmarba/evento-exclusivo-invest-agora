@@ -45,14 +45,14 @@ export const Route = createFileRoute("/")({
   component: LandingPage,
 });
 
-// Paleta: branco, grafite #33353B (degradês) e vermelho #840B0A (degradês)
+// Paleta: branco, PRETO (com variações) e vermelho #840B0A (com degradês)
 const C = {
-  bg: "#1c1d21",
-  bgSoft: "#26272c",
-  bgCard: "#33353B",
-  bgCard2: "#3d3f46",
-  line: "#4a4c54",
-  lineSoft: "#3a3c43",
+  bg: "#050506",
+  bgSoft: "#0c0c0e",
+  bgCard: "#141416",
+  bgCard2: "#1c1c20",
+  line: "#2a2a2f",
+  lineSoft: "#1e1e22",
   text: "#ffffff",
   muted: "#c9cbd1",
   mutedSoft: "#9a9ca3",
@@ -102,7 +102,7 @@ function LandingPage() {
       {/* ============= HEADER ============= */}
       <header
         className="sticky top-0 z-40 backdrop-blur-md"
-        style={{ background: "rgba(28,29,33,.85)", borderBottom: `1px solid ${C.lineSoft}` }}
+        style={{ background: "rgba(5,5,6,.85)", borderBottom: `1px solid ${C.lineSoft}` }}
       >
         <div className="mx-auto flex max-w-[1200px] items-center justify-between gap-4 px-5 py-3">
           <a href="#top" className="flex items-center gap-3 shrink-0">
@@ -486,7 +486,7 @@ function LandingPage() {
       {/* STICKY MOBILE */}
       <div
         className="fixed inset-x-0 bottom-0 z-40 border-t p-3 backdrop-blur md:hidden"
-        style={{ background: "rgba(28,29,33,.92)", borderColor: C.line }}
+        style={{ background: "rgba(5,5,6,.92)", borderColor: C.line }}
       >
         <button
           onClick={openModal}
@@ -567,47 +567,53 @@ function Section({
 }) {
   const isCenter = align === "center";
 
-  // Paleta alternada: PRETO (com gradiente), VERMELHO #840B0A (com gradiente), BRANCO (com gradiente)
+  // Paleta alternada: PRETO (variações), VERMELHO #840B0A, BRANCO — com bordas suavizadas
   const variantBg: Record<typeof variant, React.CSSProperties> = {
-    // PRETO
+    // PRETO padrão (mais escuro)
     default: {
-      background: "linear-gradient(180deg, #000000 0%, #14151a 55%, #000000 100%)",
-      borderTop: "1px solid rgba(255,255,255,.06)",
-      borderBottom: "1px solid rgba(255,255,255,.06)",
+      background: "linear-gradient(180deg, #000000 0%, #0a0a0c 50%, #000000 100%)",
     },
+    // PRETO um pouco mais claro (variação)
     dark: {
-      background: "linear-gradient(180deg, #000000 0%, #14151a 55%, #000000 100%)",
-      borderTop: "1px solid rgba(255,255,255,.06)",
-      borderBottom: "1px solid rgba(255,255,255,.06)",
+      background: "linear-gradient(180deg, #08080a 0%, #141416 50%, #08080a 100%)",
     },
     // VERMELHO #840B0A
     accent: {
-      background: "linear-gradient(180deg, #5a0807 0%, #840B0A 50%, #4a0606 100%)",
-      borderTop: "1px solid rgba(255,255,255,.08)",
-      borderBottom: "1px solid rgba(255,255,255,.08)",
+      background: "linear-gradient(180deg, #3a0504 0%, #840B0A 50%, #3a0504 100%)",
     },
     highlight: {
-      background: "linear-gradient(180deg, #5a0807 0%, #840B0A 50%, #4a0606 100%)",
-      borderTop: "1px solid rgba(255,255,255,.08)",
-      borderBottom: "1px solid rgba(255,255,255,.08)",
+      background: "linear-gradient(180deg, #3a0504 0%, #840B0A 50%, #3a0504 100%)",
     },
     // BRANCO
     soft: {
-      background: "linear-gradient(180deg, #ffffff 0%, #f2f2f4 55%, #e6e7ea 100%)",
+      background: "linear-gradient(180deg, #ffffff 0%, #f4f4f6 50%, #eaeaee 100%)",
       color: "#1a1b1f",
-      borderTop: "1px solid rgba(0,0,0,.08)",
-      borderBottom: "1px solid rgba(0,0,0,.08)",
     },
   };
 
   const isLight = variant === "soft";
 
+  // Cor de "cola" para suavizar bordas entre seções (usa o tom do topo/base do gradiente)
+  const edgeColor =
+    variant === "soft" ? "#ffffff" : variant === "accent" || variant === "highlight" ? "#3a0504" : variant === "dark" ? "#08080a" : "#000000";
+
   return (
     <section
       id={id}
-      className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen py-14 md:py-20"
+      className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen py-16 md:py-24"
       style={variantBg[variant]}
     >
+      {/* Fades superior/inferior — suavizam a transição entre seções */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-24 md:h-32"
+        style={{ background: `linear-gradient(180deg, ${edgeColor} 0%, transparent 100%)` }}
+      />
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-24 md:h-32"
+        style={{ background: `linear-gradient(0deg, ${edgeColor} 0%, transparent 100%)` }}
+      />
       <div
         className="relative mx-auto max-w-[1200px] px-5"
         style={isLight ? { color: "#1a1b1f" } : undefined}
