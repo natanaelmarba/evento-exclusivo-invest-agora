@@ -559,24 +559,22 @@ function Section({
 
   return (
     <section id={id} className="py-14 md:py-20" style={variantBg[variant]}>
-      <div className="mx-auto max-w-[1200px] px-5">
-        {eyebrow && (
-          <p
-            className={`mb-3 text-[12px] font-semibold uppercase tracking-[0.18em] ${isCenter ? "text-center" : ""}`}
-            style={{ color: C.accent }}
-          >
-            {eyebrow}
-          </p>
-        )}
-        <h2
-          className={`mb-8 text-3xl font-semibold tracking-tight md:text-4xl ${
-            isCenter ? "mx-auto max-w-3xl text-center" : "max-w-3xl"
-          }`}
+      {eyebrow && (
+        <p
+          className={`mb-3 text-[12px] font-semibold uppercase tracking-[0.18em] ${isCenter ? "text-center" : ""}`}
+          style={{ color: C.accent }}
         >
-          {title}
-        </h2>
-        {children}
-      </div>
+          {eyebrow}
+        </p>
+      )}
+      <h2
+        className={`mb-8 text-3xl font-semibold tracking-tight md:text-4xl ${
+          isCenter ? "mx-auto max-w-3xl text-center" : "max-w-3xl"
+        }`}
+      >
+        {title}
+      </h2>
+      {children}
     </section>
   );
 }
