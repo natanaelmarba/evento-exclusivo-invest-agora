@@ -640,13 +640,19 @@ function Section({
 function Card({ children }: { children: React.ReactNode }) {
   return (
     <div
-      className="rounded-2xl border p-6 transition hover:-translate-y-0.5"
+      className="relative overflow-hidden rounded-2xl border p-6 transition hover:-translate-y-0.5"
       style={{
         background: `linear-gradient(180deg, ${C.bgCard2}, ${C.bgCard})`,
         borderColor: C.lineSoft,
         boxShadow: "0 10px 30px rgba(0,0,0,.35)",
       }}
     >
+      {/* subtle top sheen */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-px opacity-40"
+        style={{ background: `linear-gradient(90deg, transparent, ${C.accentSoft}40, transparent)` }}
+      />
       {children}
     </div>
   );
