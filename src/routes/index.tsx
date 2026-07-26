@@ -45,14 +45,14 @@ export const Route = createFileRoute("/")({
   component: LandingPage,
 });
 
-// Paleta: branco, grafite #33353B (degradês) e vermelho #840B0A (degradês)
+// Paleta: branco, PRETO (com variações) e vermelho #840B0A (com degradês)
 const C = {
-  bg: "#1c1d21",
-  bgSoft: "#26272c",
-  bgCard: "#33353B",
-  bgCard2: "#3d3f46",
-  line: "#4a4c54",
-  lineSoft: "#3a3c43",
+  bg: "#050506",
+  bgSoft: "#0c0c0e",
+  bgCard: "#141416",
+  bgCard2: "#1c1c20",
+  line: "#2a2a2f",
+  lineSoft: "#1e1e22",
   text: "#ffffff",
   muted: "#c9cbd1",
   mutedSoft: "#9a9ca3",
