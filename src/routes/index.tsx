@@ -198,20 +198,17 @@ function LandingPage() {
         >
           <div className="space-y-5 max-w-3xl text-[15.5px] leading-relaxed md:text-lg" style={{ color: C.muted }}>
             <p>
-              Empresários brasileiros convivem diariamente com decisões que afetam caixa, crescimento, patrimônio
-              e estabilidade familiar. Mudanças econômicas, tributárias, previdenciárias e de mercado tornam ainda
-              mais importante separar o que é urgência operacional do que é estratégia de longo prazo.
+              Mudanças econômicas, tributárias e de mercado exigem separar urgência operacional de estratégia
+              de longo prazo. Construir patrimônio sólido pede a mesma maturidade que construir uma empresa:
+              análise, diversificação, visão e decisão.
             </p>
             <p>
-              Construir uma empresa exige esforço, disciplina e capacidade de assumir riscos calculados. Construir
-              um patrimônio sólido exige a mesma maturidade: análise, diversificação, visão e decisão.
-            </p>
-            <p>
-              Este encontro foi criado para empresários que não querem deixar o futuro financeiro dependente de uma
-              única fonte de renda, de uma única decisão ou das incertezas do cenário atual.
+              Este encontro é para empresários que não querem deixar o futuro financeiro dependente de uma
+              única fonte de renda ou das incertezas do cenário atual.
             </p>
           </div>
         </Section>
+
 
         {/* ============= PROMESSA / TEMAS ============= */}
         <Section
