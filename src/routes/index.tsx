@@ -108,12 +108,17 @@ function LandingPage() {
             className="mb-5 inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[12px] font-semibold uppercase tracking-widest"
             style={{ borderColor: C.line, color: C.accent, background: `${C.accentDark}30` }}
           >
-            ● Evento Online • Vagas limitadas
+            ● Encontro Online • Gratuito • Vagas limitadas
           </span>
 
-          <h1 className="mb-10 max-w-4xl text-[clamp(34px,5vw,60px)] font-extrabold leading-[1.05] tracking-tight">
-            Empresários que decidem hoje <span style={{ color: C.accent }}>colhem vantagem amanhã</span>.
+          <h1 className="mb-5 max-w-4xl text-[clamp(34px,5vw,60px)] font-extrabold leading-[1.05] tracking-tight">
+            Empresários que se antecipam à incerteza financeira <span style={{ color: C.accent }}>constroem vantagem real</span>.
           </h1>
+
+          <p className="mb-10 max-w-2xl text-base leading-relaxed md:text-lg" style={{ color: C.muted }}>
+            Participe de um encontro online, exclusivo e gratuito, com estratégias práticas para quem quer investir melhor,
+            proteger patrimônio e tomar decisões mais seguras para o futuro da família e dos negócios.
+          </p>
 
           {/* VIDEO PLACEHOLDER */}
           <div
@@ -139,9 +144,9 @@ function LandingPage() {
           </div>
 
           <div className="mt-10">
-            <CtaButton onClick={openModal}>Quero garantir minha inscrição →</CtaButton>
+            <CtaButton onClick={openModal}>Quero garantir minha vaga →</CtaButton>
             <p className="mt-4 text-[13px]" style={{ color: C.muted }}>
-              Vagas limitadas • Cadastro rápido • Confirmação por e-mail/WhatsApp
+              Vagas limitadas • Inscrição rápida • Confirmação por WhatsApp
             </p>
           </div>
         </section>
