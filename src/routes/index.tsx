@@ -195,6 +195,7 @@ function LandingPage() {
           id="encontro"
           eyebrow="Contexto"
           title="Em um cenário de incertezas, improvisar com o patrimônio deixou de ser uma opção."
+          variant="soft"
         >
           <div className="space-y-5 max-w-3xl text-[15.5px] leading-relaxed md:text-lg" style={{ color: C.muted }}>
             <p>
@@ -215,6 +216,7 @@ function LandingPage() {
           id="temas"
           title="O que será abordado"
           align="center"
+          variant="dark"
         >
 
 
@@ -266,6 +268,7 @@ function LandingPage() {
           id="publico"
           eyebrow="Para quem é"
           title="Este encontro foi pensado para empresários que…"
+          variant="soft"
         >
           <div className="grid gap-4 md:grid-cols-2">
             {[
@@ -304,7 +307,7 @@ function LandingPage() {
 
 
         {/* ============= ESCASSEZ ============= */}
-        <Section eyebrow="Vagas limitadas" title="Inscrições limitadas para esta edição.">
+        <Section eyebrow="Vagas limitadas" title="Inscrições limitadas para esta edição." variant="accent">
           <p className="max-w-3xl text-[15.5px] leading-relaxed md:text-lg" style={{ color: C.muted }}>
             Para preservar a qualidade da experiência e da interação, as inscrições para este encontro são
             limitadas. Se você entende que este é o momento de olhar com mais estratégia para o patrimônio
@@ -347,7 +350,7 @@ function LandingPage() {
         </section>
 
         {/* ============= FAQ ============= */}
-        <Section eyebrow="Perguntas frequentes" title="Tudo o que você precisa saber">
+        <Section eyebrow="Perguntas frequentes" title="Tudo o que você precisa saber" variant="dark">
           <div className="space-y-3">
             {[
               [
