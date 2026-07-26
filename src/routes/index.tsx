@@ -298,18 +298,6 @@ function LandingPage() {
 
         </Section>
 
-        {/* ============= DIFERENCIAL ============= */}
-        <Section
-          eyebrow="Diferencial"
-          title="O futuro não se constrói apenas trabalhando mais. Ele se constrói decidindo melhor."
-        >
-          <blockquote
-            className="mt-2 border-l-2 pl-6 text-xl font-medium italic leading-snug md:text-2xl"
-            style={{ borderColor: C.accent, color: C.text }}
-          >
-            “Quem toma decisões antes, amplia suas possibilidades de resultado depois.”
-          </blockquote>
-        </Section>
 
 
 
