@@ -417,7 +417,7 @@ function LandingPage() {
       {/* STICKY MOBILE */}
       <div
         className="fixed inset-x-0 bottom-0 z-50 border-t p-3 backdrop-blur md:hidden"
-        style={{ background: "rgba(5,8,15,.92)", borderColor: C.line }}
+        style={{ background: "rgba(28,29,33,.92)", borderColor: C.line }}
       >
         <a
           href="#form"
