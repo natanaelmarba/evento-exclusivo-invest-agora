@@ -277,7 +277,7 @@ function LandingPage() {
           id="publico"
           eyebrow="Para quem é"
           title="Este encontro foi pensado para empresários que…"
-          variant="soft"
+          variant="highlight"
         >
           <div className="grid gap-4 md:grid-cols-2">
             {[
