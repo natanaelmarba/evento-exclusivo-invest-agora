@@ -114,7 +114,7 @@ function LandingPage() {
       style={{
         color: C.text,
         fontFamily: "Inter, system-ui, sans-serif",
-        background: `radial-gradient(1000px 500px at 80% -10%, ${C.accentDark}55 0%, transparent 60%), radial-gradient(900px 400px at -10% 20%, #1a2a55 0%, transparent 55%), linear-gradient(180deg, ${C.bg}, ${C.bgSoft})`,
+        background: `radial-gradient(1000px 500px at 80% -10%, ${C.accentDark}66 0%, transparent 60%), radial-gradient(900px 400px at -10% 20%, ${C.bgCard2} 0%, transparent 55%), linear-gradient(180deg, ${C.bg}, ${C.bgSoft})`,
       }}
     >
       {/* ============= HEADER ============= */}
