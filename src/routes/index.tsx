@@ -254,15 +254,14 @@ function LandingPage() {
             style={{ background: `linear-gradient(135deg, ${C.accentDark}66, ${C.bgCard})`, borderColor: C.line }}>
             <div>
               <h2 className="mb-2 text-3xl font-extrabold tracking-tight md:text-4xl">
-                Seu próximo salto empresarial começa aqui.
+                Faça seu cadastro em menos de 1 minuto.
               </h2>
               <p className="text-lg" style={{ color: C.muted }}>
-                Inscreva-se no evento online e aprenda a tomar decisões mais inteligentes em investimento,
-                alavancagem patrimonial, aplicação de capital e oportunidades em leilão.
+                Garanta sua vaga no encontro online gratuito e entre no grupo de empresários que decide antes.
               </p>
             </div>
             <div className="md:text-right">
-              <CtaButton onClick={openModal}>Quero garantir minha inscrição →</CtaButton>
+              <CtaButton onClick={openModal}>Finalizar inscrição →</CtaButton>
             </div>
           </div>
         </section>
