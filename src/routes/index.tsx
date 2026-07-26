@@ -603,12 +603,19 @@ function Section({
   const isLight = variant === "soft";
 
   return (
-    <section id={id} className="relative py-14 md:py-20" style={variantBg[variant]}>
-      <div className="relative" style={isLight ? { color: "#1a1b1f" } : undefined}>
+    <section
+      id={id}
+      className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen py-14 md:py-20"
+      style={variantBg[variant]}
+    >
+      <div
+        className="relative mx-auto max-w-[1200px] px-5"
+        style={isLight ? { color: "#1a1b1f" } : undefined}
+      >
         {eyebrow && (
           <p
             className={`mb-3 text-[12px] font-semibold uppercase tracking-[0.18em] ${isCenter ? "text-center" : ""}`}
-            style={{ color: C.accent }}
+            style={{ color: isLight ? "#840B0A" : C.accent }}
           >
             {eyebrow}
           </p>
