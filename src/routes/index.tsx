@@ -539,10 +539,10 @@ function CtaButton({
   return (
     <button
       onClick={onClick}
-      className={`inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-[15px] font-semibold uppercase tracking-wider text-white transition hover:-translate-y-px ${full ? "w-full" : ""}`}
+      className={`inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-[15px] font-semibold uppercase tracking-wider text-white transition hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black ${full ? "w-full" : ""}`}
       style={{
-        background: `linear-gradient(180deg, ${C.accentSoft}, ${C.accentDark})`,
-        boxShadow: `0 14px 34px ${C.accentDeep}aa`,
+        background: `linear-gradient(180deg, #d81f21, ${C.accentDark} 60%, #4a0606)`,
+        boxShadow: `0 14px 34px rgba(0,0,0,.55), inset 0 0 0 1px rgba(255,255,255,.18)`,
       }}
     >
       {children}
