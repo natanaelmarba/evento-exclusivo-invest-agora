@@ -195,6 +195,7 @@ function LandingPage() {
           id="encontro"
           eyebrow="Contexto"
           title="Em um cenário de incertezas, improvisar com o patrimônio deixou de ser uma opção."
+          variant="soft"
         >
           <div className="space-y-5 max-w-3xl text-[15.5px] leading-relaxed md:text-lg" style={{ color: C.muted }}>
             <p>
@@ -215,6 +216,7 @@ function LandingPage() {
           id="temas"
           title="O que será abordado"
           align="center"
+          variant="dark"
         >
 
 
@@ -266,6 +268,7 @@ function LandingPage() {
           id="publico"
           eyebrow="Para quem é"
           title="Este encontro foi pensado para empresários que…"
+          variant="soft"
         >
           <div className="grid gap-4 md:grid-cols-2">
             {[
@@ -304,7 +307,7 @@ function LandingPage() {
 
 
         {/* ============= ESCASSEZ ============= */}
-        <Section eyebrow="Vagas limitadas" title="Inscrições limitadas para esta edição.">
+        <Section eyebrow="Vagas limitadas" title="Inscrições limitadas para esta edição." variant="accent">
           <p className="max-w-3xl text-[15.5px] leading-relaxed md:text-lg" style={{ color: C.muted }}>
             Para preservar a qualidade da experiência e da interação, as inscrições para este encontro são
             limitadas. Se você entende que este é o momento de olhar com mais estratégia para o patrimônio
@@ -347,7 +350,7 @@ function LandingPage() {
         </section>
 
         {/* ============= FAQ ============= */}
-        <Section eyebrow="Perguntas frequentes" title="Tudo o que você precisa saber">
+        <Section eyebrow="Perguntas frequentes" title="Tudo o que você precisa saber" variant="dark">
           <div className="space-y-3">
             {[
               [
@@ -517,17 +520,45 @@ function Section({
   eyebrow,
   title,
   align = "left",
+  variant = "default",
   children,
 }: {
   id?: string;
   eyebrow?: string;
   title: string;
   align?: "left" | "center";
+  variant?: "default" | "soft" | "dark" | "accent" | "highlight";
   children: React.ReactNode;
 }) {
   const isCenter = align === "center";
+
+  const variantBg: Record<typeof variant, React.CSSProperties> = {
+    default: {},
+    soft: {
+      background: `linear-gradient(180deg, ${C.bgSoft}80, transparent)`,
+      borderTop: `1px solid ${C.lineSoft}`,
+      borderBottom: `1px solid ${C.lineSoft}`,
+    },
+    dark: {
+      background: `linear-gradient(180deg, ${C.bg}ee, ${C.bgSoft}ee)`,
+      borderTop: `1px solid ${C.lineSoft}`,
+      borderBottom: `1px solid ${C.lineSoft}`,
+      boxShadow: "inset 0 30px 60px rgba(0,0,0,.25)",
+    },
+    accent: {
+      background: `linear-gradient(135deg, ${C.accentDeep}90, ${C.bgCard}90)`,
+      borderTop: `1px solid ${C.accent}33`,
+      borderBottom: `1px solid ${C.accent}33`,
+    },
+    highlight: {
+      background: `radial-gradient(800px 400px at 20% 0%, ${C.accentSoft}22 0%, transparent 60%), linear-gradient(180deg, ${C.bgCard}, ${C.bgSoft})`,
+      borderTop: `1px solid ${C.lineSoft}`,
+      borderBottom: `1px solid ${C.lineSoft}`,
+    },
+  };
+
   return (
-    <section id={id} className="py-14 md:py-20">
+    <section id={id} className="py-14 md:py-20" style={variantBg[variant]}>
       {eyebrow && (
         <p
           className={`mb-3 text-[12px] font-semibold uppercase tracking-[0.18em] ${isCenter ? "text-center" : ""}`}
