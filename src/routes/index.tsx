@@ -328,15 +328,15 @@ function LandingPage() {
 
 
         {/* ============= ESCASSEZ ============= */}
-        <Section eyebrow="Vagas limitadas" title="Inscrições limitadas para esta edição." variant="soft">
-          <p className="max-w-3xl text-[15.5px] leading-relaxed md:text-lg" style={{ color: "#3a3b40" }}>
+        <Section eyebrow="Vagas limitadas" title="Inscrições limitadas para esta edição." variant="highlight">
+          <p className="max-w-3xl text-[15.5px] leading-relaxed md:text-lg" style={{ color: C.muted }}>
             Para preservar a qualidade da experiência e da interação, as inscrições para este encontro são
             limitadas. Se você entende que este é o momento de olhar com mais estratégia para o patrimônio
             que construiu e para o futuro que deseja projetar, faça sua inscrição agora.
           </p>
           <div className="mt-8">
             <CtaButton onClick={openModal}>Garantir minha inscrição</CtaButton>
-            <p className="mt-3 text-[13px]" style={{ color: "#6a6c72" }}>
+            <p className="mt-3 text-[13px]" style={{ color: "rgba(255,255,255,.72)" }}>
               Participação sujeita à disponibilidade de vagas.
             </p>
           </div>
@@ -577,12 +577,13 @@ function Section({
     dark: {
       background: "linear-gradient(180deg, #08080a 0%, #141416 50%, #08080a 100%)",
     },
-    // VERMELHO #840B0A
+    // VERMELHO #840B0A (tom mais fechado)
     accent: {
       background: "linear-gradient(180deg, #3a0504 0%, #840B0A 50%, #3a0504 100%)",
     },
+    // VERMELHO #840B0A (tom mais vibrante, com variação de brilho)
     highlight: {
-      background: "linear-gradient(180deg, #3a0504 0%, #840B0A 50%, #3a0504 100%)",
+      background: "radial-gradient(1200px 500px at 50% -20%, #a8100f 0%, transparent 60%), linear-gradient(180deg, #5a0807 0%, #840B0A 40%, #840B0A 60%, #5a0807 100%)",
     },
     // BRANCO
     soft: {
@@ -592,10 +593,11 @@ function Section({
   };
 
   const isLight = variant === "soft";
+  const isRed = variant === "accent" || variant === "highlight";
 
   // Cor de "cola" para suavizar bordas entre seções (usa o tom do topo/base do gradiente)
   const edgeColor =
-    variant === "soft" ? "#ffffff" : variant === "accent" || variant === "highlight" ? "#3a0504" : variant === "dark" ? "#08080a" : "#000000";
+    variant === "soft" ? "#ffffff" : variant === "accent" || variant === "highlight" ? "#5a0807" : variant === "dark" ? "#08080a" : "#000000";
 
   return (
     <section
@@ -621,7 +623,7 @@ function Section({
         {eyebrow && (
           <p
             className={`mb-3 text-[12px] font-semibold uppercase tracking-[0.18em] ${isCenter ? "text-center" : ""}`}
-            style={{ color: isLight ? "#840B0A" : C.accent }}
+            style={{ color: isLight ? "#840B0A" : isRed ? "#ffd1d1" : C.accent }}
           >
             {eyebrow}
           </p>
