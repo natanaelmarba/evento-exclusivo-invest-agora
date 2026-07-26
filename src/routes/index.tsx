@@ -175,9 +175,6 @@ function LandingPage() {
 
           <div className="mt-10">
             <CtaButton onClick={openModal}>Quero garantir minha inscrição</CtaButton>
-            <p className="mt-4 text-[13px]" style={{ color: C.mutedSoft }}>
-              Cadastro rápido. As informações de acesso serão enviadas após a confirmação da inscrição.
-            </p>
           </div>
 
           <div
@@ -188,8 +185,9 @@ function LandingPage() {
               color: C.muted,
             }}
           >
-            “Um encontro para empresários que entendem que decisões antecipadas criam mais opções no futuro.”
+            “Quem toma decisões antes, amplia suas possibilidades de resultado depois.”
           </div>
+
         </section>
 
         {/* ============= CONTEXTO / DOR ============= */}
