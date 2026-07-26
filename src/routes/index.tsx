@@ -152,22 +152,23 @@ function LandingPage() {
         </section>
 
         {/* ============= POR QUE AGORA ============= */}
-        <Section eyebrow="Por que esse evento importa agora" title="O cenário muda rápido. Sua estratégia precisa mudar antes.">
+        <Section eyebrow="Por que agora" title="O cenário econômico muda rápido. Sua estratégia não pode ficar parada.">
           <p className="max-w-3xl text-lg leading-relaxed" style={{ color: C.muted }}>
-            Quem empreende sabe: crescimento sem estratégia vira risco. Este evento online foi desenhado para
-            empresários de diferentes segmentos que querem tomar decisões mais inteligentes sobre patrimônio, capital
-            e expansão. Você terá uma visão objetiva para agir com mais segurança, previsibilidade e clareza.
+            Empresários de todos os segmentos estão enfrentando o mesmo desafio: preservar capital, crescer com
+            inteligência e reduzir exposição às instabilidades do mercado brasileiro. Este encontro foi criado para
+            quem entende que esperar “o momento ideal” custa caro. Aqui, você terá clareza para transformar incerteza
+            em plano de ação.
           </p>
         </Section>
 
         {/* ============= O QUE VAI APRENDER ============= */}
-        <Section eyebrow="O que você vai aprender" title="Conteúdo direto ao ponto para decisões de alto impacto">
+        <Section eyebrow="O que você vai aprender" title="Conteúdo estratégico para decisões que impactam seu patrimônio">
           <div className="grid gap-4 md:grid-cols-2">
             {[
-              ["Alavancagem Patrimonial", "Como estruturar crescimento sem comprometer fluxo e estabilidade."],
-              ["Investimento Inteligente", "Critérios práticos para avaliar risco, retorno e timing."],
-              ["Aplicação Estratégica de Capital", "Como direcionar recursos para gerar avanço consistente."],
-              ["Oportunidades em Leilão", "Como analisar oportunidades com método e visão de negócio."],
+              ["Investimento Inteligente", "Como avaliar oportunidades com visão de risco, retorno e prazo."],
+              ["Alavancagem Patrimonial", "Caminhos para acelerar crescimento com estrutura e controle."],
+              ["Planejamento de Longo Prazo", "Decisões financeiras com foco em estabilidade futura."],
+              ["Oportunidades em Leilão", "Abordagem prática para quem quer diversificar com critério."],
             ].map(([t, d], i) => (
               <Card key={t}>
                 <div className="mb-3 grid h-10 w-10 place-items-center rounded-full text-sm font-bold"
@@ -179,16 +180,19 @@ function LandingPage() {
               </Card>
             ))}
           </div>
+          <div className="mt-8">
+            <CtaButton onClick={openModal}>Reservar minha inscrição agora →</CtaButton>
+          </div>
         </Section>
 
         {/* ============= PARA QUEM É ============= */}
-        <Section eyebrow="Para quem é este evento" title="Feito para empresários que querem jogar no próximo nível">
+        <Section eyebrow="Para quem é" title="Se você se identifica com esses pontos, este evento é para você">
           <div className="grid gap-4 md:grid-cols-2">
             {[
-              "Donos de negócio que querem crescer com mais controle",
-              "Empresários que buscam proteger e expandir patrimônio",
-              "Quem deseja melhorar qualidade das decisões financeiras",
-              "Quem quer enxergar novas alavancas de resultado",
+              "Empresário que deseja investir com mais estratégia e menos improviso",
+              "Profissional que já acumulou capital e busca decisões mais sofisticadas",
+              "Quem quer proteger patrimônio diante da instabilidade econômica",
+              "Quem pensa em crescimento sustentável para empresa e família",
             ].map((t) => (
               <Card key={t}>
                 <div className="flex items-start gap-3">
@@ -203,14 +207,22 @@ function LandingPage() {
           </div>
         </Section>
 
+        {/* ============= TRANSFORMAÇÃO ============= */}
+        <Section eyebrow="O que você leva do encontro" title="Saia do evento com direção clara para os próximos passos">
+          <p className="max-w-3xl text-lg leading-relaxed" style={{ color: C.muted }}>
+            Em vez de consumir informações soltas, você terá uma visão organizada para tomar decisões mais maduras
+            sobre capital, patrimônio e expansão. A proposta é simples: menos ruído, mais estratégia.
+          </p>
+        </Section>
+
         {/* ============= URGÊNCIA ============= */}
-        <Section eyebrow="Prova de urgência" title="Turma com vagas limitadas">
+        <Section eyebrow="Vagas limitadas" title="Inscrições abertas por tempo limitado">
           <Card>
             <p className="mb-6 text-base leading-relaxed" style={{ color: C.muted }}>
-              Para manter qualidade e interação, as inscrições são limitadas.
-              Garanta sua participação agora e evite ficar de fora desta edição.
+              Para manter a qualidade do encontro, as vagas são limitadas. Garanta sua participação agora e entre no
+              grupo de empresários que decide antes.
             </p>
-            <CtaButton onClick={openModal}>Reservar minha vaga agora →</CtaButton>
+            <CtaButton onClick={openModal}>Confirmar minha vaga gratuita →</CtaButton>
           </Card>
         </Section>
 
@@ -218,10 +230,10 @@ function LandingPage() {
         <Section eyebrow="Dúvidas frequentes" title="Tudo o que você precisa saber">
           <div className="space-y-3">
             {[
-              ["O evento é para qual tipo de empresário?", "Para empresários de qualquer segmento que desejam evoluir a estratégia patrimonial e de investimento."],
-              ["É conteúdo teórico ou aplicável?", "Aplicável. O foco é fornecer direcionamentos práticos para decisão."],
-              ["Vou receber acesso após o cadastro?", "Sim. A confirmação e os detalhes de acesso são enviados após a inscrição."],
-              ["Há limite de participantes?", "Sim. As vagas são limitadas por edição."],
+              ["É realmente gratuito?", "Sim. A inscrição no encontro é gratuita."],
+              ["É só para um nicho específico?", "Não. O conteúdo foi estruturado para empresários de qualquer segmento."],
+              ["Vai ter conteúdo prático ou só teoria?", "O foco é prático, com direcionamentos aplicáveis à tomada de decisão."],
+              ["Como recebo o acesso?", "Após o cadastro, você recebe as instruções no WhatsApp/e-mail informado."],
             ].map(([q, a]) => (
               <details key={q} className="group rounded-xl border p-4 open:pb-5"
                 style={{ background: C.bgCard, borderColor: C.line }}>
