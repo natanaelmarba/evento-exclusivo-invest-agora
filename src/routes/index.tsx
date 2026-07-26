@@ -213,15 +213,10 @@ function LandingPage() {
         {/* ============= PROMESSA / TEMAS ============= */}
         <Section
           id="temas"
-          eyebrow="O que será abordado"
-          title="Mais do que informações: uma nova forma de olhar para o seu patrimônio."
+          title="O que será abordado"
+          align="center"
         >
-          <p className="mb-10 max-w-3xl text-[15.5px] leading-relaxed md:text-lg" style={{ color: C.muted }}>
-            Em vez de consumir conteúdos desconectados ou tomar decisões sob pressão, você terá acesso a uma
-            conversa estratégica sobre caminhos que podem apoiar uma construção patrimonial mais estruturada.
-            O objetivo do encontro é ampliar sua visão sobre como analisar oportunidades, proteger capital e
-            buscar crescimento patrimonial com mais critério.
-          </p>
+
 
           <div className="grid gap-5 md:grid-cols-2">
             {[
