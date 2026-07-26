@@ -114,13 +114,6 @@ function LandingPage() {
       <div id="top" className="mx-auto max-w-[1200px] px-5 pb-24">
         {/* ============= HERO ============= */}
         <section className="flex flex-col items-center pt-14 pb-10 text-center md:pt-20 md:pb-14">
-          <span
-            className="mb-6 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em]"
-            style={{ borderColor: `${C.accent}55`, color: C.text, background: `${C.accentDeep}55` }}
-          >
-            <span className="h-1.5 w-1.5 rounded-full" style={{ background: C.accent }} />
-            Encontro Online Exclusivo para Empresários
-          </span>
 
           <h1 className="mb-6 max-w-4xl text-[clamp(32px,4.6vw,56px)] font-semibold leading-[1.08] tracking-tight">
             Seu negócio construiu patrimônio.
@@ -182,9 +175,6 @@ function LandingPage() {
 
           <div className="mt-10">
             <CtaButton onClick={openModal}>Quero garantir minha inscrição</CtaButton>
-            <p className="mt-4 text-[13px]" style={{ color: C.mutedSoft }}>
-              Cadastro rápido. As informações de acesso serão enviadas após a confirmação da inscrição.
-            </p>
           </div>
 
           <div
@@ -195,8 +185,9 @@ function LandingPage() {
               color: C.muted,
             }}
           >
-            “Um encontro para empresários que entendem que decisões antecipadas criam mais opções no futuro.”
+            “Quem toma decisões antes, amplia suas possibilidades de resultado depois.”
           </div>
+
         </section>
 
         {/* ============= CONTEXTO / DOR ============= */}
@@ -207,33 +198,25 @@ function LandingPage() {
         >
           <div className="space-y-5 max-w-3xl text-[15.5px] leading-relaxed md:text-lg" style={{ color: C.muted }}>
             <p>
-              Empresários brasileiros convivem diariamente com decisões que afetam caixa, crescimento, patrimônio
-              e estabilidade familiar. Mudanças econômicas, tributárias, previdenciárias e de mercado tornam ainda
-              mais importante separar o que é urgência operacional do que é estratégia de longo prazo.
+              Mudanças econômicas, tributárias e de mercado exigem separar urgência operacional de estratégia
+              de longo prazo. Construir patrimônio sólido pede a mesma maturidade que construir uma empresa:
+              análise, diversificação, visão e decisão.
             </p>
             <p>
-              Construir uma empresa exige esforço, disciplina e capacidade de assumir riscos calculados. Construir
-              um patrimônio sólido exige a mesma maturidade: análise, diversificação, visão e decisão.
-            </p>
-            <p>
-              Este encontro foi criado para empresários que não querem deixar o futuro financeiro dependente de uma
-              única fonte de renda, de uma única decisão ou das incertezas do cenário atual.
+              Este encontro é para empresários que não querem deixar o futuro financeiro dependente de uma
+              única fonte de renda ou das incertezas do cenário atual.
             </p>
           </div>
         </Section>
 
+
         {/* ============= PROMESSA / TEMAS ============= */}
         <Section
           id="temas"
-          eyebrow="O que será abordado"
-          title="Mais do que informações: uma nova forma de olhar para o seu patrimônio."
+          title="O que será abordado"
+          align="center"
         >
-          <p className="mb-10 max-w-3xl text-[15.5px] leading-relaxed md:text-lg" style={{ color: C.muted }}>
-            Em vez de consumir conteúdos desconectados ou tomar decisões sob pressão, você terá acesso a uma
-            conversa estratégica sobre caminhos que podem apoiar uma construção patrimonial mais estruturada.
-            O objetivo do encontro é ampliar sua visão sobre como analisar oportunidades, proteger capital e
-            buscar crescimento patrimonial com mais critério.
-          </p>
+
 
           <div className="grid gap-5 md:grid-cols-2">
             {[
@@ -311,21 +294,8 @@ function LandingPage() {
             ))}
           </div>
 
-          <div
-            className="mt-10 rounded-2xl border p-8 text-center"
-            style={{
-              background: `linear-gradient(135deg, ${C.accentDeep}66, ${C.bgCard})`,
-              borderColor: `${C.accent}44`,
-            }}
-          >
-            <p className="text-lg font-medium md:text-xl">
-              Este encontro não é sobre fórmulas prontas.
-              <br />
-              <span style={{ color: C.muted }}>
-                É sobre ampliar critérios para que você faça escolhas mais conscientes.
-              </span>
-            </p>
-          </div>
+
+
         </Section>
 
         {/* ============= DIFERENCIAL ============= */}
@@ -333,58 +303,17 @@ function LandingPage() {
           eyebrow="Diferencial"
           title="O futuro não se constrói apenas trabalhando mais. Ele se constrói decidindo melhor."
         >
-          <div className="space-y-5 max-w-3xl text-[15.5px] leading-relaxed md:text-lg" style={{ color: C.muted }}>
-            <p>
-              Muitos empresários concentram sua energia em gerar resultado na operação — e isso é essencial. Mas,
-              à medida que o patrimônio cresce, surge uma nova responsabilidade: criar uma estratégia capaz de
-              preservar, organizar e projetar esse patrimônio para os próximos anos.
-            </p>
-            <p>
-              Neste encontro, você será provocado a olhar além da rotina da empresa e refletir sobre decisões
-              que impactam sua liberdade, sua família e a continuidade do que está construindo.
-            </p>
-          </div>
-
           <blockquote
-            className="mt-10 border-l-2 pl-6 text-xl font-medium italic leading-snug md:text-2xl"
+            className="mt-2 border-l-2 pl-6 text-xl font-medium italic leading-snug md:text-2xl"
             style={{ borderColor: C.accent, color: C.text }}
           >
             “Quem toma decisões antes, amplia suas possibilidades de resultado depois.”
           </blockquote>
         </Section>
 
-        {/* ============= COMO FUNCIONA ============= */}
-        <Section eyebrow="Como funciona" title="Como será o encontro">
-          <div className="grid gap-5 md:grid-cols-3">
-            {[
-              {
-                n: "01",
-                t: "Inscreva-se",
-                d: "Preencha o cadastro para solicitar sua participação no encontro.",
-              },
-              {
-                n: "02",
-                t: "Receba a confirmação",
-                d: "Após a validação da inscrição, você receberá as informações do evento pelos canais cadastrados.",
-              },
-              {
-                n: "03",
-                t: "Participe do encontro online",
-                d: "Reserve esse momento para ampliar sua visão sobre patrimônio, investimentos e oportunidades estratégicas.",
-              },
-            ].map((s) => (
-              <Card key={s.n}>
-                <div className="mb-3 text-3xl font-semibold tracking-tight" style={{ color: C.accent }}>
-                  {s.n}
-                </div>
-                <h3 className="mb-2 text-lg font-semibold">{s.t}</h3>
-                <p className="text-[14.5px] leading-relaxed" style={{ color: C.muted }}>
-                  {s.d}
-                </p>
-              </Card>
-            ))}
-          </div>
-        </Section>
+
+
+
 
         {/* ============= ESCASSEZ ============= */}
         <Section eyebrow="Vagas limitadas" title="Inscrições limitadas para esta edição.">
@@ -599,26 +528,38 @@ function Section({
   id,
   eyebrow,
   title,
+  align = "left",
   children,
 }: {
   id?: string;
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
+  align?: "left" | "center";
   children: React.ReactNode;
 }) {
+  const isCenter = align === "center";
   return (
     <section id={id} className="py-14 md:py-20">
-      <p
-        className="mb-3 text-[12px] font-semibold uppercase tracking-[0.18em]"
-        style={{ color: C.accent }}
+      {eyebrow && (
+        <p
+          className={`mb-3 text-[12px] font-semibold uppercase tracking-[0.18em] ${isCenter ? "text-center" : ""}`}
+          style={{ color: C.accent }}
+        >
+          {eyebrow}
+        </p>
+      )}
+      <h2
+        className={`mb-8 text-3xl font-semibold tracking-tight md:text-4xl ${
+          isCenter ? "mx-auto max-w-3xl text-center" : "max-w-3xl"
+        }`}
       >
-        {eyebrow}
-      </p>
-      <h2 className="mb-8 max-w-3xl text-3xl font-semibold tracking-tight md:text-4xl">{title}</h2>
+        {title}
+      </h2>
       {children}
     </section>
   );
 }
+
 
 function Card({ children }: { children: React.ReactNode }) {
   return (
