@@ -432,7 +432,7 @@ function LandingPage() {
 }
 
 const inputCls =
-  "w-full rounded-xl border p-3 text-white outline-none transition placeholder:text-white/40 focus:border-[#7cc3ff] focus:ring-4 focus:ring-[#7cc3ff]/15";
+  "w-full rounded-xl border p-3 text-white outline-none transition placeholder:text-white/40 focus:border-[#e11f1d] focus:ring-4 focus:ring-[#e11f1d]/20";
 const inputStyle = { background: C.bg, borderColor: C.line } as const;
 
 function Field({ label, error, children }: { label: string; error?: string | false; children: React.ReactNode }) {
