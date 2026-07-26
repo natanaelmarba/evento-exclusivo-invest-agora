@@ -593,12 +593,27 @@ function Section({
 
   const isLight = variant === "soft";
 
+  // Cor de "cola" para suavizar bordas entre seções (usa o tom do topo/base do gradiente)
+  const edgeColor =
+    variant === "soft" ? "#ffffff" : variant === "accent" || variant === "highlight" ? "#3a0504" : variant === "dark" ? "#08080a" : "#000000";
+
   return (
     <section
       id={id}
-      className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen py-14 md:py-20"
+      className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen py-16 md:py-24"
       style={variantBg[variant]}
     >
+      {/* Fades superior/inferior — suavizam a transição entre seções */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-24 md:h-32"
+        style={{ background: `linear-gradient(180deg, ${edgeColor} 0%, transparent 100%)` }}
+      />
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-24 md:h-32"
+        style={{ background: `linear-gradient(0deg, ${edgeColor} 0%, transparent 100%)` }}
+      />
       <div
         className="relative mx-auto max-w-[1200px] px-5"
         style={isLight ? { color: "#1a1b1f" } : undefined}
