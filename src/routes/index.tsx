@@ -43,19 +43,20 @@ export const Route = createFileRoute("/")({
   component: LandingPage,
 });
 
-// Paleta inspirada em marketingelo.com.br
+// Paleta: branco, grafite #33353B (degradês) e vermelho #840b0a (degradês)
 const C = {
-  bg: "#05080f",
-  bgSoft: "#0a1020",
-  bgCard: "#0d1528",
-  bgCard2: "#111a30",
-  line: "#1d2947",
+  bg: "#1c1d21",
+  bgSoft: "#26272c",
+  bgCard: "#33353B",
+  bgCard2: "#3d3f46",
+  line: "#4a4c54",
   text: "#ffffff",
-  muted: "#a7b3cf",
-  accent: "#7cc3ff",
-  accentSoft: "#5aa8ee",
-  accentDark: "#1a4b82",
+  muted: "#c9cbd1",
+  accent: "#e11f1d",
+  accentSoft: "#a8100f",
+  accentDark: "#840b0a",
 };
+
 
 function LandingPage() {
   const [nome, setNome] = useState("");
@@ -113,13 +114,13 @@ function LandingPage() {
       style={{
         color: C.text,
         fontFamily: "Inter, system-ui, sans-serif",
-        background: `radial-gradient(1000px 500px at 80% -10%, ${C.accentDark}55 0%, transparent 60%), radial-gradient(900px 400px at -10% 20%, #1a2a55 0%, transparent 55%), linear-gradient(180deg, ${C.bg}, ${C.bgSoft})`,
+        background: `radial-gradient(1000px 500px at 80% -10%, ${C.accentDark}66 0%, transparent 60%), radial-gradient(900px 400px at -10% 20%, ${C.bgCard2} 0%, transparent 55%), linear-gradient(180deg, ${C.bg}, ${C.bgSoft})`,
       }}
     >
       {/* ============= HEADER ============= */}
       <header
         className="sticky top-0 z-40 backdrop-blur-md"
-        style={{ background: "rgba(5,8,15,.72)", borderBottom: `1px solid ${C.line}` }}
+        style={{ background: "rgba(28,29,33,.78)", borderBottom: `1px solid ${C.line}` }}
       >
         <div className="mx-auto flex max-w-[1160px] items-center justify-between px-5 py-3">
           <div className="flex items-center gap-3">
@@ -239,7 +240,7 @@ function LandingPage() {
               </Field>
 
               <label className="flex items-start gap-2 pt-1 text-[13px]" style={{ color: C.muted }}>
-                <input type="checkbox" checked={lgpd} onChange={(e) => setLgpd(e.target.checked)} className="mt-1 accent-[#7cc3ff]" />
+                <input type="checkbox" checked={lgpd} onChange={(e) => setLgpd(e.target.checked)} className="mt-1 accent-[#e11f1d]" />
                 <span>Autorizo o contato da equipe organizadora, conforme a LGPD, para tratar da minha inscrição.</span>
               </label>
 
@@ -416,7 +417,7 @@ function LandingPage() {
       {/* STICKY MOBILE */}
       <div
         className="fixed inset-x-0 bottom-0 z-50 border-t p-3 backdrop-blur md:hidden"
-        style={{ background: "rgba(5,8,15,.92)", borderColor: C.line }}
+        style={{ background: "rgba(28,29,33,.92)", borderColor: C.line }}
       >
         <a
           href="#form"
@@ -431,7 +432,7 @@ function LandingPage() {
 }
 
 const inputCls =
-  "w-full rounded-xl border p-3 text-white outline-none transition placeholder:text-white/40 focus:border-[#7cc3ff] focus:ring-4 focus:ring-[#7cc3ff]/15";
+  "w-full rounded-xl border p-3 text-white outline-none transition placeholder:text-white/40 focus:border-[#e11f1d] focus:ring-4 focus:ring-[#e11f1d]/20";
 const inputStyle = { background: C.bg, borderColor: C.line } as const;
 
 function Field({ label, error, children }: { label: string; error?: string | false; children: React.ReactNode }) {
