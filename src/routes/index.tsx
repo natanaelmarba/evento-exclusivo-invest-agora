@@ -294,21 +294,8 @@ function LandingPage() {
             ))}
           </div>
 
-          <div
-            className="mt-10 rounded-2xl border p-8 text-center"
-            style={{
-              background: `linear-gradient(135deg, ${C.accentDeep}66, ${C.bgCard})`,
-              borderColor: `${C.accent}44`,
-            }}
-          >
-            <p className="text-lg font-medium md:text-xl">
-              Este encontro não é sobre fórmulas prontas.
-              <br />
-              <span style={{ color: C.muted }}>
-                É sobre ampliar critérios para que você faça escolhas mais conscientes.
-              </span>
-            </p>
-          </div>
+
+
         </Section>
 
         {/* ============= DIFERENCIAL ============= */}
