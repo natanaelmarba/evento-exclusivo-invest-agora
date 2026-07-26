@@ -469,5 +469,3 @@ function Card({ children }: { children: React.ReactNode }) {
   );
 }
 
-// silence unused-var lint if useEffect not needed elsewhere
-void useEffect;
