@@ -122,9 +122,15 @@ function LandingPage() {
 
       <div id="top" className="mx-auto max-w-[1200px] px-5 pb-24">
         {/* ============= HERO ============= */}
-        <section className="flex flex-col items-center pt-14 pb-10 text-center md:pt-20 md:pb-14">
+        <section className="relative flex flex-col items-center pt-14 pb-10 text-center md:pt-20 md:pb-14">
+          {/* soft radial glow behind headline */}
+          <span
+            aria-hidden
+            className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full opacity-20 blur-3xl"
+            style={{ background: `radial-gradient(circle, ${C.accentSoft}30 0%, transparent 70%)` }}
+          />
 
-          <h1 className="mb-6 max-w-4xl text-[clamp(32px,4.6vw,56px)] font-semibold leading-[1.08] tracking-tight">
+          <h1 className="relative mb-6 max-w-4xl text-[clamp(32px,4.6vw,56px)] font-semibold leading-[1.08] tracking-tight">
             Seu negócio construiu patrimônio.
             <br />
             <span style={{ color: C.text }}>Agora, </span>
@@ -140,14 +146,14 @@ function LandingPage() {
             </span>
           </h1>
 
-          <p className="mb-8 max-w-2xl text-base leading-relaxed md:text-lg" style={{ color: C.muted }}>
+          <p className="relative mb-8 max-w-2xl text-base leading-relaxed md:text-lg" style={{ color: C.muted }}>
             Participe de um encontro estratégico para empresários que desejam tomar decisões mais conscientes sobre
             investimentos, aplicação de capital, alavancagem patrimonial e oportunidades em operações de leilão —
             com visão de longo prazo para a empresa, a família e o futuro.
           </p>
 
           <div
-            className="mb-8 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-sm"
+            className="relative mb-8 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-sm"
             style={{ color: C.mutedSoft }}
           >
             <Info>{EVENT_DATE}</Info>
@@ -169,7 +175,13 @@ function LandingPage() {
               boxShadow: "0 30px 80px rgba(0,0,0,.55)",
             }}
           >
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-6">
+            {/* subtle sheen */}
+            <span
+              aria-hidden
+              className="pointer-events-none absolute inset-0 opacity-30"
+              style={{ background: `linear-gradient(135deg, ${C.accentSoft}10 0%, transparent 50%, ${C.bgCard2}40 100%)` }}
+            />
+            <div className="relative flex flex-col items-center justify-center gap-4 p-6">
               <div
                 className="grid h-16 w-16 place-items-center rounded-full text-2xl"
                 style={{ background: `${C.accentDark}66`, color: C.text, border: `1px solid ${C.line}` }}
@@ -182,12 +194,12 @@ function LandingPage() {
             </div>
           </div>
 
-          <div className="mt-10">
+          <div className="relative mt-10">
             <CtaButton onClick={openModal}>Quero garantir minha inscrição</CtaButton>
           </div>
 
           <div
-            className="mt-12 w-full max-w-3xl rounded-2xl border px-6 py-6 text-center text-base italic md:text-lg"
+            className="relative mt-12 w-full max-w-3xl rounded-2xl border px-6 py-6 text-center text-base italic md:text-lg"
             style={{
               borderColor: C.lineSoft,
               background: `linear-gradient(180deg, ${C.bgCard}cc, ${C.bgSoft}cc)`,
