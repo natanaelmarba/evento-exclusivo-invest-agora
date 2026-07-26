@@ -120,7 +120,7 @@ function LandingPage() {
       {/* ============= HEADER ============= */}
       <header
         className="sticky top-0 z-40 backdrop-blur-md"
-        style={{ background: "rgba(5,8,15,.72)", borderBottom: `1px solid ${C.line}` }}
+        style={{ background: "rgba(28,29,33,.78)", borderBottom: `1px solid ${C.line}` }}
       >
         <div className="mx-auto flex max-w-[1160px] items-center justify-between px-5 py-3">
           <div className="flex items-center gap-3">
