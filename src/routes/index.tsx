@@ -1,94 +1,71 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
+import logoAgora from "@/assets/logo-agora.png.asset.json";
+import logoVerticale from "@/assets/logo-especialista.png.asset.json";
 
 // =====================================================================
-// PLACEHOLDERS — trocar aqui antes de publicar.
+// PLACEHOLDERS — trocar antes de publicar.
 // =====================================================================
+const WHATSAPP_URL =
+  "https://wa.me/5500000000000?text=Ol%C3%A1!%20Quero%20garantir%20minha%20vaga%20no%20encontro%20exclusivo%20para%20empres%C3%A1rios.";
 const WEBHOOK_URL = "{{WEBHOOK_URL}}";
-const CHECKOUT_URL = "{{CHECKOUT_URL}}";
-const DATA_ISO = "2026-09-22T20:00:00-03:00";
 
 const eventSchema = {
   "@context": "https://schema.org",
   "@type": "Event",
-  name: "Imersão Empresarial ao Vivo",
-  startDate: DATA_ISO,
-  eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
+  name: "Encontro Exclusivo para Empresários — Invest Agora",
+  eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
   eventStatus: "https://schema.org/EventScheduled",
-  location: {
-    "@type": "VirtualLocation",
-    url: "https://evento-exclusivo-invest-agora.lovable.app/",
-  },
   description:
-    "Imersão prática para empresários: organizar caixa, priorizar alocação e acelerar crescimento com disciplina financeira.",
+    "Encontro exclusivo por convite para empresários sobre alavancagem patrimonial, investimento, aplicação e oportunidades com leilão.",
 };
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Imersão Empresarial ao Vivo | Investimento e Negócios" },
+      { title: "Encontro Exclusivo para Empresários | Invest Agora × Verticale" },
       {
         name: "description",
         content:
-          "Aprenda um método prático para decidir melhor, alocar capital com segurança e acelerar o crescimento da sua empresa.",
+          "Um encontro por convite para empresários que querem projetar o futuro com alavancagem patrimonial, investimento, aplicação e oportunidades com leilão.",
       },
-      { property: "og:title", content: "Imersão Empresarial ao Vivo | Investimento e Negócios" },
+      { property: "og:title", content: "Encontro Exclusivo para Empresários | Invest Agora" },
       {
         property: "og:description",
         content:
-          "Aprenda um método prático para decidir melhor, alocar capital com segurança e acelerar o crescimento da sua empresa.",
+          "Negócios que interessam para você e sua família: alavancagem patrimonial, investimento, aplicação e leilão. Vagas limitadas na sua cidade.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    scripts: [
-      { type: "application/ld+json", children: JSON.stringify(eventSchema) },
-    ],
+    scripts: [{ type: "application/ld+json", children: JSON.stringify(eventSchema) }],
   }),
   component: LandingPage,
 });
 
-function useCountdown(targetISO: string) {
-  const [now, setNow] = useState(() => Date.now());
-  useEffect(() => {
-    const id = setInterval(() => setNow(Date.now()), 1000);
-    return () => clearInterval(id);
-  }, []);
-  const target = new Date(targetISO).getTime();
-  const diff = Number.isNaN(target) ? 0 : Math.max(0, target - now);
-  return {
-    d: Math.floor(diff / 86400000),
-    h: Math.floor((diff / 3600000) % 24),
-    m: Math.floor((diff / 60000) % 60),
-    s: Math.floor((diff / 1000) % 60),
-  };
-}
-
-const COLORS = {
-  bg: "#33353B",
-  bgLight: "#404349",
-  bgLighter: "#4c4f57",
-  bgDark: "#26272c",
-  bgDarker: "#1c1d21",
-  card: "#3a3c43",
-  line: "#4c4f57",
+// Paleta inspirada em marketingelo.com.br
+const C = {
+  bg: "#05080f",
+  bgSoft: "#0a1020",
+  bgCard: "#0d1528",
+  bgCard2: "#111a30",
+  line: "#1d2947",
   text: "#ffffff",
-  muted: "#c9cacf",
-  primary: "#840b0a",
-  primaryLight: "#a8100f",
-  primaryLighter: "#c4302f",
-  primaryDark: "#5e0807",
+  muted: "#a7b3cf",
+  accent: "#7cc3ff",
+  accentSoft: "#5aa8ee",
+  accentDark: "#1a4b82",
 };
 
 function LandingPage() {
-  const { d, h, m, s } = useCountdown(DATA_ISO);
-
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
-  const [porte, setPorte] = useState("");
+  const [empresa, setEmpresa] = useState("");
+  const [cidade, setCidade] = useState("");
+  const [segmento, setSegmento] = useState("");
   const [lgpd, setLgpd] = useState(false);
-  const [errors, setErrors] = useState<{ nome?: boolean; email?: boolean; whatsapp?: boolean }>({});
+  const [errors, setErrors] = useState<{ nome?: boolean; email?: boolean; whatsapp?: boolean; cidade?: boolean }>({});
   const [ok, setOk] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -99,42 +76,30 @@ function LandingPage() {
       nome: nome.trim().length < 2,
       email: !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email),
       whatsapp: wpp.length < 10,
+      cidade: cidade.trim().length < 2,
     };
     setErrors(errs);
-    if (errs.nome || errs.email || errs.whatsapp || !lgpd) return;
+    if (errs.nome || errs.email || errs.whatsapp || errs.cidade || !lgpd) return;
 
     setLoading(true);
-    const params = new URLSearchParams(window.location.search);
-    const payload = {
-      nome,
-      email,
-      whatsapp: wpp,
-      porte,
-      utm_source: params.get("utm_source") || "",
-      utm_medium: params.get("utm_medium") || "",
-      utm_campaign: params.get("utm_campaign") || "",
-      page: window.location.href,
-      created_at: new Date().toISOString(),
-    };
-
     try {
       if (WEBHOOK_URL && !WEBHOOK_URL.startsWith("{{")) {
+        const params = new URLSearchParams(window.location.search);
         await fetch(WEBHOOK_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
+          body: JSON.stringify({
+            nome, email, whatsapp: wpp, empresa, cidade, segmento,
+            utm_source: params.get("utm_source") || "",
+            utm_medium: params.get("utm_medium") || "",
+            utm_campaign: params.get("utm_campaign") || "",
+            page: window.location.href,
+            created_at: new Date().toISOString(),
+          }),
         });
       }
-      // @ts-expect-error dataLayer
-      window.dataLayer = window.dataLayer || [];
-      // @ts-expect-error dataLayer
-      window.dataLayer.push({ event: "lead_submit", lead_source: payload.utm_source || "direct" });
-
       setOk(true);
-      setNome(""); setEmail(""); setWhatsapp(""); setPorte(""); setLgpd(false);
-      if (CHECKOUT_URL && !CHECKOUT_URL.startsWith("{{")) {
-        setTimeout(() => { window.location.href = CHECKOUT_URL; }, 700);
-      }
+      setNome(""); setEmail(""); setWhatsapp(""); setEmpresa(""); setCidade(""); setSegmento(""); setLgpd(false);
     } catch {
       alert("Falha ao enviar. Tente novamente em instantes.");
     } finally {
@@ -142,306 +107,367 @@ function LandingPage() {
     }
   };
 
-  const inputCls =
-    "w-full rounded-[10px] border p-3 text-white outline-none focus:border-[#a8100f]";
-  const inputStyle = { background: COLORS.bgDark, borderColor: COLORS.line } as const;
-
-  const chip = "rounded-full border px-[11px] py-[7px] text-[13px]";
-  const chipStyle = { background: COLORS.bgDark, borderColor: COLORS.line, color: COLORS.muted } as const;
-
-  const itemStyle = {
-    background: `linear-gradient(180deg, ${COLORS.bgLight}, ${COLORS.bg})`,
-    borderColor: COLORS.line,
-  } as const;
-
   return (
     <div
       className="min-h-screen"
       style={{
-        color: COLORS.text,
+        color: C.text,
         fontFamily: "Inter, system-ui, sans-serif",
-        background: `radial-gradient(1200px 500px at 20% -10%, ${COLORS.bgLight} 0%, transparent 60%), linear-gradient(180deg, ${COLORS.bgDark}, ${COLORS.bg})`,
+        background: `radial-gradient(1000px 500px at 80% -10%, ${C.accentDark}55 0%, transparent 60%), radial-gradient(900px 400px at -10% 20%, #1a2a55 0%, transparent 55%), linear-gradient(180deg, ${C.bg}, ${C.bgSoft})`,
       }}
     >
-      <div className="mx-auto max-w-[1120px] px-5 pb-20 md:pb-5">
-        {/* ================= HERO ================= */}
-        <section className="grid grid-cols-1 items-start gap-6 py-7 lg:grid-cols-[1.1fr_.9fr]">
+      {/* ============= HEADER ============= */}
+      <header
+        className="sticky top-0 z-40 backdrop-blur-md"
+        style={{ background: "rgba(5,8,15,.72)", borderBottom: `1px solid ${C.line}` }}
+      >
+        <div className="mx-auto flex max-w-[1160px] items-center justify-between px-5 py-3">
+          <div className="flex items-center gap-3">
+            <img src={logoAgora.url} alt="Invest Agora" className="h-9 md:h-11" />
+            <span className="hidden h-6 w-px bg-white/15 md:block" />
+            <img src={logoVerticale.url} alt="Verticale" className="hidden h-9 md:block md:h-11" />
+          </div>
+          <a
+            href="#form"
+            className="rounded-full border px-4 py-2 text-sm font-semibold transition hover:bg-white/5"
+            style={{ borderColor: C.line, color: C.text }}
+          >
+            Quero meu convite
+          </a>
+        </div>
+      </header>
+
+      <div className="mx-auto max-w-[1160px] px-5 pb-24">
+        {/* ============= HERO ============= */}
+        <section className="grid grid-cols-1 items-center gap-10 py-14 md:py-20 lg:grid-cols-[1.15fr_.85fr]">
           <div>
             <span
-              className="mb-3 inline-flex items-center gap-2 rounded-full border px-3 py-2 text-[13px]"
-              style={{ background: COLORS.bgDark, borderColor: COLORS.line, color: COLORS.muted }}
+              className="mb-4 inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[12px] font-semibold uppercase tracking-widest"
+              style={{ borderColor: C.line, color: C.accent, background: `${C.accentDark}30` }}
             >
-              Ao vivo e online • Turma limitada
+              ● Encontro por convite • Vagas limitadas
             </span>
-            <h1 className="mb-2.5 text-[clamp(30px,4vw,52px)] font-bold leading-[1.08] tracking-tight">
-              O empresário que decide investimento com método cresce com menos risco.
+            <h1 className="mb-4 text-[clamp(34px,5vw,60px)] font-extrabold leading-[1.05] tracking-tight">
+              Negócios que projetam <span style={{ color: C.accent }}>você e sua família</span> para o futuro.
             </h1>
-            <p className="mb-4 text-lg" style={{ color: COLORS.muted }}>
-              Em uma imersão prática, você aprende a organizar caixa, priorizar alocação e acelerar crescimento com disciplina financeira.
+            <p className="mb-6 max-w-xl text-lg leading-relaxed" style={{ color: C.muted }}>
+              Um encontro exclusivo para empresários de qualquer segmento sobre{" "}
+              <strong className="text-white">alavancagem patrimonial, investimento, aplicação</strong> e{" "}
+              <strong className="text-white">oportunidades com leilão</strong>. Presencial, na sua cidade.
             </p>
 
-            <div className="mb-4 flex flex-wrap gap-2">
-              {["📅 22 e 23 de Setembro • 20h", "💻 100% Online", "🎯 Foco em negócio real"].map((c) => (
-                <span key={c} className={chip} style={chipStyle}>{c}</span>
-              ))}
-            </div>
-
-            <div className="mb-4 flex items-end gap-2.5">
-              <span className="text-lg line-through" style={{ color: COLORS.muted }}>de R$197</span>
-              <span className="text-[34px] font-extrabold">por R$47</span>
-            </div>
-            <p className="text-[13px]" style={{ color: COLORS.muted }}>
-              Pagamento seguro • Acesso imediato após confirmação
-            </p>
-
-            <a
-              href="#form"
-              className="mt-4 inline-block rounded-xl px-[18px] py-3.5 font-bold text-white transition hover:-translate-y-px"
-              style={{
-                background: `linear-gradient(180deg, ${COLORS.primaryLight}, ${COLORS.primary})`,
-                boxShadow: "0 10px 24px rgba(132,11,10,.35)",
-              }}
-            >
-              Garantir minha vaga agora
-            </a>
-
-            <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
-              {[["Dias", d], ["Horas", h], ["Min", m], ["Seg", s]].map(([label, val]) => (
-                <div
-                  key={label as string}
-                  className="rounded-[10px] border p-2.5 text-center"
-                  style={{ background: COLORS.bgDark, borderColor: COLORS.line }}
+            <div className="mb-8 flex flex-wrap gap-2">
+              {[
+                "🎯 Alavancagem patrimonial",
+                "📈 Investimento & aplicação",
+                "🏛️ Oportunidades com leilão",
+                "🤝 Networking qualificado",
+              ].map((c) => (
+                <span
+                  key={c}
+                  className="rounded-full border px-3 py-1.5 text-[13px]"
+                  style={{ borderColor: C.line, color: C.muted, background: C.bgCard }}
                 >
-                  <div className="text-[26px] font-extrabold tabular-nums">{String(val).padStart(2, "0")}</div>
-                  <div className="text-xs" style={{ color: COLORS.muted }}>{label}</div>
-                </div>
+                  {c}
+                </span>
               ))}
             </div>
+
+            <div className="flex flex-wrap items-center gap-3">
+              <a
+                href="#form"
+                className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 font-bold text-white transition hover:-translate-y-px"
+                style={{
+                  background: `linear-gradient(180deg, ${C.accentSoft}, ${C.accentDark})`,
+                  boxShadow: `0 12px 32px ${C.accentDark}88`,
+                }}
+              >
+                Solicitar meu convite →
+              </a>
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener"
+                className="inline-flex items-center gap-2 rounded-full border px-6 py-3.5 font-semibold transition hover:bg-white/5"
+                style={{ borderColor: C.line }}
+              >
+                Falar no WhatsApp
+              </a>
+            </div>
+            <p className="mt-4 text-[13px]" style={{ color: C.muted }}>
+              Sem compromisso · confirmação da equipe em até 24h
+            </p>
           </div>
 
           {/* FORM CARD */}
           <div
             id="form"
-            className="rounded-[14px] border p-[18px]"
+            className="rounded-2xl border p-6 md:p-7"
             style={{
-              background: `linear-gradient(180deg, ${COLORS.bgLighter}, ${COLORS.card})`,
-              borderColor: COLORS.line,
-              boxShadow: "0 18px 40px rgba(0,0,0,.45)",
+              background: `linear-gradient(180deg, ${C.bgCard2}, ${C.bgCard})`,
+              borderColor: C.line,
+              boxShadow: "0 30px 80px rgba(0,0,0,.55)",
             }}
           >
-            <h3 className="mb-1.5 text-xl font-bold">Falta pouco para concluir sua inscrição</h3>
-            <p className="text-[13px]" style={{ color: COLORS.muted }}>
-              Preencha e avance para a página de pagamento. Leva menos de 1 minuto.
+            <h3 className="mb-1 text-xl font-bold">Solicite seu convite</h3>
+            <p className="mb-4 text-[13px]" style={{ color: C.muted }}>
+              As vagas são limitadas. Após o cadastro, nossa equipe entra em contato para confirmar.
             </p>
 
-            <form onSubmit={onSubmit} noValidate className="mt-2">
-              <FormField label="Nome completo" error={errors.nome ? "Informe seu nome completo." : undefined}>
+            <form onSubmit={onSubmit} noValidate className="space-y-3">
+              <Field label="Nome completo*" error={errors.nome && "Informe seu nome."}>
                 <input value={nome} onChange={(e) => setNome(e.target.value)} className={inputCls} style={inputStyle} placeholder="Seu nome" />
-              </FormField>
-              <FormField label="WhatsApp" error={errors.whatsapp ? "Informe um WhatsApp válido." : undefined}>
-                <input inputMode="tel" value={whatsapp} onChange={(e) => setWhatsapp(e.target.value)} className={inputCls} style={inputStyle} placeholder="(11) 90000-0000" />
-              </FormField>
-              <FormField label="E-mail" error={errors.email ? "Informe um e-mail válido." : undefined}>
-                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className={inputCls} style={inputStyle} placeholder="voce@empresa.com" />
-              </FormField>
-              <FormField label="Porte da empresa">
-                <select value={porte} onChange={(e) => setPorte(e.target.value)} className={inputCls} style={inputStyle}>
-                  <option value="">Selecione</option>
-                  <option>MEI/Autônomo</option>
-                  <option>Pequena</option>
-                  <option>Média</option>
-                  <option>Grande</option>
-                </select>
-              </FormField>
+              </Field>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <Field label="WhatsApp*" error={errors.whatsapp && "WhatsApp inválido."}>
+                  <input inputMode="tel" value={whatsapp} onChange={(e) => setWhatsapp(e.target.value)} className={inputCls} style={inputStyle} placeholder="(11) 90000-0000" />
+                </Field>
+                <Field label="E-mail*" error={errors.email && "E-mail inválido."}>
+                  <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className={inputCls} style={inputStyle} placeholder="voce@empresa.com" />
+                </Field>
+              </div>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <Field label="Empresa">
+                  <input value={empresa} onChange={(e) => setEmpresa(e.target.value)} className={inputCls} style={inputStyle} placeholder="Nome da empresa" />
+                </Field>
+                <Field label="Segmento">
+                  <input value={segmento} onChange={(e) => setSegmento(e.target.value)} className={inputCls} style={inputStyle} placeholder="Ex.: Indústria, Serviços…" />
+                </Field>
+              </div>
+              <Field label="Cidade*" error={errors.cidade && "Informe sua cidade."}>
+                <input value={cidade} onChange={(e) => setCidade(e.target.value)} className={inputCls} style={inputStyle} placeholder="Sua cidade" />
+              </Field>
 
-              <label className="mt-3 flex items-start gap-2 text-[13px]" style={{ color: COLORS.muted }}>
-                <input type="checkbox" checked={lgpd} onChange={(e) => setLgpd(e.target.checked)} className="mt-1" />
-                <span>Concordo com o tratamento dos meus dados para comunicações deste evento.</span>
+              <label className="flex items-start gap-2 pt-1 text-[13px]" style={{ color: C.muted }}>
+                <input type="checkbox" checked={lgpd} onChange={(e) => setLgpd(e.target.checked)} className="mt-1 accent-[#7cc3ff]" />
+                <span>Autorizo o contato da equipe organizadora, conforme a LGPD, para tratar da minha inscrição.</span>
               </label>
 
               <button
                 type="submit"
                 disabled={loading}
-                className="mt-4 w-full rounded-xl px-[18px] py-3.5 font-bold text-white transition disabled:opacity-70"
+                className="mt-2 w-full rounded-full px-6 py-3.5 font-bold text-white transition disabled:opacity-70"
                 style={{
-                  background: `linear-gradient(180deg, ${COLORS.primaryLight}, ${COLORS.primary})`,
-                  boxShadow: "0 10px 24px rgba(132,11,10,.35)",
+                  background: `linear-gradient(180deg, ${C.accentSoft}, ${C.accentDark})`,
+                  boxShadow: `0 12px 28px ${C.accentDark}77`,
                 }}
               >
                 {loading ? "Enviando…" : "Quero garantir minha vaga"}
               </button>
               {ok && (
-                <p className="mt-3 text-[13px]" style={{ color: "#9be3a8" }}>
-                  Cadastro concluído. Redirecionando…
+                <p className="rounded-lg border px-3 py-2 text-[13px]" style={{ borderColor: "#1f5f3a", background: "#0d2a1c", color: "#a6f0c1" }}>
+                  Cadastro recebido! Nossa equipe entrará em contato em breve.
                 </p>
               )}
             </form>
           </div>
         </section>
 
-        {/* ================= MÉTODO ================= */}
-        <section className="py-8">
-          <p className="text-xs uppercase tracking-widest" style={{ color: COLORS.primaryLighter }}>O método</p>
-          <h2 className="mb-2 text-3xl font-bold tracking-tight">As 4 Alavancas do Capital Empresarial</h2>
-          <p className="mb-4" style={{ color: COLORS.muted }}>
-            Enquanto uma alavanca estiver mal calibrada, o crescimento da empresa perde eficiência.
+        {/* ============= PARA QUEM É ============= */}
+        <Section eyebrow="Para quem é" title="Empresários que querem crescer com estratégia">
+          <p className="mb-8 max-w-3xl text-lg" style={{ color: C.muted }}>
+            Se o seu negócio se encaixa em um destes perfis, este encontro foi desenhado para você.
           </p>
-          <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-3">
             {[
-              ["1. Caixa Estratégico", "Separar operação, reserva e expansão sem sufocar o negócio."],
-              ["2. Alocação de Capital", "Definir prioridade de investimento por retorno e prazo."],
-              ["3. Gestão de Risco", "Blindar decisão contra impulso e cenário volátil."],
-            ].map(([t, dsc]) => (
-              <div key={t} className="rounded-xl border p-3.5" style={itemStyle}>
-                <strong className="block mb-1">{t}</strong>
-                <p className="text-sm" style={{ color: COLORS.muted }}>{dsc}</p>
-              </div>
+              ["Empresários em expansão", "Quem já fatura bem e quer transformar lucro em patrimônio sólido — sem depender só do caixa da empresa."],
+              ["Famílias empresárias", "Sócios e famílias que querem estruturar sucessão, proteção e crescimento em conjunto."],
+              ["Investidores estratégicos", "Empresários que já investem e buscam método para alocar melhor, inclusive em leilão."],
+            ].map(([t, d]) => (
+              <Card key={t}>
+                <h3 className="mb-2 text-lg font-bold">{t}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: C.muted }}>{d}</p>
+              </Card>
             ))}
           </div>
-        </section>
+        </Section>
 
-        {/* ================= GRADE ================= */}
-        <section className="py-8">
-          <p className="text-xs uppercase tracking-widest" style={{ color: COLORS.primaryLighter }}>A grade</p>
-          <h2 className="mb-4 text-3xl font-bold tracking-tight">Em 2 dias, um plano prático para execução</h2>
+        {/* ============= O QUE VAMOS TRATAR ============= */}
+        <Section eyebrow="O que vamos tratar no encontro" title="Negócios que interessam para você e sua família">
+          <div className="grid gap-4 md:grid-cols-2">
+            {[
+              ["Alavancagem patrimonial", "Como usar estrutura e capital de forma inteligente para acelerar o crescimento sem comprometer a operação."],
+              ["Investimento & aplicação", "Critérios claros para decidir onde alocar capital em diferentes cenários de risco e liquidez."],
+              ["Oportunidades com leilão", "Um dos caminhos mais estratégicos — e menos explorados — para expansão patrimonial com desconto real."],
+              ["Crescimento com proteção", "Como projetar a empresa e a família para o próximo ciclo, com disciplina e blindagem de riscos."],
+            ].map(([t, d], i) => (
+              <Card key={t}>
+                <div className="mb-3 grid h-10 w-10 place-items-center rounded-full text-sm font-bold" style={{ background: `${C.accentDark}66`, color: C.accent, border: `1px solid ${C.line}` }}>
+                  {String(i + 1).padStart(2, "0")}
+                </div>
+                <h3 className="mb-1 text-lg font-bold">{t}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: C.muted }}>{d}</p>
+              </Card>
+            ))}
+          </div>
+        </Section>
 
-          {[
-            ["Dia 1", "Diagnóstico e destravamento financeiro", "Onde o dinheiro está sendo mal alocado e como corrigir rápido."],
-            ["Dia 2", "Plano de crescimento com disciplina de capital", "Modelo de decisão para os próximos 30 dias da empresa."],
-          ].map(([tag, title, desc]) => (
-            <div
-              key={tag}
-              className="mb-2.5 grid grid-cols-[120px_1fr] items-start gap-3.5 rounded-xl border p-3.5"
-              style={itemStyle}
-            >
-              <div
-                className="rounded-[10px] border p-2 text-center font-bold text-white"
-                style={{
-                  background: `linear-gradient(180deg, ${COLORS.primary}, ${COLORS.primaryDark})`,
-                  borderColor: COLORS.primaryDark,
-                }}
+        {/* ============= COMO FUNCIONA ============= */}
+        <Section eyebrow="Como funciona" title="Um encontro objetivo, do convite à confirmação">
+          <div className="grid gap-4 md:grid-cols-3">
+            {[
+              ["01 · Solicitação", "Você preenche o formulário e nos conta um pouco sobre a sua empresa."],
+              ["02 · Validação", "Nossa equipe analisa o perfil e confirma sua vaga por WhatsApp em até 24h."],
+              ["03 · Encontro", "No dia, você recebe os detalhes do local, credenciamento e agenda do encontro."],
+            ].map(([t, d]) => (
+              <Card key={t}>
+                <p className="mb-2 text-[13px] font-semibold uppercase tracking-widest" style={{ color: C.accent }}>{t.split(" · ")[0]}</p>
+                <h3 className="mb-2 text-lg font-bold">{t.split(" · ")[1]}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: C.muted }}>{d}</p>
+              </Card>
+            ))}
+          </div>
+        </Section>
+
+        {/* ============= PROVA SOCIAL ============= */}
+        <Section eyebrow="Quem já participou" title="O que dizem os empresários">
+          <div className="grid gap-4 md:grid-cols-3">
+            {[
+              ["“Saí do encontro com clareza absoluta sobre onde alocar o próximo capital da empresa. Valeu cada minuto.”", "Ricardo M.", "Indústria de embalagens"],
+              ["“A parte de leilão abriu uma porta que eu nem sabia que existia. Já estamos estruturando a primeira operação.”", "Camila A.", "Sócia · rede de clínicas"],
+              ["“Networking de altíssimo nível. Fechei duas conversas de negócio direto no evento.”", "Eduardo P.", "Diretor · construtora"],
+            ].map(([q, n, r]) => (
+              <Card key={n}>
+                <p className="mb-4 text-[15px] leading-relaxed">{q}</p>
+                <p className="text-sm font-bold">{n}</p>
+                <p className="text-xs" style={{ color: C.muted }}>{r}</p>
+              </Card>
+            ))}
+          </div>
+        </Section>
+
+        {/* ============= GARANTIA / SEGURANÇA ============= */}
+        <Section eyebrow="Compromisso com você" title="Vaga garantida ou reembolso do seu tempo">
+          <Card>
+            <p className="text-base leading-relaxed" style={{ color: C.muted }}>
+              O encontro é <strong className="text-white">gratuito e por convite</strong>. Se, no primeiro bloco, você
+              sentir que o conteúdo não é para o seu momento de empresa, é só avisar a organização e você sai livre —
+              sem burocracia. O risco é todo nosso.
+            </p>
+          </Card>
+        </Section>
+
+        {/* ============= FAQ ============= */}
+        <Section eyebrow="Dúvidas frequentes" title="Tudo o que você precisa saber">
+          <div className="space-y-3">
+            {[
+              ["Quem pode participar?", "Empresários de qualquer segmento interessados em crescimento patrimonial estruturado e networking qualificado."],
+              ["O evento é pago?", "Não. As vagas são por convite. Após o cadastro, nossa equipe entra em contato para confirmar sua presença."],
+              ["Onde acontece?", "O encontro é presencial, na sua cidade. Detalhes de local e horário são enviados após a confirmação."],
+              ["Posso levar um sócio ou acompanhante?", "Cada convite é nominal. Consulte a equipe sobre disponibilidade de vagas adicionais."],
+              ["Como confirmo minha inscrição?", "Preencha o formulário. Nossa equipe entra em contato por WhatsApp para confirmar os detalhes."],
+            ].map(([q, a]) => (
+              <details
+                key={q}
+                className="group rounded-xl border p-4 open:pb-5"
+                style={{ background: C.bgCard, borderColor: C.line }}
               >
-                {tag}
-              </div>
-              <div>
-                <strong className="block mb-1">{title}</strong>
-                <p className="text-sm" style={{ color: COLORS.muted }}>{desc}</p>
-              </div>
-            </div>
-          ))}
-        </section>
-
-        {/* ================= OFERTA ================= */}
-        <section className="py-8">
-          <p className="text-xs uppercase tracking-widest" style={{ color: COLORS.primaryLighter }}>A oferta</p>
-          <h2 className="mb-4 text-3xl font-bold tracking-tight">Tudo que está incluído</h2>
-          <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
-            {[
-              ["Imersão ao vivo", "2 encontros com aplicação prática."],
-              ["Mapa de decisão", "Framework para priorizar investimentos."],
-              ["Replay + checklist", "Revisão e execução no seu ritmo."],
-            ].map(([t, dsc]) => (
-              <div key={t} className="rounded-xl border p-3.5" style={itemStyle}>
-                <strong className="block mb-1">{t}</strong>
-                <p className="text-sm" style={{ color: COLORS.muted }}>{dsc}</p>
-              </div>
+                <summary className="flex cursor-pointer list-none items-center justify-between font-semibold">
+                  {q}
+                  <span className="ml-4 grid h-7 w-7 place-items-center rounded-full border text-lg transition group-open:rotate-45" style={{ borderColor: C.line, color: C.accent }}>+</span>
+                </summary>
+                <p className="mt-3 text-sm leading-relaxed" style={{ color: C.muted }}>{a}</p>
+              </details>
             ))}
           </div>
-        </section>
+        </Section>
 
-        {/* ================= PROVA ================= */}
-        <section className="py-8">
-          <p className="text-xs uppercase tracking-widest" style={{ color: COLORS.primaryLighter }}>Prova e autoridade</p>
-          <h2 className="mb-4 text-3xl font-bold tracking-tight">Resultados que importam para empresário</h2>
-          <div className="grid grid-cols-1 gap-2.5 md:grid-cols-3">
-            {[
-              ["+1.200", "empresários impactados em treinamentos."],
-              ["+R$ XX mi", "em decisões de alocação orientadas por método."],
-              ["NPS 9,2", "média de satisfação dos participantes."],
-            ].map(([n, dsc]) => (
-              <div key={n} className="rounded-xl border p-4" style={itemStyle}>
-                <div className="text-2xl font-extrabold">{n}</div>
-                <p className="text-sm" style={{ color: COLORS.muted }}>{dsc}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* ================= FAQ ================= */}
-        <section className="py-8">
-          <h2 className="mb-3 text-3xl font-bold tracking-tight">Perguntas frequentes</h2>
-          {[
-            ["Preciso ser especialista em investimentos?", "Não. O conteúdo é aplicado para empresários em diferentes níveis."],
-            ["É só teoria?", "Não. A proposta é sair com plano executável em 30 dias."],
-            ["Vou receber acesso depois do pagamento?", "Sim, acesso imediato após confirmação."],
-          ].map(([q, a]) => (
-            <details key={q} className="my-2 rounded-[10px] border p-3" style={itemStyle}>
-              <summary className="cursor-pointer font-semibold">{q}</summary>
-              <p className="mt-2 text-sm" style={{ color: COLORS.muted }}>{a}</p>
-            </details>
-          ))}
-        </section>
-
-        {/* ================= FINAL CTA ================= */}
-        <section className="py-8">
+        {/* ============= FINAL CTA ============= */}
+        <section className="pt-8 md:pt-14">
           <div
-            className="grid grid-cols-1 items-center gap-3 rounded-[14px] border p-[18px] md:grid-cols-2"
+            className="grid grid-cols-1 items-center gap-6 rounded-3xl border p-8 md:grid-cols-[1.2fr_.8fr] md:p-12"
             style={{
-              background: `linear-gradient(135deg, ${COLORS.bgLighter}, ${COLORS.bgDark})`,
-              borderColor: COLORS.line,
+              background: `linear-gradient(135deg, ${C.accentDark}66, ${C.bgCard})`,
+              borderColor: C.line,
             }}
           >
             <div>
-              <h2 className="mb-1 text-2xl font-bold tracking-tight">
-                Uma decisão boa de capital pode mudar seu próximo trimestre.
+              <h2 className="mb-2 text-3xl font-extrabold tracking-tight md:text-4xl">
+                As vagas são limitadas. Não fique de fora.
               </h2>
-              <p style={{ color: COLORS.muted }}>
-                Garanta sua vaga agora e avance para a inscrição completa.
+              <p className="text-lg" style={{ color: C.muted }}>
+                Solicite seu convite hoje e dê o próximo passo no crescimento da sua empresa e do patrimônio da sua família.
               </p>
             </div>
             <div className="md:text-right">
               <a
                 href="#form"
-                className="inline-block rounded-xl px-[18px] py-3.5 font-bold text-white transition hover:-translate-y-px"
+                className="inline-flex items-center gap-2 rounded-full px-7 py-4 font-bold text-white transition hover:-translate-y-px"
                 style={{
-                  background: `linear-gradient(180deg, ${COLORS.primaryLight}, ${COLORS.primary})`,
-                  boxShadow: "0 10px 24px rgba(132,11,10,.35)",
+                  background: `linear-gradient(180deg, ${C.accentSoft}, ${C.accentDark})`,
+                  boxShadow: `0 14px 30px ${C.accentDark}99`,
                 }}
               >
-                Quero minha vaga
+                Quero meu convite agora →
               </a>
             </div>
           </div>
         </section>
 
-        <footer className="py-6 text-center text-xs" style={{ color: COLORS.muted }}>
-          © 2026 Sua Empresa • Política de Privacidade • Termos de Uso
+        <footer className="pt-12 pb-6 text-center text-xs" style={{ color: C.muted }}>
+          <div className="mb-3 flex items-center justify-center gap-4 opacity-90">
+            <img src={logoAgora.url} alt="Invest Agora" className="h-8" />
+            <img src={logoVerticale.url} alt="Verticale" className="h-8" />
+          </div>
+          © {new Date().getFullYear()} Invest Agora × Verticale • Todos os direitos reservados
         </footer>
       </div>
 
       {/* STICKY MOBILE */}
       <div
-        className="fixed inset-x-0 bottom-0 z-50 border-t p-2.5 backdrop-blur md:hidden"
-        style={{ background: "rgba(38,39,44,.94)", borderColor: COLORS.line }}
+        className="fixed inset-x-0 bottom-0 z-50 border-t p-3 backdrop-blur md:hidden"
+        style={{ background: "rgba(5,8,15,.92)", borderColor: C.line }}
       >
         <a
           href="#form"
-          className="block w-full rounded-xl px-[18px] py-3.5 text-center font-bold text-white"
-          style={{ background: `linear-gradient(180deg, ${COLORS.primaryLight}, ${COLORS.primary})` }}
+          className="block w-full rounded-full px-5 py-3.5 text-center font-bold text-white"
+          style={{ background: `linear-gradient(180deg, ${C.accentSoft}, ${C.accentDark})` }}
         >
-          Garantir vaga agora
+          Solicitar meu convite
         </a>
       </div>
     </div>
   );
 }
 
-function FormField({ label, error, children }: { label: string; error?: string; children: React.ReactNode }) {
+const inputCls =
+  "w-full rounded-xl border p-3 text-white outline-none transition placeholder:text-white/40 focus:border-[#7cc3ff] focus:ring-4 focus:ring-[#7cc3ff]/15";
+const inputStyle = { background: C.bg, borderColor: C.line } as const;
+
+function Field({ label, error, children }: { label: string; error?: string | false; children: React.ReactNode }) {
   return (
-    <div className="my-2.5 flex flex-col gap-1.5">
-      <label className="text-sm">{label}</label>
+    <div className="space-y-1.5">
+      <label className="block text-[12px] font-semibold uppercase tracking-wider" style={{ color: C.muted }}>{label}</label>
       {children}
-      {error && <span className="text-xs" style={{ color: "#c4302f" }}>{error}</span>}
+      {error && <p className="text-xs font-medium" style={{ color: "#ff8a8a" }}>{error}</p>}
     </div>
   );
 }
+
+function Section({ eyebrow, title, children }: { eyebrow: string; title: string; children: React.ReactNode }) {
+  return (
+    <section className="py-14 md:py-20">
+      <p className="mb-2 text-[12px] font-semibold uppercase tracking-widest" style={{ color: C.accent }}>{eyebrow}</p>
+      <h2 className="mb-6 max-w-3xl text-3xl font-extrabold tracking-tight md:text-4xl">{title}</h2>
+      {children}
+    </section>
+  );
+}
+
+function Card({ children }: { children: React.ReactNode }) {
+  return (
+    <div
+      className="rounded-2xl border p-6 transition hover:-translate-y-0.5"
+      style={{
+        background: `linear-gradient(180deg, ${C.bgCard2}, ${C.bgCard})`,
+        borderColor: C.line,
+        boxShadow: "0 10px 30px rgba(0,0,0,.35)",
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+// silence unused-var lint if useEffect not needed elsewhere
+void useEffect;
