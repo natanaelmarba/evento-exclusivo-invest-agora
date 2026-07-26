@@ -422,15 +422,21 @@ function LandingPage() {
         </Section>
 
         {/* ============= FINAL ============= */}
-        <section className="pt-8 md:pt-14">
+        <section className="relative pt-8 md:pt-14">
           <div
-            className="grid grid-cols-1 items-center gap-6 rounded-3xl border p-8 md:grid-cols-[1.2fr_.8fr] md:p-12"
+            className="relative grid grid-cols-1 items-center gap-6 overflow-hidden rounded-3xl border p-8 md:grid-cols-[1.2fr_.8fr] md:p-12"
             style={{
               background: `linear-gradient(135deg, ${C.accentDeep}77, ${C.bgCard})`,
               borderColor: `${C.accent}44`,
             }}
           >
-            <div>
+            {/* subtle radial texture */}
+            <span
+              aria-hidden
+              className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full opacity-20 blur-3xl"
+              style={{ background: `radial-gradient(circle, ${C.accentSoft} 0%, transparent 70%)` }}
+            />
+            <div className="relative">
               <h2 className="mb-3 text-3xl font-semibold tracking-tight md:text-4xl">
                 O patrimônio que você construiu merece uma estratégia à altura.
               </h2>
@@ -439,7 +445,7 @@ function LandingPage() {
                 visão, critério e preparo diante das oportunidades e incertezas do mercado.
               </p>
             </div>
-            <div className="md:text-right">
+            <div className="relative md:text-right">
               <CtaButton onClick={openModal}>Quero participar do encontro</CtaButton>
             </div>
           </div>
