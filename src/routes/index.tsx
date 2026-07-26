@@ -43,19 +43,20 @@ export const Route = createFileRoute("/")({
   component: LandingPage,
 });
 
-// Paleta inspirada em marketingelo.com.br
+// Paleta: branco, grafite #33353B (degradês) e vermelho #840b0a (degradês)
 const C = {
-  bg: "#05080f",
-  bgSoft: "#0a1020",
-  bgCard: "#0d1528",
-  bgCard2: "#111a30",
-  line: "#1d2947",
+  bg: "#1c1d21",
+  bgSoft: "#26272c",
+  bgCard: "#33353B",
+  bgCard2: "#3d3f46",
+  line: "#4a4c54",
   text: "#ffffff",
-  muted: "#a7b3cf",
-  accent: "#7cc3ff",
-  accentSoft: "#5aa8ee",
-  accentDark: "#1a4b82",
+  muted: "#c9cbd1",
+  accent: "#e11f1d",
+  accentSoft: "#a8100f",
+  accentDark: "#840b0a",
 };
+
 
 function LandingPage() {
   const [nome, setNome] = useState("");
