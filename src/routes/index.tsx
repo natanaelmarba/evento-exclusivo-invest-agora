@@ -216,7 +216,7 @@ function LandingPage() {
           id="encontro"
           eyebrow="Contexto"
           title="Em um cenário de incertezas, improvisar com o patrimônio deixou de ser uma opção."
-          variant="soft"
+          variant="dark"
         >
           <div className="space-y-5 max-w-3xl text-[15.5px] leading-relaxed md:text-lg" style={{ color: C.muted }}>
             <p>
@@ -237,7 +237,7 @@ function LandingPage() {
           id="temas"
           title="O que será abordado"
           align="center"
-          variant="dark"
+          variant="soft"
         >
 
 
@@ -289,7 +289,7 @@ function LandingPage() {
           id="publico"
           eyebrow="Para quem é"
           title="Este encontro foi pensado para empresários que…"
-          variant="highlight"
+          variant="dark"
         >
           <div className="grid gap-4 md:grid-cols-2">
             {[
