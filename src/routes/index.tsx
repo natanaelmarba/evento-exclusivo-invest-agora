@@ -103,73 +103,46 @@ function LandingPage() {
 
       <div className="mx-auto max-w-[1160px] px-5 pb-24">
         {/* ============= HERO ============= */}
-        <section className="grid grid-cols-1 items-center gap-10 py-14 md:py-20 lg:grid-cols-[1.15fr_.85fr]">
-          <div>
-            <span
-              className="mb-4 inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[12px] font-semibold uppercase tracking-widest"
-              style={{ borderColor: C.line, color: C.accent, background: `${C.accentDark}30` }}
-            >
-              ● Evento Online • Vagas limitadas
-            </span>
-            <h1 className="mb-4 text-[clamp(34px,5vw,60px)] font-extrabold leading-[1.05] tracking-tight">
-              Empresários que decidem hoje <span style={{ color: C.accent }}>colhem vantagem amanhã</span>.
-            </h1>
-            <p className="mb-6 max-w-xl text-lg leading-relaxed" style={{ color: C.muted }}>
-              Participe de um evento online estratégico para quem quer acelerar resultados com visão de longo prazo,
-              usando <strong className="text-white">inteligência patrimonial</strong>, decisões de investimento e
-              oportunidades de mercado.
-            </p>
+        <section className="flex flex-col items-center py-14 text-center md:py-20">
+          <span
+            className="mb-5 inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[12px] font-semibold uppercase tracking-widest"
+            style={{ borderColor: C.line, color: C.accent, background: `${C.accentDark}30` }}
+          >
+            ● Evento Online • Vagas limitadas
+          </span>
 
-            <ul className="mb-8 space-y-2 text-[15px]" style={{ color: C.muted }}>
-              {[
-                "Estratégias para crescimento patrimonial com foco prático",
-                "Direcionamento para investimentos e aplicação de capital",
-                "Como identificar oportunidades em operações de leilão",
-                "Conteúdo voltado para negócios e proteção do futuro familiar",
-              ].map((b) => (
-                <li key={b} className="flex items-start gap-2">
-                  <span style={{ color: C.accent }}>✓</span>
-                  <span>{b}</span>
-                </li>
-              ))}
-            </ul>
+          <h1 className="mb-10 max-w-4xl text-[clamp(34px,5vw,60px)] font-extrabold leading-[1.05] tracking-tight">
+            Empresários que decidem hoje <span style={{ color: C.accent }}>colhem vantagem amanhã</span>.
+          </h1>
 
-            <CtaButton onClick={openModal}>Quero garantir minha inscrição →</CtaButton>
-            <p className="mt-4 text-[13px]" style={{ color: C.muted }}>
-              Vagas limitadas • Cadastro rápido • Confirmação por e-mail/WhatsApp
-            </p>
-          </div>
-
-          {/* HERO SIDE CARD */}
+          {/* VIDEO PLACEHOLDER */}
           <div
-            className="rounded-2xl border p-7"
+            className="relative w-full max-w-4xl overflow-hidden rounded-2xl border"
             style={{
+              aspectRatio: "16 / 9",
               background: `linear-gradient(180deg, ${C.bgCard2}, ${C.bgCard})`,
               borderColor: C.line,
               boxShadow: "0 30px 80px rgba(0,0,0,.55)",
             }}
           >
-            <p className="mb-2 text-[12px] font-semibold uppercase tracking-widest" style={{ color: C.accent }}>
-              Evento online ao vivo
-            </p>
-            <h3 className="mb-4 text-2xl font-bold leading-tight">
-              Mais clareza para investir, crescer e proteger seu patrimônio.
-            </h3>
-            <div className="mb-6 space-y-3">
-              {[
-                ["🎯", "Conteúdo objetivo e aplicável"],
-                ["📈", "Visão prática para expandir patrimônio"],
-                ["🛡️", "Estratégias para negócios e futuro familiar"],
-                ["⏳", "Vagas limitadas por edição"],
-              ].map(([ic, tx]) => (
-                <div key={tx} className="flex items-center gap-3 rounded-xl border p-3"
-                  style={{ borderColor: C.line, background: C.bg }}>
-                  <span className="text-xl">{ic}</span>
-                  <span className="text-sm">{tx}</span>
-                </div>
-              ))}
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-6">
+              <div
+                className="grid h-16 w-16 place-items-center rounded-full text-3xl"
+                style={{ background: `${C.accentDark}66`, color: C.accent, border: `1px solid ${C.line}` }}
+              >
+                ▶
+              </div>
+              <p className="text-sm font-medium" style={{ color: C.muted }}>
+                Espaço reservado para o vídeo do evento
+              </p>
             </div>
-            <CtaButton onClick={openModal} full>Reservar minha vaga</CtaButton>
+          </div>
+
+          <div className="mt-10">
+            <CtaButton onClick={openModal}>Quero garantir minha inscrição →</CtaButton>
+            <p className="mt-4 text-[13px]" style={{ color: C.muted }}>
+              Vagas limitadas • Cadastro rápido • Confirmação por e-mail/WhatsApp
+            </p>
           </div>
         </section>
 
