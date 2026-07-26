@@ -312,38 +312,8 @@ function LandingPage() {
         </Section>
 
 
-        {/* ============= COMO FUNCIONA ============= */}
-        <Section eyebrow="Como funciona" title="Como será o encontro">
-          <div className="grid gap-5 md:grid-cols-3">
-            {[
-              {
-                n: "01",
-                t: "Inscreva-se",
-                d: "Preencha o cadastro para solicitar sua participação no encontro.",
-              },
-              {
-                n: "02",
-                t: "Receba a confirmação",
-                d: "Após a validação da inscrição, você receberá as informações do evento pelos canais cadastrados.",
-              },
-              {
-                n: "03",
-                t: "Participe do encontro online",
-                d: "Reserve esse momento para ampliar sua visão sobre patrimônio, investimentos e oportunidades estratégicas.",
-              },
-            ].map((s) => (
-              <Card key={s.n}>
-                <div className="mb-3 text-3xl font-semibold tracking-tight" style={{ color: C.accent }}>
-                  {s.n}
-                </div>
-                <h3 className="mb-2 text-lg font-semibold">{s.t}</h3>
-                <p className="text-[14.5px] leading-relaxed" style={{ color: C.muted }}>
-                  {s.d}
-                </p>
-              </Card>
-            ))}
-          </div>
-        </Section>
+
+
 
         {/* ============= ESCASSEZ ============= */}
         <Section eyebrow="Vagas limitadas" title="Inscrições limitadas para esta edição.">
