@@ -303,25 +303,14 @@ function LandingPage() {
           eyebrow="Diferencial"
           title="O futuro não se constrói apenas trabalhando mais. Ele se constrói decidindo melhor."
         >
-          <div className="space-y-5 max-w-3xl text-[15.5px] leading-relaxed md:text-lg" style={{ color: C.muted }}>
-            <p>
-              Muitos empresários concentram sua energia em gerar resultado na operação — e isso é essencial. Mas,
-              à medida que o patrimônio cresce, surge uma nova responsabilidade: criar uma estratégia capaz de
-              preservar, organizar e projetar esse patrimônio para os próximos anos.
-            </p>
-            <p>
-              Neste encontro, você será provocado a olhar além da rotina da empresa e refletir sobre decisões
-              que impactam sua liberdade, sua família e a continuidade do que está construindo.
-            </p>
-          </div>
-
           <blockquote
-            className="mt-10 border-l-2 pl-6 text-xl font-medium italic leading-snug md:text-2xl"
+            className="mt-2 border-l-2 pl-6 text-xl font-medium italic leading-snug md:text-2xl"
             style={{ borderColor: C.accent, color: C.text }}
           >
             “Quem toma decisões antes, amplia suas possibilidades de resultado depois.”
           </blockquote>
         </Section>
+
 
         {/* ============= COMO FUNCIONA ============= */}
         <Section eyebrow="Como funciona" title="Como será o encontro">
