@@ -121,9 +121,9 @@ function LandingPage() {
         </div>
       </header>
 
-      <div id="top" className="mx-auto max-w-[1200px] px-5 pb-24">
+      <div id="top" className="mx-auto max-w-[1200px] px-5 pb-28 md:pb-24">
         {/* ============= HERO — Editorial Noir ============= */}
-        <section className="relative flex flex-col items-center pt-16 pb-12 text-center md:pt-24 md:pb-20">
+        <section className="relative flex flex-col items-center pt-10 pb-8 text-center md:pt-24 md:pb-20">
           {/* ambient red glow */}
           <span
             aria-hidden
@@ -648,18 +648,18 @@ function Section({
   return (
     <section
       id={id}
-      className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen py-16 md:py-24"
+      className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen py-12 md:py-24"
       style={variantBg[variant]}
     >
-      {/* Fades superior/inferior — suavizam a transição entre seções */}
+      {/* Fades superior/inferior — suavizam a transição entre seções (sutis, sem tapar títulos) */}
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-24 md:h-32"
+        className="pointer-events-none absolute inset-x-0 top-0 h-8 md:h-20"
         style={{ background: `linear-gradient(180deg, ${edgeColor} 0%, transparent 100%)` }}
       />
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-24 md:h-32"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-8 md:h-20"
         style={{ background: `linear-gradient(0deg, ${edgeColor} 0%, transparent 100%)` }}
       />
       <div
