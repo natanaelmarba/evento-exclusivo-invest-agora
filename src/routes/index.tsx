@@ -648,18 +648,18 @@ function Section({
   return (
     <section
       id={id}
-      className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen py-16 md:py-24"
+      className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen py-12 md:py-24"
       style={variantBg[variant]}
     >
-      {/* Fades superior/inferior — suavizam a transição entre seções */}
+      {/* Fades superior/inferior — suavizam a transição entre seções (sutis, sem tapar títulos) */}
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-24 md:h-32"
+        className="pointer-events-none absolute inset-x-0 top-0 h-8 md:h-20"
         style={{ background: `linear-gradient(180deg, ${edgeColor} 0%, transparent 100%)` }}
       />
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-24 md:h-32"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-8 md:h-20"
         style={{ background: `linear-gradient(0deg, ${edgeColor} 0%, transparent 100%)` }}
       />
       <div
