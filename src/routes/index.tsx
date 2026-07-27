@@ -666,26 +666,30 @@ function Section({
         className="relative mx-auto max-w-[1200px] px-5"
         style={isLight ? { color: "#1a1b1f" } : undefined}
       >
-        {eyebrow && (
-          <p
-            className={`mb-3 text-[12px] font-semibold uppercase tracking-[0.18em] ${isCenter ? "text-center" : ""}`}
-            style={{ color: isLight ? "#840B0A" : isRed ? "#ffd1d1" : C.accent }}
+        <Reveal stagger duration={1}>
+          {eyebrow && (
+            <p
+              className={`mb-3 text-[12px] font-semibold uppercase tracking-[0.18em] ${isCenter ? "text-center" : ""}`}
+              style={{ color: isLight ? "#840B0A" : isRed ? "#ffd1d1" : C.accent }}
+            >
+              {eyebrow}
+            </p>
+          )}
+          <h2
+            className={`mb-8 text-3xl font-semibold tracking-tight md:text-4xl ${
+              isCenter ? "mx-auto max-w-3xl text-center" : "max-w-3xl"
+            }`}
+            style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
           >
-            {eyebrow}
-          </p>
-        )}
-        <h2
-          className={`mb-8 text-3xl font-semibold tracking-tight md:text-4xl ${
-            isCenter ? "mx-auto max-w-3xl text-center" : "max-w-3xl"
-          }`}
-        >
-          {title}
-        </h2>
-        {children}
+            {title}
+          </h2>
+        </Reveal>
+        <Reveal y={20} duration={1} delay={0.15}>{children}</Reveal>
       </div>
     </section>
   );
 }
+
 
 
 function Card({ children }: { children: React.ReactNode }) {
