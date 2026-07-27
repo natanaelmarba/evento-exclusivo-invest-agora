@@ -32,11 +32,11 @@ export const Route = createFileRoute("/")({
         content:
           "Encontro estratégico online para empresários. Investimentos, aplicação de capital, alavancagem patrimonial e operações de leilão com visão de longo prazo.",
       },
-      { property: "og:title", content: "Invest Agora | Encontro Online para Empresários" },
+      { property: "og:title", content: "Invest Agora | Encontro Online Exclusivo para Empresários" },
       {
         property: "og:description",
         content:
-          "Um encontro para empresários que entendem que decisões antecipadas criam mais opções no futuro.",
+          "Encontro estratégico online para empresários. Investimentos, aplicação de capital, alavancagem patrimonial e operações de leilão com visão de longo prazo.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
