@@ -43,13 +43,27 @@
   }
   html {
     scroll-behavior: smooth;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+    background-color: oklch(0.02 0 0);
   }
   body {
-    background-color: var(--color-background);
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    overflow-x: clip;
+    background-color: oklch(0.02 0 0);
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+  }
+  #root {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+    background-color: oklch(0.02 0 0);
   }
   h1, h2, h3, h4 {
     font-family: var(--font-display);

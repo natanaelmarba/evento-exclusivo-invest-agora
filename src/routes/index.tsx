@@ -84,7 +84,7 @@ function LandingPage() {
 
   return (
     <div
-      className="min-h-screen"
+      className="min-h-screen w-full overflow-x-clip"
       style={{
         color: C.text,
         fontFamily: "Inter, system-ui, sans-serif",
@@ -123,11 +123,11 @@ function LandingPage() {
 
       <div id="top" className="mx-auto max-w-[1200px] px-5 pb-28 md:pb-24">
         {/* ============= HERO — Editorial Noir ============= */}
-        <section className="relative flex flex-col items-center pt-10 pb-8 text-center md:pt-24 md:pb-20">
+        <section className="relative flex flex-col items-center overflow-hidden pt-10 pb-8 text-center md:pt-24 md:pb-20">
           {/* ambient red glow */}
           <span
             aria-hidden
-            className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 h-[560px] w-[1000px] rounded-full opacity-[0.18] blur-[120px]"
+            className="pointer-events-none absolute -top-10 left-1/2 h-[360px] w-[140vw] max-w-[1000px] -translate-x-1/2 rounded-full opacity-[0.18] blur-[120px] md:h-[560px]"
             style={{ background: `radial-gradient(circle, ${C.accentSoft} 0%, transparent 65%)` }}
           />
 
@@ -648,7 +648,7 @@ function Section({
   return (
     <section
       id={id}
-      className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen py-12 md:py-24"
+      className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen overflow-hidden py-12 md:py-24"
       style={variantBg[variant]}
     >
       {/* Fades superior/inferior — suavizam a transição entre seções (sutis, sem tapar títulos) */}
