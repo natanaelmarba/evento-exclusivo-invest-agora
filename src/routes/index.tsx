@@ -121,9 +121,9 @@ function LandingPage() {
         </div>
       </header>
 
-      <div id="top" className="mx-auto max-w-[1200px] px-5 pb-24">
+      <div id="top" className="mx-auto max-w-[1200px] px-5 pb-28 md:pb-24">
         {/* ============= HERO — Editorial Noir ============= */}
-        <section className="relative flex flex-col items-center pt-16 pb-12 text-center md:pt-24 md:pb-20">
+        <section className="relative flex flex-col items-center pt-10 pb-8 text-center md:pt-24 md:pb-20">
           {/* ambient red glow */}
           <span
             aria-hidden
