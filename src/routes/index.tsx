@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import logoAgora from "@/assets/logo-agora.png.asset.json";
+import { Reveal } from "@/components/Reveal";
 
 // =====================================================================
 // PLACEHOLDERS — trocar antes de publicar.
@@ -121,95 +122,140 @@ function LandingPage() {
       </header>
 
       <div id="top" className="mx-auto max-w-[1200px] px-5 pb-24">
-        {/* ============= HERO ============= */}
-        <section className="relative flex flex-col items-center pt-14 pb-10 text-center md:pt-20 md:pb-14">
-          {/* soft radial glow behind headline */}
+        {/* ============= HERO — Editorial Noir ============= */}
+        <section className="relative flex flex-col items-center pt-16 pb-12 text-center md:pt-24 md:pb-20">
+          {/* ambient red glow */}
           <span
             aria-hidden
-            className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full opacity-20 blur-3xl"
-            style={{ background: `radial-gradient(circle, ${C.accentSoft}30 0%, transparent 70%)` }}
+            className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 h-[560px] w-[1000px] rounded-full opacity-[0.18] blur-[120px]"
+            style={{ background: `radial-gradient(circle, ${C.accentSoft} 0%, transparent 65%)` }}
           />
 
-          <h1 className="relative mb-6 max-w-4xl text-[clamp(32px,4.6vw,56px)] font-semibold leading-[1.08] tracking-tight">
-            Seu negócio construiu patrimônio.
-            <br />
-            <span style={{ color: C.text }}>Agora, </span>
+          <Reveal className="relative mb-10 flex flex-col items-center gap-5" stagger duration={1.1}>
             <span
+              className="text-[11px] md:text-xs font-semibold uppercase"
+              style={{ color: C.accent, letterSpacing: "0.4em" }}
+            >
+              — Acesso Privado —
+            </span>
+            <h1
+              className="max-w-4xl text-white text-[clamp(38px,5.6vw,76px)] font-bold leading-[1.02] tracking-tight"
+              style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+            >
+              Onde o capital encontra a{" "}
+              <span className="italic" style={{ color: C.accent }}>estratégia.</span>
+            </h1>
+            <div className="mx-auto mt-2 h-px w-16" style={{ background: C.line }} />
+          </Reveal>
+
+          {/* VIDEO FRAME — cinematic */}
+          <Reveal
+            className="group relative w-full max-w-5xl overflow-hidden rounded-sm border"
+            duration={1.3}
+            y={40}
+          >
+            <div
+              className="relative"
               style={{
-                backgroundImage: `linear-gradient(90deg, ${C.accent}, ${C.accentDark})`,
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                color: "transparent",
+                aspectRatio: "16 / 9",
+                background: `linear-gradient(180deg, ${C.bgCard2}, #050506)`,
+                borderColor: "rgba(255,255,255,.08)",
+                boxShadow: `0 40px 120px rgba(0,0,0,.7), 0 0 60px ${C.accentDeep}55`,
               }}
             >
-              quem está construindo o futuro dele?
-            </span>
-          </h1>
-
-          <p className="relative mb-8 max-w-2xl text-base leading-relaxed md:text-lg" style={{ color: C.muted }}>
-            Participe de um encontro estratégico para empresários que desejam tomar decisões mais conscientes sobre
-            investimentos, aplicação de capital, alavancagem patrimonial e oportunidades em operações de leilão —
-            com visão de longo prazo para a empresa, a família e o futuro.
-          </p>
-
-          <div
-            className="relative mb-8 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-sm"
-            style={{ color: C.mutedSoft }}
-          >
-            <Info>{EVENT_DATE}</Info>
-            <Dot />
-            <Info>{EVENT_TIME}</Info>
-            <Dot />
-            <Info>Online</Info>
-            <Dot />
-            <Info>Inscrições limitadas</Info>
-          </div>
-
-          {/* VIDEO PLACEHOLDER */}
-          <div
-            className="relative w-full max-w-4xl overflow-hidden rounded-2xl border"
-            style={{
-              aspectRatio: "16 / 9",
-              background: `linear-gradient(180deg, ${C.bgCard2}, ${C.bgCard})`,
-              borderColor: C.line,
-              boxShadow: "0 30px 80px rgba(0,0,0,.55)",
-            }}
-          >
-            {/* subtle sheen */}
-            <span
-              aria-hidden
-              className="pointer-events-none absolute inset-0 opacity-30"
-              style={{ background: `linear-gradient(135deg, ${C.accentSoft}10 0%, transparent 50%, ${C.bgCard2}40 100%)` }}
-            />
-            <div className="relative flex flex-col items-center justify-center gap-4 p-6">
-              <div
-                className="grid h-16 w-16 place-items-center rounded-full text-2xl"
-                style={{ background: `${C.accentDark}66`, color: C.text, border: `1px solid ${C.line}` }}
-              >
-                ▶
+              {/* subtle texture layer */}
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-0 opacity-40 mix-blend-luminosity"
+                style={{
+                  background: `radial-gradient(600px 300px at 30% 40%, ${C.bgCard2} 0%, transparent 70%), radial-gradient(500px 260px at 75% 70%, #101015 0%, transparent 70%)`,
+                }}
+              />
+              {/* vignette */}
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-0"
+                style={{ background: "radial-gradient(closest-side, transparent 55%, rgba(0,0,0,.65) 100%)" }}
+              />
+              {/* play control */}
+              <div className="absolute inset-0 flex items-center justify-center transition-transform duration-700 group-hover:scale-[1.02]">
+                <button
+                  onClick={openModal}
+                  aria-label="Assistir vídeo"
+                  className="grid h-20 w-20 place-items-center rounded-full border backdrop-blur-md transition-colors duration-500"
+                  style={{
+                    borderColor: "rgba(255,255,255,.22)",
+                    background: "rgba(255,255,255,.05)",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = C.accentDark;
+                    e.currentTarget.style.borderColor = C.accentDark;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "rgba(255,255,255,.05)";
+                    e.currentTarget.style.borderColor = "rgba(255,255,255,.22)";
+                  }}
+                >
+                  <span
+                    className="ml-1"
+                    style={{
+                      width: 0,
+                      height: 0,
+                      borderTop: "10px solid transparent",
+                      borderBottom: "10px solid transparent",
+                      borderLeft: "18px solid #fff",
+                    }}
+                  />
+                </button>
               </div>
-              <p className="text-sm font-medium" style={{ color: C.muted }}>
-                Espaço reservado para o vídeo do encontro
-              </p>
+              {/* corner accents */}
+              <span aria-hidden className="absolute top-4 left-4 h-px w-8" style={{ background: C.accent }} />
+              <span aria-hidden className="absolute top-4 left-4 w-px h-8" style={{ background: C.accent }} />
+              <span aria-hidden className="absolute bottom-4 right-4 h-px w-8" style={{ background: C.accent }} />
+              <span aria-hidden className="absolute bottom-4 right-4 w-px h-8" style={{ background: C.accent }} />
+              {/* frame labels */}
+              <div
+                className="absolute bottom-4 left-4 text-[10px] uppercase"
+                style={{ color: "rgba(255,255,255,.55)", letterSpacing: "0.25em", fontFamily: "'Inter', sans-serif" }}
+              >
+                Reel / 001
+              </div>
+              <div
+                className="absolute top-4 right-4 text-[10px] uppercase"
+                style={{ color: "rgba(255,255,255,.55)", letterSpacing: "0.25em", fontFamily: "'Inter', sans-serif" }}
+              >
+                16:9 · Cinematic
+              </div>
             </div>
-          </div>
+          </Reveal>
 
-          <div className="relative mt-10">
-            <CtaButton onClick={openModal}>Quero garantir minha inscrição</CtaButton>
-          </div>
+          <Reveal className="relative mt-12 flex flex-col items-center gap-6" duration={1} delay={0.2}>
+            <CtaButton onClick={openModal}>Solicite seu convite</CtaButton>
+            <p
+              className="max-w-md text-sm font-light tracking-wide"
+              style={{ color: C.mutedSoft, fontFamily: "'Inter', sans-serif" }}
+            >
+              Um encontro estratégico para empresários que desejam decidir com mais visão sobre investimentos,
+              alavancagem patrimonial e oportunidades em operações de leilão.
+            </p>
+          </Reveal>
 
-          <div
-            className="relative mt-12 w-full max-w-3xl rounded-2xl border px-6 py-6 text-center text-base italic md:text-lg"
-            style={{
-              borderColor: C.lineSoft,
-              background: `linear-gradient(180deg, ${C.bgCard}cc, ${C.bgSoft}cc)`,
-              color: C.muted,
-            }}
+          {/* editorial meta bar */}
+          <Reveal
+            className="relative mt-16 grid w-full max-w-4xl grid-cols-3 items-center gap-4 border-t pt-6 text-[10px] uppercase"
+            duration={0.9}
+            delay={0.3}
           >
-            “Quem toma decisões antes, amplia suas possibilidades de resultado depois.”
-          </div>
-
+            <span style={{ color: C.mutedSoft, letterSpacing: "0.2em" }}>{EVENT_DATE}</span>
+            <span className="text-center" style={{ color: C.accent, letterSpacing: "0.25em" }}>
+              Invest Agora
+            </span>
+            <span className="text-right" style={{ color: C.mutedSoft, letterSpacing: "0.2em" }}>
+              Online · {EVENT_TIME}
+            </span>
+          </Reveal>
         </section>
+
 
         {/* ============= CONTEXTO / DOR ============= */}
         <Section
@@ -620,26 +666,30 @@ function Section({
         className="relative mx-auto max-w-[1200px] px-5"
         style={isLight ? { color: "#1a1b1f" } : undefined}
       >
-        {eyebrow && (
-          <p
-            className={`mb-3 text-[12px] font-semibold uppercase tracking-[0.18em] ${isCenter ? "text-center" : ""}`}
-            style={{ color: isLight ? "#840B0A" : isRed ? "#ffd1d1" : C.accent }}
+        <Reveal stagger duration={1}>
+          {eyebrow && (
+            <p
+              className={`mb-3 text-[12px] font-semibold uppercase tracking-[0.18em] ${isCenter ? "text-center" : ""}`}
+              style={{ color: isLight ? "#840B0A" : isRed ? "#ffd1d1" : C.accent }}
+            >
+              {eyebrow}
+            </p>
+          )}
+          <h2
+            className={`mb-8 text-3xl font-semibold tracking-tight md:text-4xl ${
+              isCenter ? "mx-auto max-w-3xl text-center" : "max-w-3xl"
+            }`}
+            style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
           >
-            {eyebrow}
-          </p>
-        )}
-        <h2
-          className={`mb-8 text-3xl font-semibold tracking-tight md:text-4xl ${
-            isCenter ? "mx-auto max-w-3xl text-center" : "max-w-3xl"
-          }`}
-        >
-          {title}
-        </h2>
-        {children}
+            {title}
+          </h2>
+        </Reveal>
+        <Reveal y={20} duration={1} delay={0.15}>{children}</Reveal>
       </div>
     </section>
   );
 }
+
 
 
 function Card({ children }: { children: React.ReactNode }) {
