@@ -492,7 +492,7 @@ function LandingPage() {
             />
             <div className="relative">
               <h2 className="mb-3 text-3xl font-semibold tracking-tight md:text-4xl">
-                O patrimônio que você construiu merece uma estratégia à altura.
+                O patrimônio que você quer construir merece uma estratégia à altura.
               </h2>
               <p className="text-lg" style={{ color: C.muted }}>
                 Faça sua inscrição e participe de um encontro voltado a empresários que desejam agir com mais
