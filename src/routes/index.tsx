@@ -108,9 +108,7 @@ function LandingPage() {
         style={{ background: "rgba(5,5,6,.85)", borderBottom: `1px solid ${C.lineSoft}` }}
       >
         <div className="mx-auto flex max-w-[1200px] items-center justify-between gap-4 px-5 py-3">
-          <a href="#top" className="flex items-center gap-3 shrink-0">
-            <img src={logoAgora.url} alt="Invest Agora" className="h-9 md:h-10" />
-          </a>
+          <div aria-hidden className="hidden md:block" />
           <nav className="hidden items-center gap-7 text-sm font-medium md:flex" style={{ color: C.muted }}>
             <a href="#encontro" className="hover:text-white transition">O Encontro</a>
             <a href="#temas" className="hover:text-white transition">Temas</a>
