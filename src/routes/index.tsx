@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import logoAgora from "@/assets/logo-agora.png.asset.json";
+import logoVerticale from "@/assets/logo-verticale.png.asset.json";
 import { Reveal } from "@/components/Reveal";
 
 // =====================================================================
