@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import logoAgora from "@/assets/logo-agora.png.asset.json";
+import logoVerticale from "@/assets/logo-verticale.png.asset.json";
 import { Reveal } from "@/components/Reveal";
 
 // =====================================================================
@@ -107,9 +108,7 @@ function LandingPage() {
         style={{ background: "rgba(5,5,6,.85)", borderBottom: `1px solid ${C.lineSoft}` }}
       >
         <div className="mx-auto flex max-w-[1200px] items-center justify-between gap-4 px-5 py-3">
-          <a href="#top" className="flex items-center gap-3 shrink-0">
-            <img src={logoAgora.url} alt="Invest Agora" className="h-9 md:h-10" />
-          </a>
+          <div aria-hidden className="hidden md:block" />
           <nav className="hidden items-center gap-7 text-sm font-medium md:flex" style={{ color: C.muted }}>
             <a href="#encontro" className="hover:text-white transition">O Encontro</a>
             <a href="#temas" className="hover:text-white transition">Temas</a>
@@ -512,7 +511,10 @@ function LandingPage() {
             className="grid gap-6 border-t pt-8 md:grid-cols-[auto_1fr_auto] md:items-center"
             style={{ borderColor: C.lineSoft }}
           >
-            <img src={logoAgora.url} alt="Invest Agora" className="h-9" />
+            <div className="flex items-center gap-4">
+              <img src={logoAgora.url} alt="Invest Agora" className="h-14 md:h-16" />
+              <img src={logoVerticale.url} alt="Verticale" className="h-14 md:h-16" />
+            </div>
             <div className="space-y-1 text-sm md:text-center">
               <div className="font-medium text-white/90">{COMPANY_NAME}</div>
               <div>
