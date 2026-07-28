@@ -10,8 +10,9 @@ const WEBHOOK_URL = "{{WEBHOOK_URL}}";
 const EVENT_DATE = "[DATA DO EVENTO]";
 const EVENT_TIME = "[HORÁRIO]";
 const CONTACT_WHATSAPP = "[Inserir WhatsApp]";
-const CONTACT_EMAIL = "[Inserir e-mail]";
-const CONTACT_CNPJ = "[Inserir CNPJ]";
+const CONTACT_EMAIL = "contato@verticaleassessoria.com.br";
+const CONTACT_CNPJ = "30.077.407/0001-88";
+const COMPANY_NAME = "VERTICALE SOLUÇÕES CORPORATIVAS LTDA";
 
 const eventSchema = {
   "@context": "https://schema.org",
@@ -512,10 +513,18 @@ function LandingPage() {
             style={{ borderColor: C.lineSoft }}
           >
             <img src={logoAgora.url} alt="Invest Agora" className="h-9" />
-            <div className="text-sm md:text-center">
+            <div className="space-y-1 text-sm md:text-center">
+              <div className="font-medium text-white/90">{COMPANY_NAME}</div>
               <div>
-                {CONTACT_WHATSAPP} <span className="mx-2 opacity-40">|</span> {CONTACT_EMAIL}
-                <span className="mx-2 opacity-40">|</span> {CONTACT_CNPJ}
+                CNPJ: {CONTACT_CNPJ}
+                <span className="mx-2 opacity-40">|</span>
+                {CONTACT_EMAIL}
+                {CONTACT_WHATSAPP && CONTACT_WHATSAPP !== "[Inserir WhatsApp]" && (
+                  <>
+                    <span className="mx-2 opacity-40">|</span>
+                    {CONTACT_WHATSAPP}
+                  </>
+                )}
               </div>
             </div>
             <div className="flex gap-5 text-sm md:justify-end">
