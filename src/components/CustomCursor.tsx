@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 
 const COLOR = "#c2181a";
+const RING_SIZE = 44;
+const DOT_SIZE = 10;
 
 /**
  * Crisp SVG cursor with two layers:
@@ -8,6 +10,7 @@ const COLOR = "#c2181a";
  *  - a hollow ring that lerps toward the dot for a trailing effect
  *
  * Hidden on touch / coarse pointers.
+ * On interactive elements the cursor brightens to stand out against same-colour buttons.
  */
 export default function CustomCursor() {
   const dotRef = useRef<HTMLDivElement | null>(null);
@@ -17,6 +20,8 @@ export default function CustomCursor() {
   const visible = useRef(false);
   const scale = useRef(1);
   const targetScale = useRef(1);
+  const hovering = useRef(0);
+  const targetHover = useRef(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -50,11 +55,16 @@ export default function CustomCursor() {
       );
     };
     const onOver = (e: MouseEvent) => {
-      targetScale.current = isInteractive(e.target) ? 1.6 : 1;
+      const active = isInteractive(e.target);
+      targetScale.current = active ? 1.6 : 1;
+      targetHover.current = active;
     };
     const onDown = () => (targetScale.current = 0.75);
-    const onUp = (e: MouseEvent) =>
-      (targetScale.current = isInteractive(e.target) ? 1.6 : 1);
+    const onUp = (e: MouseEvent) => {
+      const active = isInteractive(e.target);
+      targetScale.current = active ? 1.6 : 1;
+      targetHover.current = active;
+    };
 
     window.addEventListener("mousemove", onMove, { passive: true });
     window.addEventListener("mouseover", onOver, { passive: true });
@@ -68,12 +78,19 @@ export default function CustomCursor() {
       ring.current.x += (target.current.x - ring.current.x) * 0.18;
       ring.current.y += (target.current.y - ring.current.y) * 0.18;
       scale.current += (targetScale.current - scale.current) * 0.2;
+      hovering.current += ((targetHover.current ? 1 : 0) - hovering.current) * 0.2;
+
+      const brightness = 1 + hovering.current * 0.35;
+      const glow = 6 + hovering.current * 12;
+      const ringGlow = 4 + hovering.current * 10;
 
       if (dotRef.current) {
         dotRef.current.style.transform = `translate3d(${target.current.x}px, ${target.current.y}px, 0) translate(-50%, -50%)`;
+        dotRef.current.style.filter = `brightness(${brightness}) drop-shadow(0 0 ${glow}px ${COLOR})`;
       }
       if (ringRef.current) {
         ringRef.current.style.transform = `translate3d(${ring.current.x}px, ${ring.current.y}px, 0) translate(-50%, -50%) scale(${scale.current})`;
+        ringRef.current.style.filter = `brightness(${brightness}) drop-shadow(0 0 ${ringGlow}px ${COLOR})`;
       }
       raf = requestAnimationFrame(tick);
     };
@@ -100,20 +117,20 @@ export default function CustomCursor() {
           position: "fixed",
           top: 0,
           left: 0,
-          width: 34,
-          height: 34,
+          width: RING_SIZE,
+          height: RING_SIZE,
           pointerEvents: "none",
           zIndex: 2147483647,
           opacity: 0,
           transition: "opacity .2s ease",
-          willChange: "transform, opacity",
+          willChange: "transform, opacity, filter",
         }}
       >
-        <svg viewBox="0 0 34 34" width="34" height="34">
+        <svg viewBox={`0 0 ${RING_SIZE} ${RING_SIZE}`} width={RING_SIZE} height={RING_SIZE}>
           <circle
-            cx="17"
-            cy="17"
-            r="15.25"
+            cx={RING_SIZE / 2}
+            cy={RING_SIZE / 2}
+            r={RING_SIZE / 2 - 2}
             fill="none"
             stroke={COLOR}
             strokeWidth="1.5"
@@ -130,18 +147,17 @@ export default function CustomCursor() {
           position: "fixed",
           top: 0,
           left: 0,
-          width: 10,
-          height: 10,
+          width: DOT_SIZE,
+          height: DOT_SIZE,
           pointerEvents: "none",
           zIndex: 2147483647,
           opacity: 0,
           transition: "opacity .2s ease",
-          willChange: "transform, opacity",
-          filter: `drop-shadow(0 0 6px ${COLOR}55)`,
+          willChange: "transform, opacity, filter",
         }}
       >
-        <svg viewBox="0 0 10 10" width="10" height="10">
-          <circle cx="5" cy="5" r="4" fill={COLOR} />
+        <svg viewBox={`0 0 ${DOT_SIZE} ${DOT_SIZE}`} width={DOT_SIZE} height={DOT_SIZE}>
+          <circle cx={DOT_SIZE / 2} cy={DOT_SIZE / 2} r={DOT_SIZE / 2 - 1} fill={COLOR} />
         </svg>
       </div>
     </>
