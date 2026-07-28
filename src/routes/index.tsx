@@ -511,7 +511,10 @@ function LandingPage() {
             className="grid gap-6 border-t pt-8 md:grid-cols-[auto_1fr_auto] md:items-center"
             style={{ borderColor: C.lineSoft }}
           >
-            <img src={logoAgora.url} alt="Invest Agora" className="h-9" />
+            <div className="flex items-center gap-4">
+              <img src={logoAgora.url} alt="Invest Agora" className="h-14 md:h-16" />
+              <img src={logoVerticale.url} alt="Verticale" className="h-14 md:h-16" />
+            </div>
             <div className="space-y-1 text-sm md:text-center">
               <div className="font-medium text-white/90">{COMPANY_NAME}</div>
               <div>
