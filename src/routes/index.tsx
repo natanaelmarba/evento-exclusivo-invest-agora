@@ -10,8 +10,9 @@ const WEBHOOK_URL = "{{WEBHOOK_URL}}";
 const EVENT_DATE = "[DATA DO EVENTO]";
 const EVENT_TIME = "[HORÁRIO]";
 const CONTACT_WHATSAPP = "[Inserir WhatsApp]";
-const CONTACT_EMAIL = "[Inserir e-mail]";
-const CONTACT_CNPJ = "[Inserir CNPJ]";
+const CONTACT_EMAIL = "contato@verticaleassessoria.com.br";
+const CONTACT_CNPJ = "30.077.407/0001-88";
+const COMPANY_NAME = "VERTICALE SOLUÇÕES CORPORATIVAS LTDA";
 
 const eventSchema = {
   "@context": "https://schema.org",
