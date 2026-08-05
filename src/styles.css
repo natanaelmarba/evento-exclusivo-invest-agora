@@ -225,3 +225,7 @@ html.light {
   --c-accent: #ffd1d1;
   color: #ffffff;
 }
+
+html.light .footer-logo {
+  filter: invert(1) contrast(1.05);
+}

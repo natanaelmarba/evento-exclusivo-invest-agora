@@ -727,8 +727,8 @@ function LandingPage() {
             style={{ borderColor: C.lineSoft }}
           >
             <div className="flex items-center gap-4">
-              <img src={logoAgora.url} alt="Invest Agora" className="h-24 md:h-28" />
-              <img src={logoVerticale.url} alt="Verticale" className="h-24 md:h-28" />
+              <img src={logoAgora.url} alt="Invest Agora" className="footer-logo h-24 md:h-28" />
+              <img src={logoVerticale.url} alt="Verticale" className="footer-logo h-24 md:h-28" />
             </div>
             <div className="space-y-1 text-sm md:text-center">
               <div className="font-medium" style={{ color: C.text }}>{COMPANY_NAME}</div>
