@@ -333,6 +333,7 @@ function LandingPage() {
 
         {/* ============= BIOGRAFIA ============= */}
         <section
+          ref={bioSectionRef}
           id="biografia"
           className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen overflow-hidden py-12 md:py-24"
           style={{ background: "linear-gradient(180deg, #3a0504 0%, #840B0A 50%, #3a0504 100%)" }}
@@ -350,33 +351,46 @@ function LandingPage() {
           />
           <div className="relative mx-auto max-w-[1200px] px-5">
             <div className="grid gap-8 md:grid-cols-[0.85fr_1.15fr] md:items-stretch">
-              <Reveal className="h-full min-h-[360px] md:min-h-full" duration={1}>
+              <div className="h-full min-h-[360px] md:min-h-full">
                 <div
-                  className="h-full overflow-hidden rounded-2xl border shadow-2xl"
+                  ref={bioImageRef}
+                  className="group relative h-full overflow-hidden rounded-2xl border shadow-2xl"
                   style={{ borderColor: "rgba(255,255,255,.12)" }}
                 >
+                  {/* brilho de hover */}
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-700 group-hover:opacity-100"
+                    style={{
+                      background: "radial-gradient(600px 300px at 50% 0%, rgba(255,255,255,.18) 0%, transparent 60%)",
+                    }}
+                  />
                   <img
+                    ref={bioImageInnerRef}
                     src={dalmoFerrari.url}
                     alt="Dalmo Ferrari — fundador do Grupo Verticale e especialista em investimentos"
-                    className="h-full w-full object-cover object-top"
+                    className="h-[115%] w-full object-cover object-top transition-transform duration-700 ease-out will-change-transform group-hover:scale-[1.04]"
                     loading="lazy"
+                    style={{ marginTop: "-7.5%" }}
                   />
                 </div>
-              </Reveal>
-              <Reveal className="flex flex-col justify-center" stagger duration={1} delay={0.15}>
+              </div>
+              <div className="flex flex-col justify-center">
                 <p
+                  ref={bioEyebrowRef}
                   className="mb-3 text-[12px] font-semibold uppercase tracking-[0.18em]"
                   style={{ color: "#ffd1d1" }}
                 >
                   Quem conduz
                 </p>
                 <h2
+                  ref={bioTitleRef}
                   className="mb-6 text-3xl font-semibold tracking-tight md:text-4xl"
                   style={{ fontFamily: "'Playfair Display', Georgia, serif", color: "#ffffff" }}
                 >
                   Dalmo Ferrari
                 </h2>
-                <div className="space-y-4 text-[15.5px] leading-relaxed md:text-base" style={{ color: "#f0e6e6" }}>
+                <div ref={bioParagraphsRef} className="space-y-4 text-[15.5px] leading-relaxed md:text-base" style={{ color: "#f0e6e6" }}>
                   <p>
                     Paranaense, casado há mais de 25 anos e pai de duas filhas, Dalmo Ferrari é administrador de
                     empresas, graduado em Comércio Exterior e especialista em Blocos Econômicos. É fundador e
@@ -414,7 +428,7 @@ function LandingPage() {
                     patrimonial.
                   </p>
                 </div>
-              </Reveal>
+              </div>
             </div>
           </div>
         </section>
