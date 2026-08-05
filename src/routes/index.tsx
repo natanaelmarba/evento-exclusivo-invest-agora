@@ -55,22 +55,57 @@ export const Route = createFileRoute("/")({
 
 // Paleta: branco, PRETO (com variações) e vermelho #840B0A (com degradês)
 const C = {
-  bg: "#050506",
-  bgSoft: "#0c0c0e",
-  bgCard: "#141416",
-  bgCard2: "#1c1c20",
-  line: "#2a2a2f",
-  lineSoft: "#1e1e22",
-  text: "#ffffff",
-  muted: "#c9cbd1",
-  mutedSoft: "#9a9ca3",
-  accent: "#c2181a",
-  accentSoft: "#a8100f",
-  accentDark: "#840b0a",
-  accentDeep: "#5a0807",
+  bg: "var(--c-bg)",
+  bgSoft: "var(--c-bg-soft)",
+  bgCard: "var(--c-bg-card)",
+  bgCard2: "var(--c-bg-card2)",
+  line: "var(--c-line)",
+  lineSoft: "var(--c-line-soft)",
+  text: "var(--c-text)",
+  muted: "var(--c-muted)",
+  mutedSoft: "var(--c-muted-soft)",
+  accent: "var(--c-accent)",
+  accentSoft: "var(--c-accent-soft)",
+  accentDark: "var(--c-accent-dark)",
+  accentDeep: "var(--c-accent-deep)",
 };
 
+type Theme = "dark" | "light";
+
+function useTheme() {
+  const [theme, setTheme] = useState<Theme>("dark");
+
+  useEffect(() => {
+    const stored = (localStorage.getItem("ia-theme") as Theme | null) ?? "dark";
+    setTheme(stored);
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("light", theme === "light");
+    localStorage.setItem("ia-theme", theme);
+  }, [theme]);
+
+  return { theme, toggle: () => setTheme((t) => (t === "dark" ? "light" : "dark")) };
+}
+
+function ThemeToggle({ theme, onToggle }: { theme: Theme; onToggle: () => void }) {
+  const isLight = theme === "light";
+  return (
+    <button
+      type="button"
+      onClick={onToggle}
+      aria-label={isLight ? "Ativar modo escuro" : "Ativar modo claro"}
+      title={isLight ? "Modo escuro" : "Modo claro"}
+      className="grid h-9 w-9 shrink-0 place-items-center rounded-full border text-sm transition hover:opacity-80"
+      style={{ borderColor: C.line, color: C.text, background: "transparent" }}
+    >
+      {isLight ? "\u263E" : "\u2600"}
+    </button>
+  );
+}
+
 function LandingPage() {
+  const { theme, toggle } = useTheme();
   const [open, setOpen] = useState(false);
   const openModal = () => setOpen(true);
   const closeModal = () => setOpen(false);
@@ -165,34 +200,38 @@ function LandingPage() {
       style={{
         color: C.text,
         fontFamily: "Inter, system-ui, sans-serif",
-        background: `radial-gradient(1100px 550px at 85% -10%, ${C.accentDeep}55 0%, transparent 60%), radial-gradient(900px 500px at -10% 15%, ${C.bgCard2}aa 0%, transparent 55%), linear-gradient(180deg, ${C.bg}, ${C.bgSoft})`,
+        background: "var(--c-page-gradient)",
       }}
     >
       {/* subtle grain texture overlay */}
       <div
         aria-hidden
-        className="pointer-events-none fixed inset-0 z-0 opacity-[0.035]"
+        className="pointer-events-none fixed inset-0 z-0"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
           backgroundSize: "200px 200px",
+          opacity: "var(--c-noise-opacity)",
         }}
       />
       {/* ============= HEADER ============= */}
       <header
         className="sticky top-0 z-40 backdrop-blur-md"
-        style={{ background: "rgba(5,5,6,.85)", borderBottom: `1px solid ${C.lineSoft}` }}
+        style={{ background: "var(--c-header-bg)", borderBottom: `1px solid ${C.lineSoft}` }}
       >
         <div className="mx-auto flex max-w-[1200px] items-center justify-between gap-4 px-5 py-3">
           <div aria-hidden className="hidden md:block" />
           <nav className="hidden items-center gap-7 text-sm font-medium md:flex" style={{ color: C.muted }}>
-            <a href="#encontro" className="hover:text-white transition">O Encontro</a>
-            <a href="#temas" className="hover:text-white transition">Temas</a>
-            <a href="#publico" className="hover:text-white transition">Para Quem É</a>
-            <a href="#inscricao" className="hover:text-white transition">Inscrição</a>
+            <a href="#encontro" className="transition hover:opacity-70">O Encontro</a>
+            <a href="#temas" className="transition hover:opacity-70">Temas</a>
+            <a href="#publico" className="transition hover:opacity-70">Para Quem É</a>
+            <a href="#inscricao" className="transition hover:opacity-70">Inscrição</a>
           </nav>
-          <CtaButton onClick={openModal} variant="outline">
-            Inscrever-me
-          </CtaButton>
+          <div className="flex items-center gap-3">
+            <ThemeToggle theme={theme} onToggle={toggle} />
+            <CtaButton onClick={openModal} variant="outline">
+              Inscrever-me
+            </CtaButton>
+          </div>
         </div>
       </header>
 
@@ -214,8 +253,8 @@ function LandingPage() {
               — Acesso Privado —
             </span>
             <h1
-              className="max-w-4xl text-white text-[clamp(38px,5.6vw,76px)] font-bold leading-[1.02] tracking-tight"
-              style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+              className="max-w-4xl text-[clamp(38px,5.6vw,76px)] font-bold leading-[1.02] tracking-tight"
+              style={{ fontFamily: "'Playfair Display', Georgia, serif", color: C.text }}
             >
               Onde o capital encontra a{" "}
               <span className="italic" style={{ color: C.accent }}>estratégia.</span>
@@ -233,9 +272,9 @@ function LandingPage() {
               className="relative"
               style={{
                 aspectRatio: "16 / 9",
-                background: `linear-gradient(180deg, ${C.bgCard2}, #050506)`,
+                background: "linear-gradient(180deg, #1c1c20, #050506)",
                 borderColor: "rgba(255,255,255,.08)",
-                boxShadow: `0 40px 120px rgba(0,0,0,.7), 0 0 60px ${C.accentDeep}55`,
+                boxShadow: "0 40px 120px rgba(0,0,0,.35), 0 0 60px rgba(90,8,7,.35)",
               }}
             >
               {/* subtle texture layer */}
@@ -243,7 +282,7 @@ function LandingPage() {
                 aria-hidden
                 className="pointer-events-none absolute inset-0 opacity-40 mix-blend-luminosity"
                 style={{
-                  background: `radial-gradient(600px 300px at 30% 40%, ${C.bgCard2} 0%, transparent 70%), radial-gradient(500px 260px at 75% 70%, #101015 0%, transparent 70%)`,
+                  background: "radial-gradient(600px 300px at 30% 40%, #1c1c20 0%, transparent 70%), radial-gradient(500px 260px at 75% 70%, #101015 0%, transparent 70%)",
                 }}
               />
               {/* vignette */}
@@ -335,7 +374,7 @@ function LandingPage() {
         <section
           ref={bioSectionRef}
           id="biografia"
-          className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen overflow-hidden py-12 md:py-24"
+          className="on-red relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen overflow-hidden py-12 md:py-24"
           style={{ background: "linear-gradient(180deg, #3a0504 0%, #840B0A 50%, #3a0504 100%)" }}
         >
           {/* fade superior/inferior para suavizar transição com as seções vizinhas */}
@@ -488,7 +527,7 @@ function LandingPage() {
                   style={{
                     background: `linear-gradient(180deg, ${C.accentSoft}, ${C.accentDark})`,
                     color: C.text,
-                    boxShadow: `0 6px 18px ${C.accentDeep}88`,
+                    boxShadow: "0 6px 18px rgba(90,8,7,.53)",
                   }}
                 >
                   {String(i + 1).padStart(2, "0")}
@@ -525,7 +564,7 @@ function LandingPage() {
               <div
                 key={t}
                 className="flex items-start gap-4 rounded-xl border p-5"
-                style={{ background: `${C.bgCard}aa`, borderColor: C.lineSoft }}
+                style={{ background: C.bgCard, borderColor: C.lineSoft }}
               >
                 <span
                   className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full text-xs font-bold"
@@ -656,8 +695,8 @@ function LandingPage() {
           <div
             className="relative grid grid-cols-1 items-center gap-6 overflow-hidden rounded-3xl border p-8 md:grid-cols-[1.2fr_.8fr] md:p-12"
             style={{
-              background: `linear-gradient(135deg, ${C.accentDeep}77, ${C.bgCard})`,
-              borderColor: `${C.accent}44`,
+              background: `linear-gradient(135deg, rgba(90,8,7,.47), ${C.bgCard})`,
+              borderColor: "rgba(194,24,26,.27)",
             }}
           >
             {/* subtle radial texture */}
@@ -688,11 +727,11 @@ function LandingPage() {
             style={{ borderColor: C.lineSoft }}
           >
             <div className="flex items-center gap-4">
-              <img src={logoAgora.url} alt="Invest Agora" className="h-24 md:h-28" />
-              <img src={logoVerticale.url} alt="Verticale" className="h-24 md:h-28" />
+              <img src={logoAgora.url} alt="Invest Agora" className="footer-logo h-24 md:h-28" />
+              <img src={logoVerticale.url} alt="Verticale" className="footer-logo h-24 md:h-28" />
             </div>
             <div className="space-y-1 text-sm md:text-center">
-              <div className="font-medium text-white/90">{COMPANY_NAME}</div>
+              <div className="font-medium" style={{ color: C.text }}>{COMPANY_NAME}</div>
               <div>
                 CNPJ: {CONTACT_CNPJ}
                 <span className="mx-2 opacity-40">|</span>
@@ -706,8 +745,8 @@ function LandingPage() {
               </div>
             </div>
             <div className="flex gap-5 text-sm md:justify-end">
-              <a href="#" className="hover:text-white transition">Política de Privacidade</a>
-              <a href="#" className="hover:text-white transition">Termos de Uso</a>
+              <a href="#" className="transition hover:opacity-70">Política de Privacidade</a>
+              <a href="#" className="transition hover:opacity-70">Termos de Uso</a>
             </div>
           </div>
           <p className="mt-6 text-center text-xs">
@@ -719,7 +758,7 @@ function LandingPage() {
       {/* STICKY MOBILE */}
       <div
         className="fixed inset-x-0 bottom-0 z-40 border-t p-3 backdrop-blur md:hidden"
-        style={{ background: "rgba(5,5,6,.92)", borderColor: C.line }}
+        style={{ background: "var(--c-header-bg)", borderColor: C.line }}
       >
         <button
           onClick={openModal}
@@ -804,11 +843,11 @@ function Section({
   const variantBg: Record<typeof variant, React.CSSProperties> = {
     // PRETO padrão (mais escuro)
     default: {
-      background: "linear-gradient(180deg, #000000 0%, #0a0a0c 50%, #000000 100%)",
+      background: "var(--sec-default)",
     },
     // PRETO um pouco mais claro (variação)
     dark: {
-      background: "linear-gradient(180deg, #08080a 0%, #141416 50%, #08080a 100%)",
+      background: "var(--sec-dark)",
     },
     // VERMELHO #840B0A (tom mais fechado)
     accent: {
@@ -820,7 +859,7 @@ function Section({
     },
     // BRANCO
     soft: {
-      background: "linear-gradient(180deg, #ffffff 0%, #f4f4f6 50%, #eaeaee 100%)",
+      background: "var(--sec-soft)",
       color: "#1a1b1f",
     },
   };
@@ -830,12 +869,12 @@ function Section({
 
   // Cor de "cola" para suavizar bordas entre seções (usa o tom do topo/base do gradiente)
   const edgeColor =
-    variant === "soft" ? "#ffffff" : variant === "accent" || variant === "highlight" ? "#5a0807" : variant === "dark" ? "#08080a" : "#000000";
+    variant === "soft" ? "var(--edge-soft)" : variant === "accent" || variant === "highlight" ? "#5a0807" : variant === "dark" ? "var(--edge-dark)" : "var(--edge-default)";
 
   return (
     <section
       id={id}
-      className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen overflow-hidden py-12 md:py-24"
+      className={`relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen overflow-hidden py-12 md:py-24 ${isRed ? "on-red" : ""}`}
       style={variantBg[variant]}
     >
       {/* Fades superior/inferior — suavizam a transição entre seções (sutis, sem tapar títulos) */}
@@ -851,7 +890,7 @@ function Section({
       />
       <div
         className="relative mx-auto max-w-[1200px] px-5"
-        style={isLight ? { color: "#1a1b1f" } : undefined}
+        style={{ color: isLight ? "#1a1b1f" : C.text }}
       >
         <Reveal stagger duration={1}>
           {eyebrow && (
@@ -884,16 +923,16 @@ function Card({ children }: { children: React.ReactNode }) {
     <div
       className="relative overflow-hidden rounded-2xl border p-6 transition hover:-translate-y-0.5"
       style={{
-        background: `linear-gradient(180deg, ${C.bgCard2}, ${C.bgCard})`,
+        background: "var(--c-card-bg)",
         borderColor: C.lineSoft,
-        boxShadow: "0 10px 30px rgba(0,0,0,.35)",
+        boxShadow: "var(--c-card-shadow)",
       }}
     >
       {/* subtle top sheen */}
       <span
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-0 h-px opacity-40"
-        style={{ background: `linear-gradient(90deg, transparent, ${C.accentSoft}40, transparent)` }}
+        style={{ background: "linear-gradient(90deg, transparent, rgba(168,16,15,.25), transparent)" }}
       />
       {children}
     </div>
@@ -1066,7 +1105,7 @@ function RegistrationForm() {
       >
         <div
           className="mb-4 grid h-14 w-14 place-items-center rounded-full text-2xl"
-          style={{ background: `${C.accentDark}66`, color: C.text, border: `1px solid ${C.line}` }}
+          style={{ background: "rgba(132,11,10,.4)", color: "#ffffff", border: `1px solid ${C.line}` }}
         >
           ✓
         </div>
@@ -1086,7 +1125,7 @@ function RegistrationForm() {
         className="mt-5 w-full rounded-full px-6 py-3.5 text-[14px] font-semibold uppercase tracking-wider text-white transition disabled:opacity-70"
         style={{
           background: `linear-gradient(180deg, ${C.accentSoft}, ${C.accentDark})`,
-          boxShadow: `0 14px 30px ${C.accentDeep}88`,
+          boxShadow: "0 14px 30px rgba(90,8,7,.53)",
         }}
       >
         {form.loading ? "Enviando…" : "Confirmar minha inscrição"}
@@ -1133,7 +1172,7 @@ function RegistrationModal({ onClose }: { onClose: () => void }) {
             <div className="py-6 text-center">
               <div
                 className="mx-auto mb-4 grid h-14 w-14 place-items-center rounded-full text-2xl"
-                style={{ background: `${C.accentDark}66`, color: C.text, border: `1px solid ${C.line}` }}
+                style={{ background: "rgba(132,11,10,.4)", color: "#ffffff", border: `1px solid ${C.line}` }}
               >
                 ✓
               </div>
@@ -1168,7 +1207,7 @@ function RegistrationModal({ onClose }: { onClose: () => void }) {
                   className="mt-5 w-full rounded-full px-6 py-3.5 text-[14px] font-semibold uppercase tracking-wider text-white transition disabled:opacity-70"
                   style={{
                     background: `linear-gradient(180deg, ${C.accentSoft}, ${C.accentDark})`,
-                    boxShadow: `0 12px 28px ${C.accentDeep}88`,
+                    boxShadow: "0 12px 28px rgba(90,8,7,.53)",
                   }}
                 >
                   {form.loading ? "Enviando…" : "Confirmar minha inscrição"}
@@ -1186,7 +1225,7 @@ function RegistrationModal({ onClose }: { onClose: () => void }) {
 }
 
 const inputCls =
-  "w-full rounded-xl border p-3 text-white outline-none transition placeholder:text-white/40 focus:border-[#c2181a] focus:ring-4 focus:ring-[#c2181a]/20";
+  "w-full rounded-xl border p-3 text-[color:var(--c-text)] outline-none transition placeholder:text-[color:var(--c-muted-soft)] focus:border-[#c2181a] focus:ring-4 focus:ring-[#c2181a]/20";
 const inputStyle = { background: C.bg, borderColor: C.line } as const;
 
 function Field({
