@@ -261,25 +261,25 @@ function LandingPage() {
         <section
           id="biografia"
           className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen overflow-hidden py-12 md:py-24"
-          style={{ background: "linear-gradient(180deg, #ffffff 0%, #f4f4f6 50%, #eaeaee 100%)" }}
+          style={{ background: "linear-gradient(180deg, #3a0504 0%, #840B0A 50%, #3a0504 100%)" }}
         >
-          {/* fade superior/inferior para suavizar transição com as seções escuras */}
+          {/* fade superior/inferior para suavizar transição com as seções vizinhas */}
           <span
             aria-hidden
             className="pointer-events-none absolute inset-x-0 top-0 h-8 md:h-20"
-            style={{ background: "linear-gradient(180deg, #000000 0%, transparent 100%)" }}
+            style={{ background: "linear-gradient(180deg, #5a0807 0%, transparent 100%)" }}
           />
           <span
             aria-hidden
             className="pointer-events-none absolute inset-x-0 bottom-0 h-8 md:h-20"
-            style={{ background: "linear-gradient(0deg, #08080a 0%, transparent 100%)" }}
+            style={{ background: "linear-gradient(0deg, #5a0807 0%, transparent 100%)" }}
           />
           <div className="relative mx-auto max-w-[1200px] px-5">
             <div className="grid gap-8 md:grid-cols-[0.85fr_1.15fr] md:items-stretch">
               <Reveal className="h-full min-h-[360px] md:min-h-full" duration={1}>
                 <div
                   className="h-full overflow-hidden rounded-2xl border shadow-2xl"
-                  style={{ borderColor: "rgba(0,0,0,.08)" }}
+                  style={{ borderColor: "rgba(255,255,255,.12)" }}
                 >
                   <img
                     src={dalmoFerrari.url}
@@ -292,17 +292,17 @@ function LandingPage() {
               <Reveal className="flex flex-col justify-center" stagger duration={1} delay={0.15}>
                 <p
                   className="mb-3 text-[12px] font-semibold uppercase tracking-[0.18em]"
-                  style={{ color: C.accent }}
+                  style={{ color: "#ffd1d1" }}
                 >
                   Quem conduz
                 </p>
                 <h2
                   className="mb-6 text-3xl font-semibold tracking-tight md:text-4xl"
-                  style={{ fontFamily: "'Playfair Display', Georgia, serif", color: "#1a1b1f" }}
+                  style={{ fontFamily: "'Playfair Display', Georgia, serif", color: "#ffffff" }}
                 >
                   Dalmo Ferrari
                 </h2>
-                <div className="space-y-4 text-[15.5px] leading-relaxed md:text-base" style={{ color: "#4a4b50" }}>
+                <div className="space-y-4 text-[15.5px] leading-relaxed md:text-base" style={{ color: "#f0e6e6" }}>
                   <p>
                     Paranaense, casado há mais de 25 anos e pai de duas filhas, Dalmo Ferrari é administrador de
                     empresas, graduado em Comércio Exterior e especialista em Blocos Econômicos. É fundador e
