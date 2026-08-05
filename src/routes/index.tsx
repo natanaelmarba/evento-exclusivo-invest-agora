@@ -75,6 +75,13 @@ function LandingPage() {
   const openModal = () => setOpen(true);
   const closeModal = () => setOpen(false);
 
+  const bioSectionRef = useRef<HTMLElement>(null);
+  const bioImageRef = useRef<HTMLDivElement>(null);
+  const bioImageInnerRef = useRef<HTMLImageElement>(null);
+  const bioEyebrowRef = useRef<HTMLParagraphElement>(null);
+  const bioTitleRef = useRef<HTMLHeadingElement>(null);
+  const bioParagraphsRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
@@ -88,6 +95,69 @@ function LandingPage() {
       document.body.style.overflow = prev;
     };
   }, [open]);
+
+  // Animações da seção de biografia
+  useEffect(() => {
+    const section = bioSectionRef.current;
+    const imageWrap = bioImageRef.current;
+    const imageInner = bioImageInnerRef.current;
+    const eyebrow = bioEyebrowRef.current;
+    const title = bioTitleRef.current;
+    const paragraphs = bioParagraphsRef.current;
+    if (!section || !imageWrap || !imageInner || !eyebrow || !title || !paragraphs) return;
+
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) {
+      gsap.set([imageWrap, eyebrow, title, paragraphs.children], { opacity: 1, x: 0, y: 0, clipPath: "inset(0 0 0 0)" });
+      return;
+    }
+
+    const ctx = gsap.context(() => {
+      // Reveal cinematográfico da imagem: wipe da esquerda para direita
+      gsap.set(imageWrap, { clipPath: "inset(0 100% 0 0)", opacity: 1 });
+      gsap.to(imageWrap, {
+        clipPath: "inset(0 0% 0 0)",
+        duration: 1.4,
+        ease: "power3.inOut",
+        scrollTrigger: {
+          trigger: section,
+          start: "top 75%",
+          once: true,
+        },
+      });
+
+      // Parallax sutil na imagem ao scrollar
+      gsap.to(imageInner, {
+        yPercent: -8,
+        ease: "none",
+        scrollTrigger: {
+          trigger: section,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1.2,
+        },
+      });
+
+      // Textos: sobe com fade + blur sutil
+      const textTargets = [eyebrow, title, ...Array.from(paragraphs.children)];
+      gsap.set(textTargets, { opacity: 0, y: 34, filter: "blur(6px)" });
+      gsap.to(textTargets, {
+        opacity: 1,
+        y: 0,
+        filter: "blur(0px)",
+        duration: 1,
+        ease: "power3.out",
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: section,
+          start: "top 70%",
+          once: true,
+        },
+      });
+    }, section);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <div
