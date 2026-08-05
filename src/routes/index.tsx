@@ -374,7 +374,7 @@ function LandingPage() {
         <section
           ref={bioSectionRef}
           id="biografia"
-          className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen overflow-hidden py-12 md:py-24"
+          className="on-red relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen overflow-hidden py-12 md:py-24"
           style={{ background: "linear-gradient(180deg, #3a0504 0%, #840B0A 50%, #3a0504 100%)" }}
         >
           {/* fade superior/inferior para suavizar transição com as seções vizinhas */}
@@ -874,7 +874,7 @@ function Section({
   return (
     <section
       id={id}
-      className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen overflow-hidden py-12 md:py-24"
+      className={`relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen overflow-hidden py-12 md:py-24 ${isRed ? "on-red" : ""}`}
       style={variantBg[variant]}
     >
       {/* Fades superior/inferior — suavizam a transição entre seções (sutis, sem tapar títulos) */}
@@ -890,7 +890,7 @@ function Section({
       />
       <div
         className="relative mx-auto max-w-[1200px] px-5"
-        style={{ color: isLight || isRed ? (isRed ? "#ffffff" : "#1a1b1f") : C.text }}
+        style={{ color: isLight ? "#1a1b1f" : C.text }}
       >
         <Reveal stagger duration={1}>
           {eyebrow && (

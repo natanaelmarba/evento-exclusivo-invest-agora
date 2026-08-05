@@ -208,3 +208,20 @@ html.light {
     transition-duration: 0.001ms !important;
   }
 }
+
+/* Seções vermelhas: escopo de cores claras independente do tema */
+.on-red {
+  --c-text: #ffffff;
+  --c-muted: #f4e3e3;
+  --c-muted-soft: #e7cccc;
+  --c-bg: #5a0807;
+  --c-bg-soft: #4a0606;
+  --c-bg-card: #6d0a09;
+  --c-bg-card2: #7a0c0b;
+  --c-card-bg: linear-gradient(180deg, #7a0c0b, #5a0807);
+  --c-card-shadow: 0 10px 30px rgba(0, 0, 0, 0.32);
+  --c-line: rgba(255, 255, 255, 0.22);
+  --c-line-soft: rgba(255, 255, 255, 0.16);
+  --c-accent: #ffd1d1;
+  color: #ffffff;
+}
