@@ -35,7 +35,72 @@
   --border: oklch(0.9 0.005 260);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.22 0.005 260);
+
+  /* ===== Landing palette — DARK (default) ===== */
+  --page-bg: #050506;
+  --c-bg: #050506;
+  --c-bg-soft: #0c0c0e;
+  --c-bg-card: #141416;
+  --c-bg-card2: #1c1c20;
+  --c-line: #2a2a2f;
+  --c-line-soft: #1e1e22;
+  --c-text: #ffffff;
+  --c-muted: #c9cbd1;
+  --c-muted-soft: #9a9ca3;
+  --c-accent: #c2181a;
+  --c-accent-soft: #a8100f;
+  --c-accent-dark: #840b0a;
+  --c-accent-deep: #5a0807;
+
+  --c-header-bg: rgba(5, 5, 6, 0.85);
+  --c-page-gradient: radial-gradient(1100px 550px at 85% -10%, rgba(90, 8, 7, 0.35) 0%, transparent 60%),
+    radial-gradient(900px 500px at -10% 15%, rgba(28, 28, 32, 0.66) 0%, transparent 55%),
+    linear-gradient(180deg, #050506, #0c0c0e);
+
+  --sec-default: linear-gradient(180deg, #000000 0%, #0a0a0c 50%, #000000 100%);
+  --sec-dark: linear-gradient(180deg, #08080a 0%, #141416 50%, #08080a 100%);
+  --sec-soft: linear-gradient(180deg, #ffffff 0%, #f4f4f6 50%, #eaeaee 100%);
+  --edge-default: #000000;
+  --edge-dark: #08080a;
+  --edge-soft: #ffffff;
+  --c-card-bg: linear-gradient(180deg, #1c1c20, #141416);
+  --c-card-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --c-noise-opacity: 0.035;
 }
+
+html.light {
+  /* ===== Landing palette — LIGHT ===== */
+  --page-bg: #ffffff;
+  --c-bg: #ffffff;
+  --c-bg-soft: #f4f4f6;
+  --c-bg-card: #ffffff;
+  --c-bg-card2: #f2f2f5;
+  --c-line: #d6d6de;
+  --c-line-soft: #e4e4ea;
+  --c-text: #050506;
+  --c-muted: #3c3e45;
+  --c-muted-soft: #5f6169;
+  --c-accent: #a8100f;
+  --c-accent-soft: #c2181a;
+  --c-accent-dark: #840b0a;
+  --c-accent-deep: #5a0807;
+
+  --c-header-bg: rgba(255, 255, 255, 0.88);
+  --c-page-gradient: radial-gradient(1100px 550px at 85% -10%, rgba(132, 11, 10, 0.08) 0%, transparent 60%),
+    radial-gradient(900px 500px at -10% 15%, rgba(0, 0, 0, 0.05) 0%, transparent 55%),
+    linear-gradient(180deg, #ffffff, #f4f4f6);
+
+  --sec-default: linear-gradient(180deg, #ffffff 0%, #f6f6f8 50%, #ffffff 100%);
+  --sec-dark: linear-gradient(180deg, #f4f4f6 0%, #e9e9ee 50%, #f4f4f6 100%);
+  --sec-soft: linear-gradient(180deg, #ffffff 0%, #f4f4f6 50%, #eaeaee 100%);
+  --edge-default: #ffffff;
+  --edge-dark: #f4f4f6;
+  --edge-soft: #ffffff;
+  --c-card-bg: linear-gradient(180deg, #ffffff, #f4f4f6);
+  --c-card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --c-noise-opacity: 0.02;
+}
+
 
 @layer base {
   * {
