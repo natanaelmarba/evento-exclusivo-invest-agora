@@ -257,6 +257,93 @@ function LandingPage() {
           </Reveal>
         </section>
 
+        {/* ============= BIOGRAFIA ============= */}
+        <section
+          id="biografia"
+          className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen overflow-hidden py-12 md:py-24"
+          style={{ background: "linear-gradient(180deg, #ffffff 0%, #f4f4f6 50%, #eaeaee 100%)" }}
+        >
+          {/* fade superior/inferior para suavizar transição com as seções escuras */}
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 top-0 h-8 md:h-20"
+            style={{ background: "linear-gradient(180deg, #000000 0%, transparent 100%)" }}
+          />
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-8 md:h-20"
+            style={{ background: "linear-gradient(0deg, #08080a 0%, transparent 100%)" }}
+          />
+          <div className="relative mx-auto max-w-[1200px] px-5">
+            <div className="grid gap-8 md:grid-cols-[0.85fr_1.15fr] md:items-stretch">
+              <Reveal className="h-full min-h-[360px] md:min-h-full" duration={1}>
+                <div
+                  className="h-full overflow-hidden rounded-2xl border shadow-2xl"
+                  style={{ borderColor: "rgba(0,0,0,.08)" }}
+                >
+                  <img
+                    src={dalmoFerrari.url}
+                    alt="Dalmo Ferrari — fundador do Grupo Verticale e especialista em investimentos"
+                    className="h-full w-full object-cover object-top"
+                    loading="lazy"
+                  />
+                </div>
+              </Reveal>
+              <Reveal className="flex flex-col justify-center" stagger duration={1} delay={0.15}>
+                <p
+                  className="mb-3 text-[12px] font-semibold uppercase tracking-[0.18em]"
+                  style={{ color: C.accent }}
+                >
+                  Quem conduz
+                </p>
+                <h2
+                  className="mb-6 text-3xl font-semibold tracking-tight md:text-4xl"
+                  style={{ fontFamily: "'Playfair Display', Georgia, serif", color: "#1a1b1f" }}
+                >
+                  Dalmo Ferrari
+                </h2>
+                <div className="space-y-4 text-[15.5px] leading-relaxed md:text-base" style={{ color: "#4a4b50" }}>
+                  <p>
+                    Paranaense, casado há mais de 25 anos e pai de duas filhas, Dalmo Ferrari é administrador de
+                    empresas, graduado em Comércio Exterior e especialista em Blocos Econômicos. É fundador e
+                    empresário à frente do Grupo Verticale e de suas empresas.
+                  </p>
+                  <p>
+                    Com uma trajetória marcada pelo empreendedorismo, pela educação e pelo mercado de investimentos,
+                    foi professor por quase uma década na FEMAR – Fundação de Estudos do Mar e na DLA International,
+                    no Rio de Janeiro.
+                  </p>
+                  <p>
+                    Atualmente, atua como especialista em aplicação de recursos, investimentos, alavancagem
+                    patrimonial e operações de ciclo-alavancagem com imóveis de leilão, desenvolvendo estratégias
+                    voltadas à construção, expansão e proteção patrimonial.
+                  </p>
+                  <p>
+                    Ao longo de sua trajetória, construiu um amplo network empresarial e institucional, mantendo
+                    relacionamento próximo com empresários e lideranças de diferentes setores. Essa rede de conexões
+                    lhe proporciona acesso a informações e diferentes perspectivas sobre movimentos que podem impactar
+                    o cenário político e econômico.
+                  </p>
+                  <p>
+                    Seu conhecimento e experiência têm contribuído para transformar a forma como profissionais,
+                    empreendedores e empresários enxergam dinheiro, investimentos e patrimônio.
+                  </p>
+                  <p>
+                    Mais do que ensinar a investir, seu propósito é democratizar o conhecimento financeiro e
+                    patrimonial, mostrando que oportunidades de crescimento não devem ser exclusivas de quem já
+                    possui grandes recursos.
+                  </p>
+                  <p>
+                    Seu objetivo é apresentar, de forma clara e prática, caminhos para que qualquer pessoa,
+                    independentemente de sua condição social ou econômica, possa ampliar sua visão, tomar decisões
+                    mais conscientes e construir um plano capaz de transformar sua trajetória financeira e
+                    patrimonial.
+                  </p>
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </section>
 
         {/* ============= CONTEXTO / DOR ============= */}
         <Section
