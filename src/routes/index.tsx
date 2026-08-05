@@ -70,42 +70,7 @@ const C = {
   accentDeep: "var(--c-accent-deep)",
 };
 
-type Theme = "dark" | "light";
-
-function useTheme() {
-  const [theme, setTheme] = useState<Theme>("dark");
-
-  useEffect(() => {
-    const stored = (localStorage.getItem("ia-theme") as Theme | null) ?? "dark";
-    setTheme(stored);
-  }, []);
-
-  useEffect(() => {
-    document.documentElement.classList.toggle("light", theme === "light");
-    localStorage.setItem("ia-theme", theme);
-  }, [theme]);
-
-  return { theme, toggle: () => setTheme((t) => (t === "dark" ? "light" : "dark")) };
-}
-
-function ThemeToggle({ theme, onToggle }: { theme: Theme; onToggle: () => void }) {
-  const isLight = theme === "light";
-  return (
-    <button
-      type="button"
-      onClick={onToggle}
-      aria-label={isLight ? "Ativar modo escuro" : "Ativar modo claro"}
-      title={isLight ? "Modo escuro" : "Modo claro"}
-      className="grid h-9 w-9 shrink-0 place-items-center rounded-full border text-sm transition hover:opacity-80"
-      style={{ borderColor: C.line, color: C.text, background: "transparent" }}
-    >
-      {isLight ? "\u263E" : "\u2600"}
-    </button>
-  );
-}
-
 function LandingPage() {
-  const { theme, toggle } = useTheme();
   const [open, setOpen] = useState(false);
   const openModal = () => setOpen(true);
   const closeModal = () => setOpen(false);
@@ -227,7 +192,6 @@ function LandingPage() {
             <a href="#inscricao" className="transition hover:opacity-70">Inscrição</a>
           </nav>
           <div className="flex items-center gap-3">
-            <ThemeToggle theme={theme} onToggle={toggle} />
             <CtaButton onClick={openModal} variant="outline">
               Inscrever-me
             </CtaButton>
