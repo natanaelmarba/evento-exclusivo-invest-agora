@@ -58,15 +58,33 @@ export function HeroBackground() {
     window.addEventListener("mousemove", onMove);
 
     let raf = 0;
+    let active = true;
     const clock = new THREE.Clock();
     const animate = () => {
       const t = clock.getElapsedTime();
       points.rotation.y = t * 0.04 + mouseX * 0.4;
       points.rotation.x = Math.sin(t * 0.15) * 0.05 + mouseY * 0.2;
       renderer.render(scene, camera);
-      if (!reduced) raf = requestAnimationFrame(animate);
+      if (!reduced && active) raf = requestAnimationFrame(animate);
     };
     animate();
+
+    // Pausa a renderização quando o hero não está visível (ex.: modal aberto / scroll)
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        const visible = !!entry?.isIntersecting;
+        if (visible && !active && !reduced) {
+          active = true;
+          raf = requestAnimationFrame(animate);
+        } else if (!visible) {
+          active = false;
+          cancelAnimationFrame(raf);
+        }
+      },
+      { threshold: 0 },
+    );
+    io.observe(mount);
+
 
     const onResize = () => {
       const w = mount.clientWidth, h = mount.clientHeight;
