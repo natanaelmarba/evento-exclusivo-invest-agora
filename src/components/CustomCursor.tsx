@@ -73,6 +73,8 @@ export default function CustomCursor() {
     document.addEventListener("mouseleave", onLeave);
 
     let raf = 0;
+    let lastDotFilter = "";
+    let lastRingFilter = "";
     const tick = () => {
       // Ring lags behind (delay/trailing)
       ring.current.x += (target.current.x - ring.current.x) * 0.18;
@@ -80,21 +82,29 @@ export default function CustomCursor() {
       scale.current += (targetScale.current - scale.current) * 0.2;
       hovering.current += ((targetHover.current ? 1 : 0) - hovering.current) * 0.2;
 
-      const brightness = 1 + hovering.current * 0.35;
-      const glow = 6 + hovering.current * 12;
-      const ringGlow = 4 + hovering.current * 10;
+      const h = Math.round(hovering.current * 20) / 20;
+      const brightness = 1 + h * 0.35;
+      const dotFilter = `brightness(${brightness}) drop-shadow(0 0 ${6 + h * 12}px ${COLOR})`;
+      const ringFilter = `brightness(${brightness}) drop-shadow(0 0 ${4 + h * 10}px ${COLOR})`;
 
       if (dotRef.current) {
         dotRef.current.style.transform = `translate3d(${target.current.x}px, ${target.current.y}px, 0) translate(-50%, -50%)`;
-        dotRef.current.style.filter = `brightness(${brightness}) drop-shadow(0 0 ${glow}px ${COLOR})`;
+        if (dotFilter !== lastDotFilter) {
+          dotRef.current.style.filter = dotFilter;
+          lastDotFilter = dotFilter;
+        }
       }
       if (ringRef.current) {
         ringRef.current.style.transform = `translate3d(${ring.current.x}px, ${ring.current.y}px, 0) translate(-50%, -50%) scale(${scale.current})`;
-        ringRef.current.style.filter = `brightness(${brightness}) drop-shadow(0 0 ${ringGlow}px ${COLOR})`;
+        if (ringFilter !== lastRingFilter) {
+          ringRef.current.style.filter = ringFilter;
+          lastRingFilter = ringFilter;
+        }
       }
       raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
+
 
     return () => {
       cancelAnimationFrame(raf);
