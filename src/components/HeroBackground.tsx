@@ -95,6 +95,8 @@ export function HeroBackground() {
     window.addEventListener("resize", onResize);
 
     return () => {
+      active = false;
+      io.disconnect();
       cancelAnimationFrame(raf);
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("resize", onResize);
