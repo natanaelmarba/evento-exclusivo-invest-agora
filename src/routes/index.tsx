@@ -922,6 +922,80 @@ const FAIXA_OPTIONS = [
   "Prefiro não informar",
 ];
 
+type DocType = "cpf" | "cnpj";
+
+function maskCpf(v: string) {
+  const d = v.replace(/\D/g, "").slice(0, 11);
+  if (d.length <= 3) return d;
+  if (d.length <= 6) return `${d.slice(0, 3)}.${d.slice(3)}`;
+  if (d.length <= 9) return `${d.slice(0, 3)}.${d.slice(3, 6)}.${d.slice(6)}`;
+  return `${d.slice(0, 3)}.${d.slice(3, 6)}.${d.slice(6, 9)}-${d.slice(9)}`;
+}
+
+function maskCnpj(v: string) {
+  const d = v.replace(/\D/g, "").slice(0, 14);
+  if (d.length <= 2) return d;
+  if (d.length <= 5) return `${d.slice(0, 2)}.${d.slice(2)}`;
+  if (d.length <= 8) return `${d.slice(0, 2)}.${d.slice(2, 5)}.${d.slice(5)}`;
+  if (d.length <= 12) return `${d.slice(0, 2)}.${d.slice(2, 5)}.${d.slice(5, 8)}/${d.slice(8)}`;
+  return `${d.slice(0, 2)}.${d.slice(2, 5)}.${d.slice(5, 8)}/${d.slice(8, 12)}-${d.slice(12)}`;
+}
+
+function maskDocument(type: DocType, value: string) {
+  return type === "cpf" ? maskCpf(value) : maskCnpj(value);
+}
+
+function calcCpfCheckDigit(digits: number[]) {
+  const calc = (arr: number[]) => {
+    let sum = 0;
+    let factor = arr.length + 1;
+    for (const n of arr) {
+      sum += n * factor;
+      factor--;
+    }
+    const rest = sum % 11;
+    return rest < 2 ? 0 : 11 - rest;
+  };
+  const first = calc(digits);
+  const second = calc([...digits, first]);
+  return [first, second];
+}
+
+function isValidCpf(v: string) {
+  const d = v.replace(/\D/g, "");
+  if (d.length !== 11 || /^\d{1}$/.test(d)) return false;
+  const digits = d.split("").map(Number);
+  const [first, second] = calcCpfCheckDigit(digits.slice(0, 9));
+  return digits[9] === first && digits[10] === second;
+}
+
+function calcCnpjCheckDigit(digits: number[]) {
+  const calc = (arr: number[], weights: number[]) => {
+    const sum = arr.reduce((acc, n, i) => acc + n * weights[i], 0);
+    const rest = sum % 11;
+    return rest < 2 ? 0 : 11 - rest;
+  };
+  const firstWeights = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+  const secondWeights = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+  const first = calc(digits, firstWeights);
+  const second = calc([...digits, first], secondWeights);
+  return [first, second];
+}
+
+function isValidCnpj(v: string) {
+  const d = v.replace(/\D/g, "");
+  if (d.length !== 14 || /^\d{1}$/.test(d)) return false;
+  const digits = d.split("").map(Number);
+  const [first, second] = calcCnpjCheckDigit(digits.slice(0, 12));
+  return digits[12] === first && digits[13] === second;
+}
+
+function isValidDocument(type: DocType, value: string) {
+  const raw = value.replace(/\D/g, "");
+  if (type === "cpf") return isValidCpf(raw);
+  return isValidCnpj(raw);
+}
+
 function useRegistrationForm() {
   const [nome, setNome] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
@@ -930,6 +1004,8 @@ function useRegistrationForm() {
   const [segmento, setSegmento] = useState("");
   const [cidade, setCidade] = useState("");
   const [faixa, setFaixa] = useState("");
+  const [tipoDocumento, setTipoDocumento] = useState<DocType>("cpf");
+  const [documento, setDocumento] = useState("");
   const [lgpd, setLgpd] = useState(false);
   const [errors, setErrors] = useState<{
     nome?: boolean;
@@ -938,6 +1014,7 @@ function useRegistrationForm() {
     empresa?: boolean;
     segmento?: boolean;
     cidade?: boolean;
+    documento?: boolean;
     lgpd?: boolean;
   }>({});
   const [ok, setOk] = useState(false);
@@ -953,6 +1030,7 @@ function useRegistrationForm() {
       empresa: empresa.trim().length < 2,
       segmento: segmento.trim().length < 2,
       cidade: cidade.trim().length < 2,
+      documento: !documento.trim() || !isValidDocument(tipoDocumento, documento),
       lgpd: !lgpd,
     };
     setErrors(errs);
@@ -973,6 +1051,8 @@ function useRegistrationForm() {
             segmento,
             cidade,
             faixa_investimento: faixa,
+            tipo_documento: tipoDocumento,
+            documento: documento.replace(/\D/g, ""),
             utm_source: params.get("utm_source") || "",
             utm_medium: params.get("utm_medium") || "",
             utm_campaign: params.get("utm_campaign") || "",
@@ -990,8 +1070,8 @@ function useRegistrationForm() {
   };
 
   return {
-    values: { nome, whatsapp, email, empresa, segmento, cidade, faixa, lgpd },
-    setters: { setNome, setWhatsapp, setEmail, setEmpresa, setSegmento, setCidade, setFaixa, setLgpd },
+    values: { nome, whatsapp, email, empresa, segmento, cidade, faixa, tipoDocumento, documento, lgpd },
+    setters: { setNome, setWhatsapp, setEmail, setEmpresa, setSegmento, setCidade, setFaixa, setTipoDocumento, setDocumento, setLgpd },
     errors,
     ok,
     loading,
@@ -1029,6 +1109,33 @@ function FormFields({
       <Field label="Cidade*" error={errors.cidade && "Informe sua cidade."}>
         <input value={v.cidade} onChange={(e) => s.setCidade(e.target.value)} className={inputCls} style={inputStyle} placeholder="Sua cidade / UF" />
       </Field>
+      <div className="grid gap-3 sm:grid-cols-[140px_1fr]">
+        <Field label="Documento*">
+          <select
+            value={v.tipoDocumento}
+            onChange={(e) => {
+              const type = e.target.value as DocType;
+              s.setTipoDocumento(type);
+              s.setDocumento(maskDocument(type, v.documento));
+            }}
+            className={inputCls}
+            style={inputStyle}
+          >
+            <option value="cpf">CPF</option>
+            <option value="cnpj">CNPJ</option>
+          </select>
+        </Field>
+        <Field label={v.tipoDocumento === "cpf" ? "CPF*" : "CNPJ*"} error={errors.documento && (v.tipoDocumento === "cpf" ? "CPF inválido." : "CNPJ inválido.")}>
+          <input
+            inputMode="numeric"
+            value={v.documento}
+            onChange={(e) => s.setDocumento(maskDocument(v.tipoDocumento, e.target.value))}
+            className={inputCls}
+            style={inputStyle}
+            placeholder={v.tipoDocumento === "cpf" ? "000.000.000-00" : "00.000.000/0000-00"}
+          />
+        </Field>
+      </div>
       <Field label="Faixa aproximada de interesse para investimento (opcional)">
         <select
           value={v.faixa}
