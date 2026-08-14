@@ -1109,6 +1109,33 @@ function FormFields({
       <Field label="Cidade*" error={errors.cidade && "Informe sua cidade."}>
         <input value={v.cidade} onChange={(e) => s.setCidade(e.target.value)} className={inputCls} style={inputStyle} placeholder="Sua cidade / UF" />
       </Field>
+      <div className="grid gap-3 sm:grid-cols-[140px_1fr]">
+        <Field label="Documento*">
+          <select
+            value={v.tipoDocumento}
+            onChange={(e) => {
+              const type = e.target.value as DocType;
+              s.setTipoDocumento(type);
+              s.setDocumento(maskDocument(type, v.documento));
+            }}
+            className={inputCls}
+            style={inputStyle}
+          >
+            <option value="cpf">CPF</option>
+            <option value="cnpj">CNPJ</option>
+          </select>
+        </Field>
+        <Field label={v.tipoDocumento === "cpf" ? "CPF*" : "CNPJ*"} error={errors.documento && (v.tipoDocumento === "cpf" ? "CPF inválido." : "CNPJ inválido.")}>
+          <input
+            inputMode="numeric"
+            value={v.documento}
+            onChange={(e) => s.setDocumento(maskDocument(v.tipoDocumento, e.target.value))}
+            className={inputCls}
+            style={inputStyle}
+            placeholder={v.tipoDocumento === "cpf" ? "000.000.000-00" : "00.000.000/0000-00"}
+          />
+        </Field>
+      </div>
       <Field label="Faixa aproximada de interesse para investimento (opcional)">
         <select
           value={v.faixa}
