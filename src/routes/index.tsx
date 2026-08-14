@@ -485,7 +485,7 @@ function LandingPage() {
                 d: "Uma visão estratégica sobre como avaliar oportunidades em operações de leilão com critérios, atenção aos riscos e potencial de diversificação.",
               },
             ].map((item, i) => (
-              <Card key={item.t}>
+              <Card key={item.t} style={{ background: "#141416" }}>
                 <div
                   className="mb-4 grid h-10 w-10 place-items-center rounded-lg text-sm font-semibold"
                   style={{
@@ -882,7 +882,13 @@ function Section({
 
 
 
-function Card({ children }: { children: React.ReactNode }) {
+function Card({
+  children,
+  style,
+}: {
+  children: React.ReactNode;
+  style?: React.CSSProperties;
+}) {
   return (
     <div
       className="relative overflow-hidden rounded-2xl border p-6 transition hover:-translate-y-0.5"
@@ -890,6 +896,7 @@ function Card({ children }: { children: React.ReactNode }) {
         background: C.bgCard,
         borderColor: C.lineSoft,
         boxShadow: "var(--c-card-shadow)",
+        ...style,
       }}
     >
       {/* subtle top sheen */}
