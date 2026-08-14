@@ -1004,7 +1004,8 @@ function useRegistrationForm() {
   const [segmento, setSegmento] = useState("");
   const [cidade, setCidade] = useState("");
   const [faixa, setFaixa] = useState("");
-  const [lgpd, setLgpd] = useState(false);
+  const [tipoDocumento, setTipoDocumento] = useState<DocType>("cpf");
+  const [documento, setDocumento] = useState("");
   const [errors, setErrors] = useState<{
     nome?: boolean;
     email?: boolean;
@@ -1012,6 +1013,7 @@ function useRegistrationForm() {
     empresa?: boolean;
     segmento?: boolean;
     cidade?: boolean;
+    documento?: boolean;
     lgpd?: boolean;
   }>({});
   const [ok, setOk] = useState(false);
