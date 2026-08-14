@@ -887,7 +887,7 @@ function Card({ children }: { children: React.ReactNode }) {
     <div
       className="relative overflow-hidden rounded-2xl border p-6 transition hover:-translate-y-0.5"
       style={{
-        background: "var(--c-card-bg)",
+        background: C.bgCard,
         borderColor: C.lineSoft,
         boxShadow: "var(--c-card-shadow)",
       }}
