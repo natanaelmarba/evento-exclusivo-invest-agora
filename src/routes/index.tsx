@@ -485,7 +485,7 @@ function LandingPage() {
                 d: "Uma visão estratégica sobre como avaliar oportunidades em operações de leilão com critérios, atenção aos riscos e potencial de diversificação.",
               },
             ].map((item, i) => (
-              <Card key={item.t}>
+              <Card key={item.t} style={{ background: "#141416" }}>
                 <div
                   className="mb-4 grid h-10 w-10 place-items-center rounded-lg text-sm font-semibold"
                   style={{
