@@ -1051,6 +1051,8 @@ function useRegistrationForm() {
             segmento,
             cidade,
             faixa_investimento: faixa,
+            tipo_documento: tipoDocumento,
+            documento: documento.replace(/\D/g, ""),
             utm_source: params.get("utm_source") || "",
             utm_medium: params.get("utm_medium") || "",
             utm_campaign: params.get("utm_campaign") || "",
