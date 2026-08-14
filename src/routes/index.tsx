@@ -1070,8 +1070,8 @@ function useRegistrationForm() {
   };
 
   return {
-    values: { nome, whatsapp, email, empresa, segmento, cidade, faixa, lgpd },
-    setters: { setNome, setWhatsapp, setEmail, setEmpresa, setSegmento, setCidade, setFaixa, setLgpd },
+    values: { nome, whatsapp, email, empresa, segmento, cidade, faixa, tipoDocumento, documento, lgpd },
+    setters: { setNome, setWhatsapp, setEmail, setEmpresa, setSegmento, setCidade, setFaixa, setTipoDocumento, setDocumento, setLgpd },
     errors,
     ok,
     loading,
