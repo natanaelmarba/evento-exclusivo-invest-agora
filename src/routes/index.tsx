@@ -1006,6 +1006,7 @@ function useRegistrationForm() {
   const [faixa, setFaixa] = useState("");
   const [tipoDocumento, setTipoDocumento] = useState<DocType>("cpf");
   const [documento, setDocumento] = useState("");
+  const [lgpd, setLgpd] = useState(false);
   const [errors, setErrors] = useState<{
     nome?: boolean;
     email?: boolean;
