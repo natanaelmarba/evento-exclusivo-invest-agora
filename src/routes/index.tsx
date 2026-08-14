@@ -1030,6 +1030,7 @@ function useRegistrationForm() {
       empresa: empresa.trim().length < 2,
       segmento: segmento.trim().length < 2,
       cidade: cidade.trim().length < 2,
+      documento: !documento.trim() || !isValidDocument(tipoDocumento, documento),
       lgpd: !lgpd,
     };
     setErrors(errs);
