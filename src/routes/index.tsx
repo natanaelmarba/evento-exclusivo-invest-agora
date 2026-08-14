@@ -922,6 +922,80 @@ const FAIXA_OPTIONS = [
   "Prefiro não informar",
 ];
 
+type DocType = "cpf" | "cnpj";
+
+function maskCpf(v: string) {
+  const d = v.replace(/\D/g, "").slice(0, 11);
+  if (d.length <= 3) return d;
+  if (d.length <= 6) return `${d.slice(0, 3)}.${d.slice(3)}`;
+  if (d.length <= 9) return `${d.slice(0, 3)}.${d.slice(3, 6)}.${d.slice(6)}`;
+  return `${d.slice(0, 3)}.${d.slice(3, 6)}.${d.slice(6, 9)}-${d.slice(9)}`;
+}
+
+function maskCnpj(v: string) {
+  const d = v.replace(/\D/g, "").slice(0, 14);
+  if (d.length <= 2) return d;
+  if (d.length <= 5) return `${d.slice(0, 2)}.${d.slice(2)}`;
+  if (d.length <= 8) return `${d.slice(0, 2)}.${d.slice(2, 5)}.${d.slice(5)}`;
+  if (d.length <= 12) return `${d.slice(0, 2)}.${d.slice(2, 5)}.${d.slice(5, 8)}/${d.slice(8)}`;
+  return `${d.slice(0, 2)}.${d.slice(2, 5)}.${d.slice(5, 8)}/${d.slice(8, 12)}-${d.slice(12)}`;
+}
+
+function maskDocument(type: DocType, value: string) {
+  return type === "cpf" ? maskCpf(value) : maskCnpj(value);
+}
+
+function calcCpfCheckDigit(digits: number[]) {
+  const calc = (arr: number[]) => {
+    let sum = 0;
+    let factor = arr.length + 1;
+    for (const n of arr) {
+      sum += n * factor;
+      factor--;
+    }
+    const rest = sum % 11;
+    return rest < 2 ? 0 : 11 - rest;
+  };
+  const first = calc(digits);
+  const second = calc([...digits, first]);
+  return [first, second];
+}
+
+function isValidCpf(v: string) {
+  const d = v.replace(/\D/g, "");
+  if (d.length !== 11 || /^\d{1}$/.test(d)) return false;
+  const digits = d.split("").map(Number);
+  const [first, second] = calcCpfCheckDigit(digits.slice(0, 9));
+  return digits[9] === first && digits[10] === second;
+}
+
+function calcCnpjCheckDigit(digits: number[]) {
+  const calc = (arr: number[], weights: number[]) => {
+    const sum = arr.reduce((acc, n, i) => acc + n * weights[i], 0);
+    const rest = sum % 11;
+    return rest < 2 ? 0 : 11 - rest;
+  };
+  const firstWeights = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+  const secondWeights = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+  const first = calc(digits, firstWeights);
+  const second = calc([...digits, first], secondWeights);
+  return [first, second];
+}
+
+function isValidCnpj(v: string) {
+  const d = v.replace(/\D/g, "");
+  if (d.length !== 14 || /^\d{1}$/.test(d)) return false;
+  const digits = d.split("").map(Number);
+  const [first, second] = calcCnpjCheckDigit(digits.slice(0, 12));
+  return digits[12] === first && digits[13] === second;
+}
+
+function isValidDocument(type: DocType, value: string) {
+  const raw = value.replace(/\D/g, "");
+  if (type === "cpf") return isValidCpf(raw);
+  return isValidCnpj(raw);
+}
+
 function useRegistrationForm() {
   const [nome, setNome] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
