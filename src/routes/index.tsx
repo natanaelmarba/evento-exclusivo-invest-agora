@@ -882,7 +882,13 @@ function Section({
 
 
 
-function Card({ children }: { children: React.ReactNode }) {
+function Card({
+  children,
+  style,
+}: {
+  children: React.ReactNode;
+  style?: React.CSSProperties;
+}) {
   return (
     <div
       className="relative overflow-hidden rounded-2xl border p-6 transition hover:-translate-y-0.5"
@@ -890,6 +896,7 @@ function Card({ children }: { children: React.ReactNode }) {
         background: C.bgCard,
         borderColor: C.lineSoft,
         boxShadow: "var(--c-card-shadow)",
+        ...style,
       }}
     >
       {/* subtle top sheen */}
