@@ -5,6 +5,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import logoAgora from "@/assets/logo-agora.png.asset.json";
 import logoVerticale from "@/assets/logo-verticale.png.asset.json";
 import dalmoFerrari from "@/assets/dalmo-ferrari.jpg.asset.json";
+import heroVideo from "@/assets/hero-video.mp4.asset.json";
+import heroPoster from "@/assets/hero-poster.jpg.asset.json";
 import { Reveal } from "@/components/Reveal";
 
 gsap.registerPlugin(ScrollTrigger);
