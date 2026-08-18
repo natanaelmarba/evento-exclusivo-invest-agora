@@ -1281,15 +1281,21 @@ function Field({
   error?: string | false;
   children: React.ReactNode;
 }) {
+  const fieldId = useId();
+  const control = isValidElement(children)
+    ? cloneElement(children as React.ReactElement<{ id?: string }>, { id: fieldId })
+    : children;
   return (
     <div className="space-y-1.5">
       <label
+        htmlFor={fieldId}
         className="block text-[11px] font-semibold uppercase tracking-[0.14em]"
         style={{ color: C.muted }}
       >
         {label}
       </label>
-      {children}
+      {control}
+
       {error && (
         <p className="text-xs font-medium" style={{ color: "#ff8a8a" }}>
           {error}
