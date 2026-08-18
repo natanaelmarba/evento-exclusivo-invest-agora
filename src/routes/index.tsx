@@ -22,38 +22,88 @@ const CONTACT_EMAIL = "contato@verticaleassessoria.com.br";
 const CONTACT_CNPJ = "30.077.407/0001-88";
 const COMPANY_NAME = "VERTICALE SOLUÇÕES CORPORATIVAS LTDA";
 
+const SITE_URL = "https://investagorabrasil.com";
+const OG_IMAGE =
+  "https://storage.googleapis.com/gpt-engineer-file-uploads/lyNJi0aZBBa9xUIOByzJpLkDg6r1/social-images/social-1784853468369-ESPECIALISTA_EM_INVESTIMENTO_E_ALAVANCAHEM_PATRIMONIAL_(2).webp";
+const PAGE_TITLE = "Invest Agora | Encontro Exclusivo para Empresários";
+const PAGE_DESCRIPTION =
+  "Encontro online para empresários: investimentos, alavancagem patrimonial e operações de leilão com visão de longo prazo.";
+
 const eventSchema = {
   "@context": "https://schema.org",
   "@type": "Event",
   name: "Encontro Online Exclusivo para Empresários — Invest Agora",
   eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
   eventStatus: "https://schema.org/EventScheduled",
+  location: {
+    "@type": "VirtualLocation",
+    url: SITE_URL,
+  },
+  organizer: {
+    "@type": "Organization",
+    name: "Invest Agora",
+    url: SITE_URL,
+  },
+  image: OG_IMAGE,
   description:
     "Encontro estratégico online para empresários que desejam tomar decisões conscientes sobre investimentos, aplicação de capital, alavancagem patrimonial e operações de leilão.",
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      q: "Quem pode participar?",
+      a: "Empresários de qualquer segmento interessados em crescimento patrimonial estruturado e networking qualificado.",
+    },
+    {
+      q: "O evento é pago?",
+      a: "As vagas são por convite. Após o cadastro, nossa equipe entra em contato com os detalhes de confirmação.",
+    },
+    {
+      q: "Como confirmar minha inscrição?",
+      a: "Preencha o formulário e aguarde o contato da nossa equipe pelos canais informados para confirmar sua presença.",
+    },
+    {
+      q: "Posso levar acompanhante?",
+      a: "Cada convite é nominal. Consulte a equipe organizadora sobre a disponibilidade de vagas adicionais.",
+    },
+    {
+      q: "O que acontece após o cadastro?",
+      a: "Você recebe uma confirmação inicial e, em seguida, nossa equipe envia os detalhes do local, horário e credenciamento.",
+    },
+  ].map(({ q, a }) => ({
+    "@type": "Question",
+    name: q,
+    acceptedAnswer: { "@type": "Answer", text: a },
+  })),
 };
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Invest Agora | Encontro Online Exclusivo para Empresários" },
-      {
-        name: "description",
-        content:
-          "Encontro estratégico online para empresários. Investimentos, aplicação de capital, alavancagem patrimonial e operações de leilão com visão de longo prazo.",
-      },
-      { property: "og:title", content: "Invest Agora | Encontro Online Exclusivo para Empresários" },
-      {
-        property: "og:description",
-        content:
-          "Encontro estratégico online para empresários. Investimentos, aplicação de capital, alavancagem patrimonial e operações de leilão com visão de longo prazo.",
-      },
+      { title: PAGE_TITLE },
+      { name: "description", content: PAGE_DESCRIPTION },
+      { property: "og:title", content: PAGE_TITLE },
+      { property: "og:description", content: PAGE_DESCRIPTION },
+      { property: "og:url", content: `${SITE_URL}/` },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: OG_IMAGE },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: PAGE_TITLE },
+      { name: "twitter:description", content: PAGE_DESCRIPTION },
+      { name: "twitter:image", content: OG_IMAGE },
     ],
-    scripts: [{ type: "application/ld+json", children: JSON.stringify(eventSchema) }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/` }],
+    scripts: [
+      { type: "application/ld+json", children: JSON.stringify(eventSchema) },
+      { type: "application/ld+json", children: JSON.stringify(faqSchema) },
+    ],
   }),
   component: LandingPage,
 });
+
 
 // Paleta: branco, PRETO (com variações) e vermelho #840B0A (com degradês)
 const C = {
