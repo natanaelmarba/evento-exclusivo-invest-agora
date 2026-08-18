@@ -241,51 +241,15 @@ function LandingPage() {
                 boxShadow: "0 40px 120px rgba(0,0,0,.35), 0 0 60px rgba(90,8,7,.35)",
               }}
             >
-              {/* subtle texture layer */}
-              <span
-                aria-hidden
-                className="pointer-events-none absolute inset-0 opacity-40 mix-blend-luminosity"
-                style={{
-                  background: "radial-gradient(600px 300px at 30% 40%, #1c1c20 0%, transparent 70%), radial-gradient(500px 260px at 75% 70%, #101015 0%, transparent 70%)",
-                }}
+              <video
+                className="absolute inset-0 h-full w-full object-cover"
+                src={heroVideo.url}
+                poster={heroPoster.url}
+                controls
+                playsInline
+                preload="metadata"
               />
-              {/* vignette */}
-              <span
-                aria-hidden
-                className="pointer-events-none absolute inset-0"
-                style={{ background: "radial-gradient(closest-side, transparent 55%, rgba(0,0,0,.65) 100%)" }}
-              />
-              {/* play control */}
-              <div className="absolute inset-0 flex items-center justify-center transition-transform duration-700 group-hover:scale-[1.02]">
-                <button
-                  onClick={openModal}
-                  aria-label="Assistir vídeo"
-                  className="grid h-20 w-20 place-items-center rounded-full border backdrop-blur-md transition-colors duration-500"
-                  style={{
-                    borderColor: "rgba(255,255,255,.22)",
-                    background: "rgba(255,255,255,.05)",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = C.accentDark;
-                    e.currentTarget.style.borderColor = C.accentDark;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = "rgba(255,255,255,.05)";
-                    e.currentTarget.style.borderColor = "rgba(255,255,255,.22)";
-                  }}
-                >
-                  <span
-                    className="ml-1"
-                    style={{
-                      width: 0,
-                      height: 0,
-                      borderTop: "10px solid transparent",
-                      borderBottom: "10px solid transparent",
-                      borderLeft: "18px solid #fff",
-                    }}
-                  />
-                </button>
-              </div>
+
               {/* corner accents */}
               <span aria-hidden className="absolute top-4 left-4 h-px w-8" style={{ background: C.accent }} />
               <span aria-hidden className="absolute top-4 left-4 w-px h-8" style={{ background: C.accent }} />
