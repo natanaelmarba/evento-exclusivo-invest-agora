@@ -78,18 +78,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Invest Agora | Encontro Online Exclusivo para Empresários" },
-      { name: "description", content: "Encontro estratégico online para empresários. Investimentos, aplicação de capital, alavancagem patrimonial e operações de leilão com visão de longo prazo." },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Invest Agora | Encontro Online Exclusivo para Empresários" },
-      { property: "og:description", content: "Encontro estratégico online para empresários. Investimentos, aplicação de capital, alavancagem patrimonial e operações de leilão com visão de longo prazo." },
+      { name: "author", content: "Invest Agora" },
+      { property: "og:site_name", content: "Invest Agora" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "Invest Agora | Encontro Online Exclusivo para Empresários" },
-      { name: "twitter:description", content: "Encontro estratégico online para empresários. Investimentos, aplicação de capital, alavancagem patrimonial e operações de leilão com visão de longo prazo." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/lyNJi0aZBBa9xUIOByzJpLkDg6r1/social-images/social-1784853468369-ESPECIALISTA_EM_INVESTIMENTO_E_ALAVANCAHEM_PATRIMONIAL_(2).webp" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/lyNJi0aZBBa9xUIOByzJpLkDg6r1/social-images/social-1784853468369-ESPECIALISTA_EM_INVESTIMENTO_E_ALAVANCAHEM_PATRIMONIAL_(2).webp" },
+
     ],
     links: [
       {
