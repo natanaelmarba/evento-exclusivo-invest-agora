@@ -1244,10 +1244,10 @@ function RegistrationModal({ onClose }: { onClose: () => void }) {
       aria-modal="true"
     >
       <div
-        className="relative w-full max-w-lg overflow-hidden rounded-2xl border"
+        className="relative w-full max-w-lg overflow-hidden rounded-2xl border-2"
         style={{
           background: `linear-gradient(180deg, ${C.bgCard2}, ${C.bgCard})`,
-          borderColor: C.line,
+          borderColor: "#840B0A",
           boxShadow: "0 40px 100px rgba(0,0,0,.7)",
         }}
         onClick={(e) => e.stopPropagation()}
@@ -1261,7 +1261,7 @@ function RegistrationModal({ onClose }: { onClose: () => void }) {
           ×
         </button>
 
-        <div className="max-h-[90vh] overflow-y-auto p-6 md:p-7">
+        <div className="scrollbar-hide max-h-[90vh] overflow-y-auto p-6 md:p-7" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
           {form.ok ? (
             <div className="py-6 text-center">
               <div
