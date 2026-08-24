@@ -64,18 +64,20 @@ export function RegistrationForm() {
     try {
       // TODO: trocar por chamada real
       if (API_CADASTRO_URL && !API_CADASTRO_URL.startsWith("{{")) {
-        await fetch(API_CADASTRO_URL, {
+        const resApi = await fetch(API_CADASTRO_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json", Authorization: `Bearer ${API_TOKEN}` },
           body: JSON.stringify(payload),
         });
+        if (!resApi.ok) throw new Error("API falhou");
       }
       if (WEBHOOK_URL && !WEBHOOK_URL.startsWith("{{")) {
-        await fetch(WEBHOOK_URL, {
+        const resWebhook = await fetch(WEBHOOK_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
         });
+        if (!resWebhook.ok) throw new Error("Webhook falhou");
       }
       trackConversion();
       setStatus("success");

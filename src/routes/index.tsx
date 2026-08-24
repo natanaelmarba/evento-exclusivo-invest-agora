@@ -97,8 +97,8 @@ export const Route = createFileRoute("/")({
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/` }],
     scripts: [
-      { type: "application/ld+json", children: JSON.stringify(eventSchema) },
-      { type: "application/ld+json", children: JSON.stringify(faqSchema) },
+      { type: "application/ld+json", children: JSON.stringify(eventSchema).replace(/</g, '\\u003c') },
+      { type: "application/ld+json", children: JSON.stringify(faqSchema).replace(/</g, '\\u003c') },
     ],
   }),
   component: LandingPage,
@@ -979,7 +979,7 @@ function calcCpfCheckDigit(digits: number[]) {
 
 function isValidCpf(v: string) {
   const d = v.replace(/\D/g, "");
-  if (d.length !== 11 || /^\d{1}$/.test(d)) return false;
+  if (d.length !== 11 || /^(\d)\1{10}$/.test(d)) return false;
   const digits = d.split("").map(Number);
   const [first, second] = calcCpfCheckDigit(digits.slice(0, 9));
   return digits[9] === first && digits[10] === second;
@@ -1000,7 +1000,7 @@ function calcCnpjCheckDigit(digits: number[]) {
 
 function isValidCnpj(v: string) {
   const d = v.replace(/\D/g, "");
-  if (d.length !== 14 || /^\d{1}$/.test(d)) return false;
+  if (d.length !== 14 || /^(\d)\1{13}$/.test(d)) return false;
   const digits = d.split("").map(Number);
   const [first, second] = calcCnpjCheckDigit(digits.slice(0, 12));
   return digits[12] === first && digits[13] === second;
@@ -1056,7 +1056,7 @@ function useRegistrationForm() {
     try {
       if (WEBHOOK_URL && !WEBHOOK_URL.startsWith("{{")) {
         const params = new URLSearchParams(window.location.search);
-        await fetch(WEBHOOK_URL, {
+        const response = await fetch(WEBHOOK_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -1076,6 +1076,9 @@ function useRegistrationForm() {
             created_at: new Date().toISOString(),
           }),
         });
+        if (!response.ok) {
+          throw new Error("Erro na comunicação com o servidor.");
+        }
       }
       setOk(true);
     } catch {
