@@ -4,7 +4,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import logoAgora from "@/assets/logo-agora.png.asset.json";
 import logoVerticale from "@/assets/logo-verticale.png.asset.json";
-import dalmoFerrari from "@/assets/dalmo-ferrari.jpg.asset.json";
+
 import heroVideo from "@/assets/hero-video.mp4.asset.json";
 import heroPoster from "@/assets/hero-poster.jpg.asset.json";
 import { Reveal } from "@/components/Reveal";
@@ -376,17 +376,9 @@ function LandingPage() {
                   className="group relative h-full overflow-hidden rounded-2xl border shadow-2xl"
                   style={{ borderColor: "rgba(255,255,255,.12)" }}
                 >
-                  {/* brilho de hover */}
-                  <span
-                    aria-hidden
-                    className="pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-700 group-hover:opacity-100"
-                    style={{
-                      background: "radial-gradient(600px 300px at 50% 0%, rgba(255,255,255,.18) 0%, transparent 60%)",
-                    }}
-                  />
                   <img
                     ref={bioImageInnerRef}
-                    src={dalmoFerrari.url}
+                    src="/dalmo-ferrari-bio.jpg"
                     alt="Dalmo Ferrari — fundador do Grupo Verticale e especialista em investimentos"
                     className="h-[115%] w-full object-cover object-top transition-transform duration-700 ease-out will-change-transform group-hover:scale-[1.04]"
                     loading="lazy"
